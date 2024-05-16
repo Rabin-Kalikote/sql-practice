@@ -1,0 +1,658 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "collapsed": false,
+    "deletable": false,
+    "editable": false,
+    "nbgrader": {
+     "grade": false,
+     "grade_id": "b1b9a4",
+     "locked": true,
+     "schema_version": 3,
+     "solution": false,
+     "task": false
+    }
+   },
+   "source": [
+    "# Tests for Activity 5"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "collapsed": false,
+    "deletable": false,
+    "editable": false,
+    "nbgrader": {
+     "grade": false,
+     "grade_id": "26ae0a",
+     "locked": true,
+     "schema_version": 3,
+     "solution": false,
+     "task": false
+    }
+   },
+   "source": [
+    "## Tests: INSERT Practice\n",
+    "\n",
+    "Some of the parts in this section depend on previous parts. To get the unit tests to pass for the latter parts, you must first have the initial parts solved correctly. For example, in part 4 you modify table D depending on the values in table C. If your table C is incorrect (so test 3 is failing) then you probably do have the right table D (so test 4 will also be failing). "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {
+    "collapsed": false,
+    "deletable": false,
+    "editable": false,
+    "nbgrader": {
+     "grade": true,
+     "grade_id": "c46d32",
+     "locked": true,
+     "points": 1,
+     "schema_version": 3,
+     "solution": false,
+     "task": false
+    }
+   },
+   "outputs": [
+   ],
+   "source": [
+    "# Test for part 1\n",
+    "from nose.tools import assert_equal\n",
+    "from csc270tools import get_table_after_script\n",
+    "\n",
+    "# Running the code in act5Insert.sql up to and including this part\n",
+    "table = get_table_after_script('act5Insert.sql', ':memory:', 1, 'A')\n",
+    "\n",
+    "assert_equal(table, [(10, 22)])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {
+    "collapsed": false,
+    "deletable": false,
+    "editable": false,
+    "nbgrader": {
+     "grade": true,
+     "grade_id": "1ad510",
+     "locked": true,
+     "points": 1,
+     "schema_version": 3,
+     "solution": false,
+     "task": false
+    }
+   },
+   "outputs": [
+   ],
+   "source": [
+    "# Test for part 2\n",
+    "from nose.tools import assert_equal\n",
+    "from csc270tools import get_table_after_script\n",
+    "\n",
+    "# Running the code in act5Insert.sql up to and including this part\n",
+    "table = get_table_after_script('act5Insert.sql', ':memory:', 2, 'B')\n",
+    "\n",
+    "assert_equal(table, [(5, None, 10, None)])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {
+    "collapsed": false,
+    "deletable": false,
+    "editable": false,
+    "nbgrader": {
+     "grade": true,
+     "grade_id": "a4ee03",
+     "locked": true,
+     "points": 1,
+     "schema_version": 3,
+     "solution": false,
+     "task": false
+    }
+   },
+   "outputs": [
+   ],
+   "source": [
+    "# Test for part 3\n",
+    "from nose.tools import assert_equal\n",
+    "from csc270tools import get_table_after_script\n",
+    "\n",
+    "# Running the code in act5Insert.sql up to and including this part\n",
+    "table = get_table_after_script('act5Insert.sql', ':memory:', 3, 'C')\n",
+    "\n",
+    "assert_equal(table, [( 0,  0,  0,  0),\n",
+    "                     ( 1,  0,  1,  0),\n",
+    "                     ( 1,  2,  3,  4),\n",
+    "                     ( 2,  4,  6,  8),\n",
+    "                     (10, -4, -5, -1),\n",
+    "                     (-1,  3, 10, -3)])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {
+    "collapsed": false,
+    "deletable": false,
+    "editable": false,
+    "nbgrader": {
+     "grade": true,
+     "grade_id": "574534",
+     "locked": true,
+     "points": 1,
+     "schema_version": 3,
+     "solution": false,
+     "task": false
+    }
+   },
+   "outputs": [
+   ],
+   "source": [
+    "# Test for part 4\n",
+    "from nose.tools import assert_equal\n",
+    "from csc270tools import get_table_after_script\n",
+    "\n",
+    "# Running the code in act5Insert.sql up to and including this part\n",
+    "table = get_table_after_script('act5Insert.sql', ':memory:', 4, 'D')\n",
+    "\n",
+    "assert_equal(table, [(0, 0), (2, 0), (10, 24), (20, 384), (0, -200), (9, 90)])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {
+    "collapsed": false,
+    "deletable": false,
+    "editable": false,
+    "nbgrader": {
+     "grade": true,
+     "grade_id": "fec78a",
+     "locked": true,
+     "points": 2,
+     "schema_version": 3,
+     "solution": false,
+     "task": false
+    }
+   },
+   "outputs": [
+   ],
+   "source": [
+    "# Test for part 5\n",
+    "from nose.tools import assert_equal\n",
+    "from csc270tools import get_table_after_script\n",
+    "\n",
+    "# Running the code in act5Insert.sql up to and including this part\n",
+    "table = get_table_after_script('act5Insert.sql', ':memory:', 5, 'E')\n",
+    "\n",
+    "assert_equal(table, [(   0, None, None),\n",
+    "                     (   2, None,    2),\n",
+    "                     (  34, None,   10),\n",
+    "                     ( 404, None,   20),\n",
+    "                     (-200, None, -200),\n",
+    "                     (  99, None,    9)])"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "collapsed": false,
+    "deletable": false,
+    "editable": false,
+    "nbgrader": {
+     "grade": false,
+     "grade_id": "c88e6e",
+     "locked": true,
+     "schema_version": 3,
+     "solution": false,
+     "task": false
+    }
+   },
+   "source": [
+    "## Tests: Chinook"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {
+    "collapsed": false,
+    "deletable": false,
+    "editable": false,
+    "nbgrader": {
+     "grade": true,
+     "grade_id": "335ef3",
+     "locked": true,
+     "points": 1,
+     "schema_version": 3,
+     "solution": false,
+     "task": false
+    }
+   },
+   "outputs": [
+   ],
+   "source": [
+    "# Test for part 1\n",
+    "import sqlite3\n",
+    "from nose.tools import assert_equal, assert_in\n",
+    "\n",
+    "# Setting up sqlite3 for unit tests\n",
+    "con = sqlite3.connect('Chinook.db')\n",
+    "cur = con.cursor()\n",
+    "\n",
+    "# Checking the database has been appropriately modified\n",
+    "table = cur.execute('SELECT * FROM MediaType ORDER BY MediaTypeId').fetchall()\n",
+    "assert_in((6, 'FLAC'), table, 'Checking the new row exists')\n",
+    "assert_equal(len(table), 6, 'Checking the number of rows in the MediaType table')\n",
+    "\n",
+    "# There are hidden tests which will *completely* check your solution."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {
+    "collapsed": false,
+    "deletable": false,
+    "editable": false,
+    "nbgrader": {
+     "grade": true,
+     "grade_id": "51e14f",
+     "locked": true,
+     "points": 1,
+     "schema_version": 3,
+     "solution": false,
+     "task": false
+    }
+   },
+   "outputs": [
+   ],
+   "source": [
+    "# Test for part 2\n",
+    "import sqlite3\n",
+    "from nose.tools import assert_equal\n",
+    "\n",
+    "# Setting up sqlite3 for unit tests\n",
+    "con = sqlite3.connect('Chinook.db')\n",
+    "cur = con.cursor()\n",
+    "\n",
+    "# Checking the database has been appropriately modified\n",
+    "table = cur.execute(\"\"\"\n",
+    "    SELECT Email FROM Customer \n",
+    "    WHERE FirstName = 'Emma' AND LastName = 'Jones';\n",
+    "    \"\"\").fetchall()\n",
+    "\n",
+    "assert_equal([('ejones270@gmail.com',)], table)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "metadata": {
+    "collapsed": false,
+    "deletable": false,
+    "editable": false,
+    "nbgrader": {
+     "grade": true,
+     "grade_id": "786a68",
+     "locked": true,
+     "points": 1,
+     "schema_version": 3,
+     "solution": false,
+     "task": false
+    }
+   },
+   "outputs": [
+   ],
+   "source": [
+    "# Test for part 3\n",
+    "import sqlite3\n",
+    "from nose.tools import assert_equal, assert_in\n",
+    "\n",
+    "# Setting up sqlite3 for unit tests\n",
+    "con = sqlite3.connect('Chinook.db')\n",
+    "cur = con.cursor()\n",
+    "\n",
+    "# Checking the database has been appropriately modified\n",
+    "table = cur.execute(\"\"\"\n",
+    "    SELECT * FROM Customer \n",
+    "    WHERE FirstName = 'Frank'\n",
+    "    ORDER BY CustomerId;\n",
+    "    \"\"\").fetchall()\n",
+    "assert_in((16,\n",
+    "  'Frank',\n",
+    "  'Harris',\n",
+    "  'Google Inc.',\n",
+    "  '1234 Cleveland Blvd',\n",
+    "  'Caldwell',\n",
+    "  'ID',\n",
+    "  'USA',\n",
+    "  '83605',\n",
+    "  '+1 (650) 253-0000',\n",
+    "  '+1 (650) 253-0000',\n",
+    "  'fharris@google.com',\n",
+    "  4), table)\n",
+    "\n",
+    "# There are hidden tests which will *completely* check your solution."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "metadata": {
+    "collapsed": false,
+    "deletable": false,
+    "editable": false,
+    "nbgrader": {
+     "grade": true,
+     "grade_id": "61d4b5",
+     "locked": true,
+     "points": 1,
+     "schema_version": 3,
+     "solution": false,
+     "task": false
+    }
+   },
+   "outputs": [
+   ],
+   "source": [
+    "# Test for part 5\n",
+    "import sqlite3\n",
+    "from nose.tools import assert_equal, assert_in\n",
+    "\n",
+    "# Setting up sqlite3 for unit tests\n",
+    "con = sqlite3.connect('Chinook.db')\n",
+    "cur = con.cursor()\n",
+    "\n",
+    "# Checking the database has been appropriately modified\n",
+    "table = cur.execute(\"\"\"\n",
+    "    SELECT FirstName, LastName, Email FROM Customer \n",
+    "    ORDER BY CustomerId;\n",
+    "    \"\"\").fetchall()\n",
+    "assert_in(('Jim', 'Dull', 'jdull@collegeofidaho.edu'), table, 'Checking that Jim Dull has been added')\n",
+    "assert_equal(len(table), 60, 'Checking the number of rows in the Customer Table')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "metadata": {
+    "collapsed": false,
+    "deletable": false,
+    "editable": false,
+    "nbgrader": {
+     "grade": true,
+     "grade_id": "1a0acb",
+     "locked": true,
+     "points": 1,
+     "schema_version": 3,
+     "solution": false,
+     "task": false
+    }
+   },
+   "outputs": [
+   ],
+   "source": [
+    "# Test for part 7\n",
+    "import sqlite3\n",
+    "from nose.tools import assert_in\n",
+    "\n",
+    "# Setting up sqlite3 for unit tests\n",
+    "con = sqlite3.connect('Chinook.db')\n",
+    "cur = con.cursor()\n",
+    "\n",
+    "# Checking the database has been appropriately modified\n",
+    "table = cur.execute(\"\"\"\n",
+    "    SELECT EmployeeId, FirstName, LastName, Title \n",
+    "    FROM Employee;\n",
+    "    \"\"\").fetchall()\n",
+    "assert_in((13, 'Lynda', 'Danielson', 'Sales Support Agent'), table)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "metadata": {
+    "collapsed": false,
+    "deletable": false,
+    "editable": false,
+    "nbgrader": {
+     "grade": true,
+     "grade_id": "939fce",
+     "locked": true,
+     "points": 1,
+     "schema_version": 3,
+     "solution": false,
+     "task": false
+    }
+   },
+   "outputs": [
+   ],
+   "source": [
+    "# Test for part 8\n",
+    "import sqlite3\n",
+    "from nose.tools import assert_in\n",
+    "\n",
+    "# Setting up sqlite3 for unit tests\n",
+    "con = sqlite3.connect('Chinook.db')\n",
+    "cur = con.cursor()\n",
+    "\n",
+    "# Checking the database has been appropriately modified\n",
+    "table = cur.execute(\"\"\"\n",
+    "    SELECT FirstName, LastName FROM Employee\n",
+    "    WHERE EmployeeId = (SELECT SupportRepId FROM Customer WHERE Email = 'jdull@collegeofidaho.edu');\n",
+    "    \"\"\").fetchall()\n",
+    "assert_equal([('Lynda', 'Danielson')], table)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "metadata": {
+    "collapsed": false,
+    "deletable": false,
+    "editable": false,
+    "nbgrader": {
+     "grade": true,
+     "grade_id": "584c74",
+     "locked": true,
+     "points": 3,
+     "schema_version": 3,
+     "solution": false,
+     "task": false
+    }
+   },
+   "outputs": [
+   ],
+   "source": [
+    "# Test for part 11\n",
+    "import sqlite3\n",
+    "from nose.tools import assert_equal, assert_in, assert_not_in\n",
+    "\n",
+    "# Setting up sqlite3 for unit tests\n",
+    "con = sqlite3.connect('Chinook.db')\n",
+    "cur = con.cursor()\n",
+    "\n",
+    "# Checking the database has been appropriately modified\n",
+    "table = cur.execute(\"\"\"\n",
+    "    SELECT Email FROM Customer\n",
+    "    WHERE SupportRepId = 13\n",
+    "    ORDER BY Email;\n",
+    "    \"\"\").fetchall()\n",
+    "\n",
+    "assert_in(('hholy@gmail.com',), table, 'Checking one Support Rep was correctly updated')\n",
+    "assert_equal(len(table), 19, 'Checking the number of Customers with Danielson as a Support Rep')\n",
+    "\n",
+    "employees = cur.execute(\"SELECT FirstName, LastName FROM Employee;\").fetchall()\n",
+    "assert_not_in(('Steve', 'Johnson'), employees, 'Checking that Johnson has been deleted')\n",
+    "\n",
+    "# There are hidden tests which will *completely* check your solution."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "metadata": {
+    "collapsed": false,
+    "deletable": false,
+    "editable": false,
+    "nbgrader": {
+     "grade": true,
+     "grade_id": "21b395",
+     "locked": true,
+     "points": 3,
+     "schema_version": 3,
+     "solution": false,
+     "task": false
+    }
+   },
+   "outputs": [
+    {
+     "ename": "AssertionError",
+     "evalue": "('Aisha Duo',) unexpectedly found in [('AC/DC',), ('Accept',), ('Aerosmith',), ('Alanis Morissette',), ('Alice In Chains',), ('Antônio Carlos Jobim',), ('Apocalyptica',), ('Audioslave',), ('BackBeat',), ('Billy Cobham',), ('Black Label Society',), ('Black Sabbath',), ('Body Count',), ('Bruce Dickinson',), ('Buddy Guy',), ('Caetano Veloso',), ('Chico Buarque',), ('Chico Science & Nação Zumbi',), ('Cidade Negra',), ('Cláudio Zoli',), ('Various Artists',), ('Led Zeppelin',), ('Frank Zappa & Captain Beefheart',), ('Marcos Valle',), ('Milton Nascimento & Bebeto',), ('Azymuth',), ('Gilberto Gil',), ('João Gilberto',), ('Bebel Gilberto',), ('Jorge Vercilo',), ('Baby Consuelo',), ('Ney Matogrosso',), ('Luiz Melodia',), ('Nando Reis',), ('Pedro Luís & A Parede',), ('O Rappa',), ('Ed Motta',), ('Banda Black Rio',), ('Fernanda Porto',), ('Os Cariocas',), ('Elis Regina',), ('Milton Nascimento',), ('A Cor Do Som',), ('Kid Abelha',), ('Sandra De Sá',), ('Jorge Ben',), ('Hermeto Pascoal',), ('Barão Vermelho',), ('Edson, DJ Marky & DJ Patife Featuring Fernanda Porto',), ('Metallica',), ('Queen',), ('Kiss',), ('Spyro Gyra',), ('Green Day',), ('David Coverdale',), ('Gonzaguinha',), ('Os Mutantes',), ('Deep Purple',), ('Santana',), ('Santana Feat. Dave Matthews',), ('Santana Feat. Everlast',), ('Santana Feat. Rob Thomas',), ('Santana Feat. Lauryn Hill & Cee-Lo',), ('Santana Feat. The Project G&B',), ('Santana Feat. Maná',), ('Santana Feat. Eagle-Eye Cherry',), ('Santana Feat. Eric Clapton',), ('Miles Davis',), ('Gene Krupa',), ('Toquinho & Vinícius',), ('Vinícius De Moraes & Baden Powell',), ('Vinícius De Moraes',), ('Vinícius E Qurteto Em Cy',), ('Vinícius E Odette Lara',), ('Vinicius, Toquinho & Quarteto Em Cy',), ('Creedence Clearwater Revival',), ('Cássia Eller',), ('Def Leppard',), ('Dennis Chambers',), ('Djavan',), ('Eric Clapton',), ('Faith No More',), ('Falamansa',), ('Foo Fighters',), ('Frank Sinatra',), ('Funk Como Le Gusta',), ('Godsmack',), (\"Guns N' Roses\",), ('Incognito',), ('Iron Maiden',), ('James Brown',), ('Jamiroquai',), ('JET',), ('Jimi Hendrix',), ('Joe Satriani',), ('Jota Quest',), ('João Suplicy',), ('Judas Priest',), ('Legião Urbana',), ('Lenny Kravitz',), ('Lulu Santos',), ('Marillion',), ('Marisa Monte',), ('Marvin Gaye',), ('Men At Work',), ('Motörhead',), ('Motörhead & Girlschool',), ('Mônica Marianno',), ('Mötley Crüe',), ('Nirvana',), ('O Terço',), ('Olodum',), ('Os Paralamas Do Sucesso',), ('Ozzy Osbourne',), ('Page & Plant',), ('Passengers',), (\"Paul D'Ianno\",), ('Pearl Jam',), ('Peter Tosh',), ('Pink Floyd',), ('Planet Hemp',), ('R.E.M. Feat. Kate Pearson',), ('R.E.M. Feat. KRS-One',), ('R.E.M.',), ('Raimundos',), ('Raul Seixas',), ('Red Hot Chili Peppers',), ('Rush',), ('Simply Red',), ('Skank',), ('Smashing Pumpkins',), ('Soundgarden',), ('Stevie Ray Vaughan & Double Trouble',), ('Stone Temple Pilots',), ('System Of A Down',), ('Terry Bozzio, Tony Levin & Steve Stevens',), ('The Black Crowes',), ('The Clash',), ('The Cult',), ('The Doors',), ('The Police',), ('The Rolling Stones',), ('The Tea Party',), ('The Who',), ('Tim Maia',), ('Titãs',), ('Battlestar Galactica',), ('Heroes',), ('Lost',), ('U2',), ('UB40',), ('Van Halen',), ('Velvet Revolver',), ('Whitesnake',), ('Zeca Pagodinho',), ('The Office',), ('Dread Zeppelin',), ('Battlestar Galactica (Classic)',), ('Aquaman',), ('Christina Aguilera featuring BigElf',), (\"Aerosmith & Sierra Leone's Refugee Allstars\",), ('Los Lonely Boys',), ('Corinne Bailey Rae',), ('Dhani Harrison & Jakob Dylan',), ('Jackson Browne',), ('Avril Lavigne',), ('Big & Rich',), (\"Youssou N'Dour\",), ('Black Eyed Peas',), ('Jack Johnson',), ('Ben Harper',), ('Snow Patrol',), ('Matisyahu',), ('The Postal Service',), ('Jaguares',), ('The Flaming Lips',), (\"Jack's Mannequin & Mick Fleetwood\",), ('Regina Spektor',), ('Scorpions',), ('House Of Pain',), ('Xis',), ('Nega Gizza',), ('Gustavo & Andres Veiga & Salazar',), ('Rodox',), ('Charlie Brown Jr.',), ('Pedro Luís E A Parede',), ('Los Hermanos',), ('Mundo Livre S/A',), ('Otto',), ('Instituto',), ('Nação Zumbi',), ('DJ Dolores & Orchestra Santa Massa',), ('Seu Jorge',), ('Sabotage E Instituto',), ('Stereo Maracana',), ('Cake',), ('Aisha Duo',), ('Habib Koité and Bamada',), ('Karsh Kale',), ('The Posies',), ('Luciana Souza/Romero Lubambo',), ('Aaron Goldberg',), ('Nicolaus Esterhazy Sinfonia',), ('Temple of the Dog',), ('Chris Cornell',), ('Alberto Turco & Nova Schola Gregoriana',), ('Richard Marlow & The Choir of Trinity College, Cambridge',), ('English Concert & Trevor Pinnock',), ('Anne-Sophie Mutter, Herbert Von Karajan & Wiener Philharmoniker',), ('Hilary Hahn, Jeffrey Kahane, Los Angeles Chamber Orchestra & Margaret Batjer',), ('Wilhelm Kempff',), ('Yo-Yo Ma',), ('Scholars Baroque Ensemble',), ('Academy of St. Martin in the Fields & Sir Neville Marriner',), ('Academy of St. Martin in the Fields Chamber Ensemble & Sir Neville Marriner',), ('Berliner Philharmoniker, Claudio Abbado & Sabine Meyer',), ('Royal Philharmonic Orchestra & Sir Thomas Beecham',), ('Orchestre Révolutionnaire et Romantique & John Eliot Gardiner',), ('Britten Sinfonia, Ivor Bolton & Lesley Garrett',), ('Chicago Symphony Chorus, Chicago Symphony Orchestra & Sir Georg Solti',), ('Sir Georg Solti & Wiener Philharmoniker',), ('Academy of St. Martin in the Fields, John Birch, Sir Neville Marriner & Sylvia McNair',), ('London Symphony Orchestra & Sir Charles Mackerras',), ('Barry Wordsworth & BBC Concert Orchestra',), ('Herbert Von Karajan, Mirella Freni & Wiener Philharmoniker',), ('Eugene Ormandy',), ('Luciano Pavarotti',), ('Leonard Bernstein & New York Philharmonic',), ('Boston Symphony Orchestra & Seiji Ozawa',), ('Aaron Copland & London Symphony Orchestra',), ('Ton Koopman',), ('Sergei Prokofiev & Yuri Temirkanov',), ('Chicago Symphony Orchestra & Fritz Reiner',), ('Orchestra of The Age of Enlightenment',), ('Emanuel Ax, Eugene Ormandy & Philadelphia Orchestra',), ('James Levine',), ('Berliner Philharmoniker & Hans Rosbaud',), ('Maurizio Pollini',), ('Academy of St. Martin in the Fields, Sir Neville Marriner & William Bennett',), ('Gustav Mahler',), ('Felix Schmidt, London Symphony Orchestra & Rafael Frühbeck de Burgos',), ('Edo de Waart & San Francisco Symphony',), ('Antal Doráti & London Symphony Orchestra',), ('Choir Of Westminster Abbey & Simon Preston',), ('Michael Tilson Thomas & San Francisco Symphony',), ('Chor der Wiener Staatsoper, Herbert Von Karajan & Wiener Philharmoniker',), (\"The King's Singers\",), ('Berliner Philharmoniker & Herbert Von Karajan',), ('Sir Georg Solti, Sumi Jo & Wiener Philharmoniker',), (\"Christopher O'Riley\",), ('Fretwork',), ('Amy Winehouse',), ('Calexico',), ('Otto Klemperer & Philharmonia Orchestra',), ('Yehudi Menuhin',), ('Philharmonia Orchestra & Sir Neville Marriner',), ('Academy of St. Martin in the Fields, Sir Neville Marriner & Thurston Dart',), ('Les Arts Florissants & William Christie',), ('The 12 Cellists of The Berlin Philharmonic',), ('Adrian Leaper & Doreen de Feis',), ('Roger Norrington, London Classical Players',), (\"Charles Dutoit & L'Orchestre Symphonique de Montréal\",), ('Equale Brass Ensemble, John Eliot Gardiner & Munich Monteverdi Orchestra and Choir',), (\"Kent Nagano and Orchestre de l'Opéra de Lyon\",), ('Julian Bream',), ('Martin Roscoe',), ('Göteborgs Symfoniker & Neeme Järvi',), ('Itzhak Perlman',), ('Michele Campanella',), ('Gerald Moore',), ('Mela Tenenbaum, Pro Musica Prague & Richard Kapp',), ('Emerson String Quartet',), ('C. Monteverdi, Nigel Rogers - Chiaroscuro; London Baroque; London Cornett & Sackbu',), ('Nash Ensemble',), ('Philip Glass Ensemble',)] : Checking Aisha Duo has been deleted",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[0;31mAssertionError\u001b[0m                            Traceback (most recent call last)",
+      "\u001b[0;32m/tmp/ipykernel_2548/904606504.py\u001b[0m in \u001b[0;36m<cell line: 14>\u001b[0;34m()\u001b[0m\n\u001b[1;32m     12\u001b[0m \u001b[0mtracks\u001b[0m  \u001b[0;34m=\u001b[0m \u001b[0mcur\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mexecute\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m\"\"\"SELECT TrackId FROM Track;\"\"\"\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mfetchall\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     13\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---> 14\u001b[0;31m \u001b[0massert_not_in\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'Aisha Duo'\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0martists\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'Checking Aisha Duo has been deleted'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m     15\u001b[0m \u001b[0massert_equal\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mlen\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0malbums\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;36m346\u001b[0m\u001b[0;34m,\u001b[0m  \u001b[0;34m'Checking the correct number of albums have been deleted'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     16\u001b[0m \u001b[0massert_equal\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mlen\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mtracks\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;36m3501\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'Checking the correct number of tracks have been deleted'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;32m/usr/lib/python3.10/unittest/case.py\u001b[0m in \u001b[0;36massertNotIn\u001b[0;34m(self, member, container, msg)\u001b[0m\n\u001b[1;32m   1117\u001b[0m             standardMsg = '%s unexpectedly found in %s' % (safe_repr(member),\n\u001b[1;32m   1118\u001b[0m                                                         safe_repr(container))\n\u001b[0;32m-> 1119\u001b[0;31m             \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mfail\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_formatMessage\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mmsg\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mstandardMsg\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m   1120\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1121\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0massertIs\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mexpr1\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mexpr2\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mmsg\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;32mNone\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;32m/usr/lib/python3.10/unittest/case.py\u001b[0m in \u001b[0;36mfail\u001b[0;34m(self, msg)\u001b[0m\n\u001b[1;32m    673\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0mfail\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mmsg\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;32mNone\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    674\u001b[0m         \u001b[0;34m\"\"\"Fail immediately, with the given message.\"\"\"\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--> 675\u001b[0;31m         \u001b[0;32mraise\u001b[0m \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mfailureException\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mmsg\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    676\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    677\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0massertFalse\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mexpr\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mmsg\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;32mNone\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;31mAssertionError\u001b[0m: ('Aisha Duo',) unexpectedly found in [('AC/DC',), ('Accept',), ('Aerosmith',), ('Alanis Morissette',), ('Alice In Chains',), ('Antônio Carlos Jobim',), ('Apocalyptica',), ('Audioslave',), ('BackBeat',), ('Billy Cobham',), ('Black Label Society',), ('Black Sabbath',), ('Body Count',), ('Bruce Dickinson',), ('Buddy Guy',), ('Caetano Veloso',), ('Chico Buarque',), ('Chico Science & Nação Zumbi',), ('Cidade Negra',), ('Cláudio Zoli',), ('Various Artists',), ('Led Zeppelin',), ('Frank Zappa & Captain Beefheart',), ('Marcos Valle',), ('Milton Nascimento & Bebeto',), ('Azymuth',), ('Gilberto Gil',), ('João Gilberto',), ('Bebel Gilberto',), ('Jorge Vercilo',), ('Baby Consuelo',), ('Ney Matogrosso',), ('Luiz Melodia',), ('Nando Reis',), ('Pedro Luís & A Parede',), ('O Rappa',), ('Ed Motta',), ('Banda Black Rio',), ('Fernanda Porto',), ('Os Cariocas',), ('Elis Regina',), ('Milton Nascimento',), ('A Cor Do Som',), ('Kid Abelha',), ('Sandra De Sá',), ('Jorge Ben',), ('Hermeto Pascoal',), ('Barão Vermelho',), ('Edson, DJ Marky & DJ Patife Featuring Fernanda Porto',), ('Metallica',), ('Queen',), ('Kiss',), ('Spyro Gyra',), ('Green Day',), ('David Coverdale',), ('Gonzaguinha',), ('Os Mutantes',), ('Deep Purple',), ('Santana',), ('Santana Feat. Dave Matthews',), ('Santana Feat. Everlast',), ('Santana Feat. Rob Thomas',), ('Santana Feat. Lauryn Hill & Cee-Lo',), ('Santana Feat. The Project G&B',), ('Santana Feat. Maná',), ('Santana Feat. Eagle-Eye Cherry',), ('Santana Feat. Eric Clapton',), ('Miles Davis',), ('Gene Krupa',), ('Toquinho & Vinícius',), ('Vinícius De Moraes & Baden Powell',), ('Vinícius De Moraes',), ('Vinícius E Qurteto Em Cy',), ('Vinícius E Odette Lara',), ('Vinicius, Toquinho & Quarteto Em Cy',), ('Creedence Clearwater Revival',), ('Cássia Eller',), ('Def Leppard',), ('Dennis Chambers',), ('Djavan',), ('Eric Clapton',), ('Faith No More',), ('Falamansa',), ('Foo Fighters',), ('Frank Sinatra',), ('Funk Como Le Gusta',), ('Godsmack',), (\"Guns N' Roses\",), ('Incognito',), ('Iron Maiden',), ('James Brown',), ('Jamiroquai',), ('JET',), ('Jimi Hendrix',), ('Joe Satriani',), ('Jota Quest',), ('João Suplicy',), ('Judas Priest',), ('Legião Urbana',), ('Lenny Kravitz',), ('Lulu Santos',), ('Marillion',), ('Marisa Monte',), ('Marvin Gaye',), ('Men At Work',), ('Motörhead',), ('Motörhead & Girlschool',), ('Mônica Marianno',), ('Mötley Crüe',), ('Nirvana',), ('O Terço',), ('Olodum',), ('Os Paralamas Do Sucesso',), ('Ozzy Osbourne',), ('Page & Plant',), ('Passengers',), (\"Paul D'Ianno\",), ('Pearl Jam',), ('Peter Tosh',), ('Pink Floyd',), ('Planet Hemp',), ('R.E.M. Feat. Kate Pearson',), ('R.E.M. Feat. KRS-One',), ('R.E.M.',), ('Raimundos',), ('Raul Seixas',), ('Red Hot Chili Peppers',), ('Rush',), ('Simply Red',), ('Skank',), ('Smashing Pumpkins',), ('Soundgarden',), ('Stevie Ray Vaughan & Double Trouble',), ('Stone Temple Pilots',), ('System Of A Down',), ('Terry Bozzio, Tony Levin & Steve Stevens',), ('The Black Crowes',), ('The Clash',), ('The Cult',), ('The Doors',), ('The Police',), ('The Rolling Stones',), ('The Tea Party',), ('The Who',), ('Tim Maia',), ('Titãs',), ('Battlestar Galactica',), ('Heroes',), ('Lost',), ('U2',), ('UB40',), ('Van Halen',), ('Velvet Revolver',), ('Whitesnake',), ('Zeca Pagodinho',), ('The Office',), ('Dread Zeppelin',), ('Battlestar Galactica (Classic)',), ('Aquaman',), ('Christina Aguilera featuring BigElf',), (\"Aerosmith & Sierra Leone's Refugee Allstars\",), ('Los Lonely Boys',), ('Corinne Bailey Rae',), ('Dhani Harrison & Jakob Dylan',), ('Jackson Browne',), ('Avril Lavigne',), ('Big & Rich',), (\"Youssou N'Dour\",), ('Black Eyed Peas',), ('Jack Johnson',), ('Ben Harper',), ('Snow Patrol',), ('Matisyahu',), ('The Postal Service',), ('Jaguares',), ('The Flaming Lips',), (\"Jack's Mannequin & Mick Fleetwood\",), ('Regina Spektor',), ('Scorpions',), ('House Of Pain',), ('Xis',), ('Nega Gizza',), ('Gustavo & Andres Veiga & Salazar',), ('Rodox',), ('Charlie Brown Jr.',), ('Pedro Luís E A Parede',), ('Los Hermanos',), ('Mundo Livre S/A',), ('Otto',), ('Instituto',), ('Nação Zumbi',), ('DJ Dolores & Orchestra Santa Massa',), ('Seu Jorge',), ('Sabotage E Instituto',), ('Stereo Maracana',), ('Cake',), ('Aisha Duo',), ('Habib Koité and Bamada',), ('Karsh Kale',), ('The Posies',), ('Luciana Souza/Romero Lubambo',), ('Aaron Goldberg',), ('Nicolaus Esterhazy Sinfonia',), ('Temple of the Dog',), ('Chris Cornell',), ('Alberto Turco & Nova Schola Gregoriana',), ('Richard Marlow & The Choir of Trinity College, Cambridge',), ('English Concert & Trevor Pinnock',), ('Anne-Sophie Mutter, Herbert Von Karajan & Wiener Philharmoniker',), ('Hilary Hahn, Jeffrey Kahane, Los Angeles Chamber Orchestra & Margaret Batjer',), ('Wilhelm Kempff',), ('Yo-Yo Ma',), ('Scholars Baroque Ensemble',), ('Academy of St. Martin in the Fields & Sir Neville Marriner',), ('Academy of St. Martin in the Fields Chamber Ensemble & Sir Neville Marriner',), ('Berliner Philharmoniker, Claudio Abbado & Sabine Meyer',), ('Royal Philharmonic Orchestra & Sir Thomas Beecham',), ('Orchestre Révolutionnaire et Romantique & John Eliot Gardiner',), ('Britten Sinfonia, Ivor Bolton & Lesley Garrett',), ('Chicago Symphony Chorus, Chicago Symphony Orchestra & Sir Georg Solti',), ('Sir Georg Solti & Wiener Philharmoniker',), ('Academy of St. Martin in the Fields, John Birch, Sir Neville Marriner & Sylvia McNair',), ('London Symphony Orchestra & Sir Charles Mackerras',), ('Barry Wordsworth & BBC Concert Orchestra',), ('Herbert Von Karajan, Mirella Freni & Wiener Philharmoniker',), ('Eugene Ormandy',), ('Luciano Pavarotti',), ('Leonard Bernstein & New York Philharmonic',), ('Boston Symphony Orchestra & Seiji Ozawa',), ('Aaron Copland & London Symphony Orchestra',), ('Ton Koopman',), ('Sergei Prokofiev & Yuri Temirkanov',), ('Chicago Symphony Orchestra & Fritz Reiner',), ('Orchestra of The Age of Enlightenment',), ('Emanuel Ax, Eugene Ormandy & Philadelphia Orchestra',), ('James Levine',), ('Berliner Philharmoniker & Hans Rosbaud',), ('Maurizio Pollini',), ('Academy of St. Martin in the Fields, Sir Neville Marriner & William Bennett',), ('Gustav Mahler',), ('Felix Schmidt, London Symphony Orchestra & Rafael Frühbeck de Burgos',), ('Edo de Waart & San Francisco Symphony',), ('Antal Doráti & London Symphony Orchestra',), ('Choir Of Westminster Abbey & Simon Preston',), ('Michael Tilson Thomas & San Francisco Symphony',), ('Chor der Wiener Staatsoper, Herbert Von Karajan & Wiener Philharmoniker',), (\"The King's Singers\",), ('Berliner Philharmoniker & Herbert Von Karajan',), ('Sir Georg Solti, Sumi Jo & Wiener Philharmoniker',), (\"Christopher O'Riley\",), ('Fretwork',), ('Amy Winehouse',), ('Calexico',), ('Otto Klemperer & Philharmonia Orchestra',), ('Yehudi Menuhin',), ('Philharmonia Orchestra & Sir Neville Marriner',), ('Academy of St. Martin in the Fields, Sir Neville Marriner & Thurston Dart',), ('Les Arts Florissants & William Christie',), ('The 12 Cellists of The Berlin Philharmonic',), ('Adrian Leaper & Doreen de Feis',), ('Roger Norrington, London Classical Players',), (\"Charles Dutoit & L'Orchestre Symphonique de Montréal\",), ('Equale Brass Ensemble, John Eliot Gardiner & Munich Monteverdi Orchestra and Choir',), (\"Kent Nagano and Orchestre de l'Opéra de Lyon\",), ('Julian Bream',), ('Martin Roscoe',), ('Göteborgs Symfoniker & Neeme Järvi',), ('Itzhak Perlman',), ('Michele Campanella',), ('Gerald Moore',), ('Mela Tenenbaum, Pro Musica Prague & Richard Kapp',), ('Emerson String Quartet',), ('C. Monteverdi, Nigel Rogers - Chiaroscuro; London Baroque; London Cornett & Sackbu',), ('Nash Ensemble',), ('Philip Glass Ensemble',)] : Checking Aisha Duo has been deleted"
+     ]
+    }
+   ],
+   "source": [
+    "# Test for part 13\n",
+    "import sqlite3\n",
+    "from nose.tools import assert_equal, assert_not_in\n",
+    "\n",
+    "# Setting up sqlite3 for unit tests\n",
+    "con = sqlite3.connect('Chinook.db')\n",
+    "cur = con.cursor()\n",
+    "\n",
+    "# Checking the database has been appropriately modified\n",
+    "artists = cur.execute(\"\"\"SELECT Name FROM Artist;  \"\"\").fetchall()\n",
+    "albums  = cur.execute(\"\"\"SELECT AlbumId FROM Album;\"\"\").fetchall()\n",
+    "tracks  = cur.execute(\"\"\"SELECT TrackId FROM Track;\"\"\").fetchall()\n",
+    "\n",
+    "assert_not_in(('Aisha Duo',), artists, 'Checking Aisha Duo has been deleted')\n",
+    "assert_equal(len(albums), 346,  'Checking the correct number of albums have been deleted')\n",
+    "assert_equal(len(tracks), 3501, 'Checking the correct number of tracks have been deleted')\n",
+    "\n",
+    "\n",
+    "# There are hidden tests which will *completely* check your solution."
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "argv": [
+    "/usr/bin/python3",
+    "-m",
+    "ipykernel",
+    "--HistoryManager.enabled=False",
+    "--matplotlib=inline",
+    "-c",
+    "%config InlineBackend.figure_formats = set(['retina'])\nimport matplotlib; matplotlib.rcParams['figure.figsize'] = (12, 7)",
+    "-f",
+    "{connection_file}"
+   ],
+   "display_name": "Python 3 (system-wide)",
+   "env": {
+   },
+   "language": "python",
+   "metadata": {
+    "cocalc": {
+     "description": "Python 3 programming language",
+     "priority": 100,
+     "url": "https://www.python.org/"
+    }
+   },
+   "name": "python3",
+   "resource_dir": "/ext/jupyter/kernels/python3"
+  },
+  "nbgrader": {
+   "__altered": false,
+   "__hash": 615395691,
+   "_root": {
+    "entries": [
+     [
+      "size",
+      6
+     ],
+     [
+      "_root",
+      {
+       "entries": [
+        [
+         "size",
+         1
+        ],
+        [
+         "_root",
+         {
+          "entries": [
+           [
+            "cocalc_minimal_stubs",
+            true
+           ]
+          ],
+          "ownerID": {
+          }
+         }
+        ],
+        [
+         "__ownerID",
+         null
+        ],
+        [
+         "__hash",
+         912286151
+        ],
+        [
+         "__altered",
+         false
+        ],
+        [
+         "cocalc_minimal_stubs",
+         true
+        ]
+       ],
+       "ownerID": {
+       }
+      }
+     ],
+     [
+      "__ownerID",
+      null
+     ],
+     [
+      "__hash",
+      853781301
+     ],
+     [
+      "__altered",
+      false
+     ],
+     [
+      "cocalc_minimal_stubs",
+      true
+     ]
+    ],
+    "ownerID": {
+    }
+   },
+   "cocalc_minimal_stubs": true,
+   "size": 6
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}

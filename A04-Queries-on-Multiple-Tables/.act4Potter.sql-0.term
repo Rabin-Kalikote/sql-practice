@@ -1,0 +1,793 @@
+]0;~/csc270/Activities/A04-Queries-on-Multiple-Tables[01;34m~/csc270/Activities/A04-Queries-on-Multiple-Tables[00m$ clearsqlite3
+SQLite version 3.37.2 2022-01-06 13:25:41
+Enter ".help" for usage hints.
+Connected to a [1mtransient in-memory database[0m.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite> .headers on
+sqlite> moe[K[K[K.mode bon[K[Kox
+sqlite> .open Potter.db
+sqlite> .schme[Ka[K[K[Khema
+CREATE TABLE Person (
+    personID INTEGER,
+    firstName TEXT,
+    lastName TEXT,
+    PRIMARY KEY (personID)
+);
+CREATE TABLE IF NOT EXISTS "ParentChild" (
+parentID INTEGER,
+childID INTEGER,
+PRIMARY KEY (parentID, childID),
+FOREIGN KEY (parentID) REFERENCES Person(personID) ON DELETE CASCADE,
+FOREIGN KEY (childID) REFERENCES Person(personID) ON DELETE CASCADE);
+sqlite> .ope[K[K[K[K.schemaopen Potter.db[C[C[C[C[C[C[C[C[C[6Pmode boxheaders on[6Pexitread schedule.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sqla.sqlc.sqlt.sql4.sqlP.sqlo.sqlt.sqlt.sqle.sqlr.sql[C[C[C[C
+Error: near line 2: in prepare, near "AS": syntax error (1)
+sqlite> .read act4Potter.sql
+Error: near line 2: in prepare, near "c": syntax error (1)
+sqlite> .read act4Potter.sql
+┌──────────┬───────┐
+│  Parent  │ Child │
+├──────────┼───────┤
+│ James    │       │
+│ Lily     │       │
+│ Harry    │       │
+│ Harry    │       │
+│ Harry    │       │
+│ Ginny    │       │
+│ Ginny    │       │
+│ Ginny    │       │
+│ Arthur   │       │
+│ Molly    │       │
+│ Cedrella │       │
+│ Septimus │       │
+│ Cedrella │       │
+│ Septimus │       │
+│ Arthur   │       │
+│ Molly    │       │
+│ Ron      │       │
+│ Ron      │       │
+│ Hermione │       │
+│ Hermione │       │
+│ Arthur   │       │
+│ Molly    │       │
+│ Arthur   │       │
+│ Molly    │       │
+│ Arthur   │       │
+│ Molly    │       │
+│ Arthur   │       │
+│ Molly    │       │
+└──────────┴───────┘
+sqlite> .read act4Potter.sql[C[C[C[C[C[C[C[C[K.read act4Potter.sql
+sqlite> .read act4Potter.sql
+┌─────────────────┬───────┐
+│     Parent      │ Child │
+├─────────────────┼───────┤
+│ JamesPotter     │       │
+│ LilyEvans       │       │
+│ HarryPotter     │       │
+│ HarryPotter     │       │
+│ HarryPotter     │       │
+│ GinnyWeasley    │       │
+│ GinnyWeasley    │       │
+│ GinnyWeasley    │       │
+│ ArthurWeasley   │       │
+│ MollyPrewett    │       │
+│ CedrellaBlack   │       │
+│ SeptimusWeasley │       │
+│ CedrellaBlack   │       │
+│ SeptimusWeasley │       │
+│ ArthurWeasley   │       │
+│ MollyPrewett    │       │
+│ RonWeasley      │       │
+│ RonWeasley      │       │
+│ HermioneGranger │       │
+│ HermioneGranger │       │
+│ ArthurWeasley   │       │
+│ MollyPrewett    │       │
+│ ArthurWeasley   │       │
+│ MollyPrewett    │       │
+│ ArthurWeasley   │       │
+│ MollyPrewett    │       │
+│ ArthurWeasley   │       │
+│ MollyPrewett    │       │
+└─────────────────┴───────┘
+sqlite> .read act4Potter.sql
+┌──────────────────┬───────┐
+│      Parent      │ Child │
+├──────────────────┼───────┤
+│ James Potter     │       │
+│ Lily Evans       │       │
+│ Harry Potter     │       │
+│ Harry Potter     │       │
+│ Harry Potter     │       │
+│ Ginny Weasley    │       │
+│ Ginny Weasley    │       │
+│ Ginny Weasley    │       │
+│ Arthur Weasley   │       │
+│ Molly Prewett    │       │
+│ Cedrella Black   │       │
+│ Septimus Weasley │       │
+│ Cedrella Black   │       │
+│ Septimus Weasley │       │
+│ Arthur Weasley   │       │
+│ Molly Prewett    │       │
+│ Ron Weasley      │       │
+│ Ron Weasley      │       │
+│ Hermione Granger │       │
+│ Hermione Granger │       │
+│ Arthur Weasley   │       │
+│ Molly Prewett    │       │
+│ Arthur Weasley   │       │
+│ Molly Prewett    │       │
+│ Arthur Weasley   │       │
+│ Molly Prewett    │       │
+│ Arthur Weasley   │       │
+│ Molly Prewett    │       │
+└──────────────────┴───────┘
+sqlite> .read act4Potter.sql
+Error: near line 2: in prepare, ON clause references tables to its right (1)
+sqlite> .read act4Potter.sql[C[C[C[C[C[C[C[C[K.read act4Potter.sql
+┌──────────────────┬──────────────────────┐
+│      Parent      │        Child         │
+├──────────────────┼──────────────────────┤
+│ James Potter     │ Harry Potter         │
+│ Lily Evans       │ Harry Potter         │
+│ Harry Potter     │ James Potter         │
+│ Harry Potter     │ Albus Potter         │
+│ Harry Potter     │ Lily Potter          │
+│ Ginny Weasley    │ James Potter         │
+│ Ginny Weasley    │ Albus Potter         │
+│ Ginny Weasley    │ Lily Potter          │
+│ Arthur Weasley   │ Ginny Weasley        │
+│ Molly Prewett    │ Ginny Weasley        │
+│ Cedrella Black   │ Arthur Weasley       │
+│ Septimus Weasley │ Arthur Weasley       │
+│ Cedrella Black   │ Bilius Weasley       │
+│ Septimus Weasley │ Bilius Weasley       │
+│ Arthur Weasley   │ Ron Weasley          │
+│ Molly Prewett    │ Ron Weasley          │
+│ Ron Weasley      │ Rose Granger-Weasley │
+│ Ron Weasley      │ Hugo Granger-Weasley │
+│ Hermione Granger │ Rose Granger-Weasley │
+│ Hermione Granger │ Hugo Granger-Weasley │
+│ Arthur Weasley   │ Bill Weasley         │
+│ Molly Prewett    │ Bill Weasley         │
+│ Arthur Weasley   │ Charlie Weasley      │
+│ Molly Prewett    │ Charlie Weasley      │
+│ Arthur Weasley   │ Fred Weasley         │
+│ Molly Prewett    │ Fred Weasley         │
+│ Arthur Weasley   │ George Weasley       │
+│ Molly Prewett    │ George Weasley       │
+└──────────────────┴──────────────────────┘
+sqlite> .read act4Potter.sql
+┌──────────────────┬──────────────────────┐
+│      Parent      │        Child         │
+├──────────────────┼──────────────────────┤
+│ James Potter     │ Harry Potter         │
+│ Lily Evans       │ Harry Potter         │
+│ Harry Potter     │ James Potter         │
+│ Harry Potter     │ Albus Potter         │
+│ Harry Potter     │ Lily Potter          │
+│ Ginny Weasley    │ James Potter         │
+│ Ginny Weasley    │ Albus Potter         │
+│ Ginny Weasley    │ Lily Potter          │
+│ Arthur Weasley   │ Ginny Weasley        │
+│ Molly Prewett    │ Ginny Weasley        │
+│ Cedrella Black   │ Arthur Weasley       │
+│ Septimus Weasley │ Arthur Weasley       │
+│ Cedrella Black   │ Bilius Weasley       │
+│ Septimus Weasley │ Bilius Weasley       │
+│ Arthur Weasley   │ Ron Weasley          │
+│ Molly Prewett    │ Ron Weasley          │
+│ Ron Weasley      │ Rose Granger-Weasley │
+│ Ron Weasley      │ Hugo Granger-Weasley │
+│ Hermione Granger │ Rose Granger-Weasley │
+│ Hermione Granger │ Hugo Granger-Weasley │
+│ Arthur Weasley   │ Bill Weasley         │
+│ Molly Prewett    │ Bill Weasley         │
+│ Arthur Weasley   │ Charlie Weasley      │
+│ Molly Prewett    │ Charlie Weasley      │
+│ Arthur Weasley   │ Fred Weasley         │
+│ Molly Prewett    │ Fred Weasley         │
+│ Arthur Weasley   │ George Weasley       │
+│ Molly Prewett    │ George Weasley       │
+└──────────────────┴──────────────────────┘
+┌───────────┐
+│ firstName │
+├───────────┤
+│ Bill      │
+│ Bill      │
+│ Charlie   │
+│ Charlie   │
+│ Fred      │
+│ Fred      │
+│ George    │
+│ George    │
+│ Ginny     │
+│ Ginny     │
+└───────────┘
+sqlite> .read act4Potter.sql
+┌──────────────────┬──────────────────────┐
+│      Parent      │        Child         │
+├──────────────────┼──────────────────────┤
+│ James Potter     │ Harry Potter         │
+│ Lily Evans       │ Harry Potter         │
+│ Harry Potter     │ James Potter         │
+│ Harry Potter     │ Albus Potter         │
+│ Harry Potter     │ Lily Potter          │
+│ Ginny Weasley    │ James Potter         │
+│ Ginny Weasley    │ Albus Potter         │
+│ Ginny Weasley    │ Lily Potter          │
+│ Arthur Weasley   │ Ginny Weasley        │
+│ Molly Prewett    │ Ginny Weasley        │
+│ Cedrella Black   │ Arthur Weasley       │
+│ Septimus Weasley │ Arthur Weasley       │
+│ Cedrella Black   │ Bilius Weasley       │
+│ Septimus Weasley │ Bilius Weasley       │
+│ Arthur Weasley   │ Ron Weasley          │
+│ Molly Prewett    │ Ron Weasley          │
+│ Ron Weasley      │ Rose Granger-Weasley │
+│ Ron Weasley      │ Hugo Granger-Weasley │
+│ Hermione Granger │ Rose Granger-Weasley │
+│ Hermione Granger │ Hugo Granger-Weasley │
+│ Arthur Weasley   │ Bill Weasley         │
+│ Molly Prewett    │ Bill Weasley         │
+│ Arthur Weasley   │ Charlie Weasley      │
+│ Molly Prewett    │ Charlie Weasley      │
+│ Arthur Weasley   │ Fred Weasley         │
+│ Molly Prewett    │ Fred Weasley         │
+│ Arthur Weasley   │ George Weasley       │
+│ Molly Prewett    │ George Weasley       │
+└──────────────────┴──────────────────────┘
+┌───────────┐
+│ firstName │
+├───────────┤
+│ Bill      │
+│ Charlie   │
+│ Fred      │
+│ George    │
+│ Ginny     │
+└───────────┘
+sqlite> .read act4Potter.sql
+┌──────────────────┬──────────────────────┐
+│      Parent      │        Child         │
+├──────────────────┼──────────────────────┤
+│ James Potter     │ Harry Potter         │
+│ Lily Evans       │ Harry Potter         │
+│ Harry Potter     │ James Potter         │
+│ Harry Potter     │ Albus Potter         │
+│ Harry Potter     │ Lily Potter          │
+│ Ginny Weasley    │ James Potter         │
+│ Ginny Weasley    │ Albus Potter         │
+│ Ginny Weasley    │ Lily Potter          │
+│ Arthur Weasley   │ Ginny Weasley        │
+│ Molly Prewett    │ Ginny Weasley        │
+│ Cedrella Black   │ Arthur Weasley       │
+│ Septimus Weasley │ Arthur Weasley       │
+│ Cedrella Black   │ Bilius Weasley       │
+│ Septimus Weasley │ Bilius Weasley       │
+│ Arthur Weasley   │ Ron Weasley          │
+│ Molly Prewett    │ Ron Weasley          │
+│ Ron Weasley      │ Rose Granger-Weasley │
+│ Ron Weasley      │ Hugo Granger-Weasley │
+│ Hermione Granger │ Rose Granger-Weasley │
+│ Hermione Granger │ Hugo Granger-Weasley │
+│ Arthur Weasley   │ Bill Weasley         │
+│ Molly Prewett    │ Bill Weasley         │
+│ Arthur Weasley   │ Charlie Weasley      │
+│ Molly Prewett    │ Charlie Weasley      │
+│ Arthur Weasley   │ Fred Weasley         │
+│ Molly Prewett    │ Fred Weasley         │
+│ Arthur Weasley   │ George Weasley       │
+│ Molly Prewett    │ George Weasley       │
+└──────────────────┴──────────────────────┘
+┌───────────┐
+│ firstName │
+├───────────┤
+│ Bill      │
+│ Charlie   │
+│ Fred      │
+│ George    │
+│ Ginny     │
+└───────────┘
+┌──────────────────┬──────────────────┬──────────────────────┐
+│      Parent      │      Parent      │        Child         │
+├──────────────────┼──────────────────┼──────────────────────┤
+│ James Potter     │ James Potter     │ Harry Potter         │
+│ Lily Evans       │ Lily Evans       │ Harry Potter         │
+│ Harry Potter     │ Harry Potter     │ James Potter         │
+│ Harry Potter     │ Harry Potter     │ Albus Potter         │
+│ Harry Potter     │ Harry Potter     │ Lily Potter          │
+│ Ginny Weasley    │ Ginny Weasley    │ James Potter         │
+│ Ginny Weasley    │ Ginny Weasley    │ Albus Potter         │
+│ Ginny Weasley    │ Ginny Weasley    │ Lily Potter          │
+│ Arthur Weasley   │ Arthur Weasley   │ Ginny Weasley        │
+│ Molly Prewett    │ Molly Prewett    │ Ginny Weasley        │
+│ Cedrella Black   │ Cedrella Black   │ Arthur Weasley       │
+│ Septimus Weasley │ Septimus Weasley │ Arthur Weasley       │
+│ Cedrella Black   │ Cedrella Black   │ Bilius Weasley       │
+│ Septimus Weasley │ Septimus Weasley │ Bilius Weasley       │
+│ Arthur Weasley   │ Arthur Weasley   │ Ron Weasley          │
+│ Molly Prewett    │ Molly Prewett    │ Ron Weasley          │
+│ Ron Weasley      │ Ron Weasley      │ Rose Granger-Weasley │
+│ Ron Weasley      │ Ron Weasley      │ Hugo Granger-Weasley │
+│ Hermione Granger │ Hermione Granger │ Rose Granger-Weasley │
+│ Hermione Granger │ Hermione Granger │ Hugo Granger-Weasley │
+│ Arthur Weasley   │ Arthur Weasley   │ Bill Weasley         │
+│ Molly Prewett    │ Molly Prewett    │ Bill Weasley         │
+│ Arthur Weasley   │ Arthur Weasley   │ Charlie Weasley      │
+│ Molly Prewett    │ Molly Prewett    │ Charlie Weasley      │
+│ Arthur Weasley   │ Arthur Weasley   │ Fred Weasley         │
+│ Molly Prewett    │ Molly Prewett    │ Fred Weasley         │
+│ Arthur Weasley   │ Arthur Weasley   │ George Weasley       │
+│ Molly Prewett    │ Molly Prewett    │ George Weasley       │
+└──────────────────┴──────────────────┴──────────────────────┘
+sqlite> .read act4Potter.sql
+┌──────────────────┬──────────────────────┐
+│      Parent      │        Child         │
+├──────────────────┼──────────────────────┤
+│ James Potter     │ Harry Potter         │
+│ Lily Evans       │ Harry Potter         │
+│ Harry Potter     │ James Potter         │
+│ Harry Potter     │ Albus Potter         │
+│ Harry Potter     │ Lily Potter          │
+│ Ginny Weasley    │ James Potter         │
+│ Ginny Weasley    │ Albus Potter         │
+│ Ginny Weasley    │ Lily Potter          │
+│ Arthur Weasley   │ Ginny Weasley        │
+│ Molly Prewett    │ Ginny Weasley        │
+│ Cedrella Black   │ Arthur Weasley       │
+│ Septimus Weasley │ Arthur Weasley       │
+│ Cedrella Black   │ Bilius Weasley       │
+│ Septimus Weasley │ Bilius Weasley       │
+│ Arthur Weasley   │ Ron Weasley          │
+│ Molly Prewett    │ Ron Weasley          │
+│ Ron Weasley      │ Rose Granger-Weasley │
+│ Ron Weasley      │ Hugo Granger-Weasley │
+│ Hermione Granger │ Rose Granger-Weasley │
+│ Hermione Granger │ Hugo Granger-Weasley │
+│ Arthur Weasley   │ Bill Weasley         │
+│ Molly Prewett    │ Bill Weasley         │
+│ Arthur Weasley   │ Charlie Weasley      │
+│ Molly Prewett    │ Charlie Weasley      │
+│ Arthur Weasley   │ Fred Weasley         │
+│ Molly Prewett    │ Fred Weasley         │
+│ Arthur Weasley   │ George Weasley       │
+│ Molly Prewett    │ George Weasley       │
+└──────────────────┴──────────────────────┘
+┌───────────┐
+│ firstName │
+├───────────┤
+│ Bill      │
+│ Charlie   │
+│ Fred      │
+│ George    │
+│ Ginny     │
+└───────────┘
+Error: near line 20: in prepare, no such column: c.firstName (1)
+sqlite> .read act4Potter.sql
+┌──────────────────┬──────────────────────┐
+│      Parent      │        Child         │
+├──────────────────┼──────────────────────┤
+│ James Potter     │ Harry Potter         │
+│ Lily Evans       │ Harry Potter         │
+│ Harry Potter     │ James Potter         │
+│ Harry Potter     │ Albus Potter         │
+│ Harry Potter     │ Lily Potter          │
+│ Ginny Weasley    │ James Potter         │
+│ Ginny Weasley    │ Albus Potter         │
+│ Ginny Weasley    │ Lily Potter          │
+│ Arthur Weasley   │ Ginny Weasley        │
+│ Molly Prewett    │ Ginny Weasley        │
+│ Cedrella Black   │ Arthur Weasley       │
+│ Septimus Weasley │ Arthur Weasley       │
+│ Cedrella Black   │ Bilius Weasley       │
+│ Septimus Weasley │ Bilius Weasley       │
+│ Arthur Weasley   │ Ron Weasley          │
+│ Molly Prewett    │ Ron Weasley          │
+│ Ron Weasley      │ Rose Granger-Weasley │
+│ Ron Weasley      │ Hugo Granger-Weasley │
+│ Hermione Granger │ Rose Granger-Weasley │
+│ Hermione Granger │ Hugo Granger-Weasley │
+│ Arthur Weasley   │ Bill Weasley         │
+│ Molly Prewett    │ Bill Weasley         │
+│ Arthur Weasley   │ Charlie Weasley      │
+│ Molly Prewett    │ Charlie Weasley      │
+│ Arthur Weasley   │ Fred Weasley         │
+│ Molly Prewett    │ Fred Weasley         │
+│ Arthur Weasley   │ George Weasley       │
+│ Molly Prewett    │ George Weasley       │
+└──────────────────┴──────────────────────┘
+┌───────────┐
+│ firstName │
+├───────────┤
+│ Bill      │
+│ Charlie   │
+│ Fred      │
+│ George    │
+│ Ginny     │
+└───────────┘
+Error: near line 20: in prepare, no such column: c.firstName (1)
+sqlite> .read act4Potter.sql
+┌──────────────────┬──────────────────────┐
+│      Parent      │        Child         │
+├──────────────────┼──────────────────────┤
+│ James Potter     │ Harry Potter         │
+│ Lily Evans       │ Harry Potter         │
+│ Harry Potter     │ James Potter         │
+│ Harry Potter     │ Albus Potter         │
+│ Harry Potter     │ Lily Potter          │
+│ Ginny Weasley    │ James Potter         │
+│ Ginny Weasley    │ Albus Potter         │
+│ Ginny Weasley    │ Lily Potter          │
+│ Arthur Weasley   │ Ginny Weasley        │
+│ Molly Prewett    │ Ginny Weasley        │
+│ Cedrella Black   │ Arthur Weasley       │
+│ Septimus Weasley │ Arthur Weasley       │
+│ Cedrella Black   │ Bilius Weasley       │
+│ Septimus Weasley │ Bilius Weasley       │
+│ Arthur Weasley   │ Ron Weasley          │
+│ Molly Prewett    │ Ron Weasley          │
+│ Ron Weasley      │ Rose Granger-Weasley │
+│ Ron Weasley      │ Hugo Granger-Weasley │
+│ Hermione Granger │ Rose Granger-Weasley │
+│ Hermione Granger │ Hugo Granger-Weasley │
+│ Arthur Weasley   │ Bill Weasley         │
+│ Molly Prewett    │ Bill Weasley         │
+│ Arthur Weasley   │ Charlie Weasley      │
+│ Molly Prewett    │ Charlie Weasley      │
+│ Arthur Weasley   │ Fred Weasley         │
+│ Molly Prewett    │ Fred Weasley         │
+│ Arthur Weasley   │ George Weasley       │
+│ Molly Prewett    │ George Weasley       │
+└──────────────────┴──────────────────────┘
+┌───────────┐
+│ firstName │
+├───────────┤
+│ Bill      │
+│ Charlie   │
+│ Fred      │
+│ George    │
+│ Ginny     │
+└───────────┘
+Error: near line 20: in prepare, no such column: c.firstName (1)
+sqlite> .read act4Potter.sql
+┌──────────────────┬──────────────────────┐
+│      Parent      │        Child         │
+├──────────────────┼──────────────────────┤
+│ James Potter     │ Harry Potter         │
+│ Lily Evans       │ Harry Potter         │
+│ Harry Potter     │ James Potter         │
+│ Harry Potter     │ Albus Potter         │
+│ Harry Potter     │ Lily Potter          │
+│ Ginny Weasley    │ James Potter         │
+│ Ginny Weasley    │ Albus Potter         │
+│ Ginny Weasley    │ Lily Potter          │
+│ Arthur Weasley   │ Ginny Weasley        │
+│ Molly Prewett    │ Ginny Weasley        │
+│ Cedrella Black   │ Arthur Weasley       │
+│ Septimus Weasley │ Arthur Weasley       │
+│ Cedrella Black   │ Bilius Weasley       │
+│ Septimus Weasley │ Bilius Weasley       │
+│ Arthur Weasley   │ Ron Weasley          │
+│ Molly Prewett    │ Ron Weasley          │
+│ Ron Weasley      │ Rose Granger-Weasley │
+│ Ron Weasley      │ Hugo Granger-Weasley │
+│ Hermione Granger │ Rose Granger-Weasley │
+│ Hermione Granger │ Hugo Granger-Weasley │
+│ Arthur Weasley   │ Bill Weasley         │
+│ Molly Prewett    │ Bill Weasley         │
+│ Arthur Weasley   │ Charlie Weasley      │
+│ Molly Prewett    │ Charlie Weasley      │
+│ Arthur Weasley   │ Fred Weasley         │
+│ Molly Prewett    │ Fred Weasley         │
+│ Arthur Weasley   │ George Weasley       │
+│ Molly Prewett    │ George Weasley       │
+└──────────────────┴──────────────────────┘
+┌───────────┐
+│ firstName │
+├───────────┤
+│ Bill      │
+│ Charlie   │
+│ Fred      │
+│ George    │
+│ Ginny     │
+└───────────┘
+Error: near line 20: in prepare, no such column: c.firstName (1)
+sqlite> .read act4Potter.sql
+┌──────────────────┬──────────────────────┐
+│      Parent      │        Child         │
+├──────────────────┼──────────────────────┤
+│ James Potter     │ Harry Potter         │
+│ Lily Evans       │ Harry Potter         │
+│ Harry Potter     │ James Potter         │
+│ Harry Potter     │ Albus Potter         │
+│ Harry Potter     │ Lily Potter          │
+│ Ginny Weasley    │ James Potter         │
+│ Ginny Weasley    │ Albus Potter         │
+│ Ginny Weasley    │ Lily Potter          │
+│ Arthur Weasley   │ Ginny Weasley        │
+│ Molly Prewett    │ Ginny Weasley        │
+│ Cedrella Black   │ Arthur Weasley       │
+│ Septimus Weasley │ Arthur Weasley       │
+│ Cedrella Black   │ Bilius Weasley       │
+│ Septimus Weasley │ Bilius Weasley       │
+│ Arthur Weasley   │ Ron Weasley          │
+│ Molly Prewett    │ Ron Weasley          │
+│ Ron Weasley      │ Rose Granger-Weasley │
+│ Ron Weasley      │ Hugo Granger-Weasley │
+│ Hermione Granger │ Rose Granger-Weasley │
+│ Hermione Granger │ Hugo Granger-Weasley │
+│ Arthur Weasley   │ Bill Weasley         │
+│ Molly Prewett    │ Bill Weasley         │
+│ Arthur Weasley   │ Charlie Weasley      │
+│ Molly Prewett    │ Charlie Weasley      │
+│ Arthur Weasley   │ Fred Weasley         │
+│ Molly Prewett    │ Fred Weasley         │
+│ Arthur Weasley   │ George Weasley       │
+│ Molly Prewett    │ George Weasley       │
+└──────────────────┴──────────────────────┘
+┌───────────┐
+│ firstName │
+├───────────┤
+│ Bill      │
+│ Charlie   │
+│ Fred      │
+│ George    │
+│ Ginny     │
+└───────────┘
+Error: near line 20: in prepare, no such column: g.firstName (1)
+sqlite> .read act4Potter.sql
+┌──────────────────┬──────────────────────┐
+│      Parent      │        Child         │
+├──────────────────┼──────────────────────┤
+│ James Potter     │ Harry Potter         │
+│ Lily Evans       │ Harry Potter         │
+│ Harry Potter     │ James Potter         │
+│ Harry Potter     │ Albus Potter         │
+│ Harry Potter     │ Lily Potter          │
+│ Ginny Weasley    │ James Potter         │
+│ Ginny Weasley    │ Albus Potter         │
+│ Ginny Weasley    │ Lily Potter          │
+│ Arthur Weasley   │ Ginny Weasley        │
+│ Molly Prewett    │ Ginny Weasley        │
+│ Cedrella Black   │ Arthur Weasley       │
+│ Septimus Weasley │ Arthur Weasley       │
+│ Cedrella Black   │ Bilius Weasley       │
+│ Septimus Weasley │ Bilius Weasley       │
+│ Arthur Weasley   │ Ron Weasley          │
+│ Molly Prewett    │ Ron Weasley          │
+│ Ron Weasley      │ Rose Granger-Weasley │
+│ Ron Weasley      │ Hugo Granger-Weasley │
+│ Hermione Granger │ Rose Granger-Weasley │
+│ Hermione Granger │ Hugo Granger-Weasley │
+│ Arthur Weasley   │ Bill Weasley         │
+│ Molly Prewett    │ Bill Weasley         │
+│ Arthur Weasley   │ Charlie Weasley      │
+│ Molly Prewett    │ Charlie Weasley      │
+│ Arthur Weasley   │ Fred Weasley         │
+│ Molly Prewett    │ Fred Weasley         │
+│ Arthur Weasley   │ George Weasley       │
+│ Molly Prewett    │ George Weasley       │
+└──────────────────┴──────────────────────┘
+┌───────────┐
+│ firstName │
+├───────────┤
+│ Bill      │
+│ Charlie   │
+│ Fred      │
+│ George    │
+│ Ginny     │
+└───────────┘
+Error: near line 20: in prepare, no such column: g.firstName (1)
+sqlite> .read act4Potter.sql
+┌──────────────────┬──────────────────────┐
+│      Parent      │        Child         │
+├──────────────────┼──────────────────────┤
+│ James Potter     │ Harry Potter         │
+│ Lily Evans       │ Harry Potter         │
+│ Harry Potter     │ James Potter         │
+│ Harry Potter     │ Albus Potter         │
+│ Harry Potter     │ Lily Potter          │
+│ Ginny Weasley    │ James Potter         │
+│ Ginny Weasley    │ Albus Potter         │
+│ Ginny Weasley    │ Lily Potter          │
+│ Arthur Weasley   │ Ginny Weasley        │
+│ Molly Prewett    │ Ginny Weasley        │
+│ Cedrella Black   │ Arthur Weasley       │
+│ Septimus Weasley │ Arthur Weasley       │
+│ Cedrella Black   │ Bilius Weasley       │
+│ Septimus Weasley │ Bilius Weasley       │
+│ Arthur Weasley   │ Ron Weasley          │
+│ Molly Prewett    │ Ron Weasley          │
+│ Ron Weasley      │ Rose Granger-Weasley │
+│ Ron Weasley      │ Hugo Granger-Weasley │
+│ Hermione Granger │ Rose Granger-Weasley │
+│ Hermione Granger │ Hugo Granger-Weasley │
+│ Arthur Weasley   │ Bill Weasley         │
+│ Molly Prewett    │ Bill Weasley         │
+│ Arthur Weasley   │ Charlie Weasley      │
+│ Molly Prewett    │ Charlie Weasley      │
+│ Arthur Weasley   │ Fred Weasley         │
+│ Molly Prewett    │ Fred Weasley         │
+│ Arthur Weasley   │ George Weasley       │
+│ Molly Prewett    │ George Weasley       │
+└──────────────────┴──────────────────────┘
+┌───────────┐
+│ firstName │
+├───────────┤
+│ Bill      │
+│ Charlie   │
+│ Fred      │
+│ George    │
+│ Ginny     │
+└───────────┘
+Error: near line 20: in prepare, no such column: g.firstName (1)
+sqlite> .read act4Potter.sql
+┌──────────────────┬──────────────────────┐
+│      Parent      │        Child         │
+├──────────────────┼──────────────────────┤
+│ James Potter     │ Harry Potter         │
+│ Lily Evans       │ Harry Potter         │
+│ Harry Potter     │ James Potter         │
+│ Harry Potter     │ Albus Potter         │
+│ Harry Potter     │ Lily Potter          │
+│ Ginny Weasley    │ James Potter         │
+│ Ginny Weasley    │ Albus Potter         │
+│ Ginny Weasley    │ Lily Potter          │
+│ Arthur Weasley   │ Ginny Weasley        │
+│ Molly Prewett    │ Ginny Weasley        │
+│ Cedrella Black   │ Arthur Weasley       │
+│ Septimus Weasley │ Arthur Weasley       │
+│ Cedrella Black   │ Bilius Weasley       │
+│ Septimus Weasley │ Bilius Weasley       │
+│ Arthur Weasley   │ Ron Weasley          │
+│ Molly Prewett    │ Ron Weasley          │
+│ Ron Weasley      │ Rose Granger-Weasley │
+│ Ron Weasley      │ Hugo Granger-Weasley │
+│ Hermione Granger │ Rose Granger-Weasley │
+│ Hermione Granger │ Hugo Granger-Weasley │
+│ Arthur Weasley   │ Bill Weasley         │
+│ Molly Prewett    │ Bill Weasley         │
+│ Arthur Weasley   │ Charlie Weasley      │
+│ Molly Prewett    │ Charlie Weasley      │
+│ Arthur Weasley   │ Fred Weasley         │
+│ Molly Prewett    │ Fred Weasley         │
+│ Arthur Weasley   │ George Weasley       │
+│ Molly Prewett    │ George Weasley       │
+└──────────────────┴──────────────────────┘
+┌───────────┐
+│ firstName │
+├───────────┤
+│ Bill      │
+│ Charlie   │
+│ Fred      │
+│ George    │
+│ Ginny     │
+└───────────┘
+┌──────────────────┬──────────────────────┬──────────────────────┐
+│   Grand Parent   │        Parent        │        Child         │
+├──────────────────┼──────────────────────┼──────────────────────┤
+│ James Potter     │ Harry Potter         │ James Potter         │
+│ James Potter     │ Harry Potter         │ Albus Potter         │
+│ James Potter     │ Harry Potter         │ Lily Potter          │
+│ Lily Evans       │ Harry Potter         │ James Potter         │
+│ Lily Evans       │ Harry Potter         │ Albus Potter         │
+│ Lily Evans       │ Harry Potter         │ Lily Potter          │
+│ Harry Potter     │ James Potter         │                      │
+│ Harry Potter     │ Albus Potter         │                      │
+│ Harry Potter     │ Lily Potter          │                      │
+│ Ginny Weasley    │ James Potter         │                      │
+│ Ginny Weasley    │ Albus Potter         │                      │
+│ Ginny Weasley    │ Lily Potter          │                      │
+│ Arthur Weasley   │ Ginny Weasley        │ James Potter         │
+│ Arthur Weasley   │ Ginny Weasley        │ Albus Potter         │
+│ Arthur Weasley   │ Ginny Weasley        │ Lily Potter          │
+│ Molly Prewett    │ Ginny Weasley        │ James Potter         │
+│ Molly Prewett    │ Ginny Weasley        │ Albus Potter         │
+│ Molly Prewett    │ Ginny Weasley        │ Lily Potter          │
+│ Cedrella Black   │ Arthur Weasley       │ Ginny Weasley        │
+│ Cedrella Black   │ Arthur Weasley       │ Ron Weasley          │
+│ Cedrella Black   │ Arthur Weasley       │ Bill Weasley         │
+│ Cedrella Black   │ Arthur Weasley       │ Charlie Weasley      │
+│ Cedrella Black   │ Arthur Weasley       │ Fred Weasley         │
+│ Cedrella Black   │ Arthur Weasley       │ George Weasley       │
+│ Septimus Weasley │ Arthur Weasley       │ Ginny Weasley        │
+│ Septimus Weasley │ Arthur Weasley       │ Ron Weasley          │
+│ Septimus Weasley │ Arthur Weasley       │ Bill Weasley         │
+│ Septimus Weasley │ Arthur Weasley       │ Charlie Weasley      │
+│ Septimus Weasley │ Arthur Weasley       │ Fred Weasley         │
+│ Septimus Weasley │ Arthur Weasley       │ George Weasley       │
+│ Cedrella Black   │ Bilius Weasley       │                      │
+│ Septimus Weasley │ Bilius Weasley       │                      │
+│ Arthur Weasley   │ Ron Weasley          │ Rose Granger-Weasley │
+│ Arthur Weasley   │ Ron Weasley          │ Hugo Granger-Weasley │
+│ Molly Prewett    │ Ron Weasley          │ Rose Granger-Weasley │
+│ Molly Prewett    │ Ron Weasley          │ Hugo Granger-Weasley │
+│ Ron Weasley      │ Rose Granger-Weasley │                      │
+│ Ron Weasley      │ Hugo Granger-Weasley │                      │
+│ Hermione Granger │ Rose Granger-Weasley │                      │
+│ Hermione Granger │ Hugo Granger-Weasley │                      │
+│ Arthur Weasley   │ Bill Weasley         │                      │
+│ Molly Prewett    │ Bill Weasley         │                      │
+│ Arthur Weasley   │ Charlie Weasley      │                      │
+│ Molly Prewett    │ Charlie Weasley      │                      │
+│ Arthur Weasley   │ Fred Weasley         │                      │
+│ Molly Prewett    │ Fred Weasley         │                      │
+│ Arthur Weasley   │ George Weasley       │                      │
+│ Molly Prewett    │ George Weasley       │                      │
+└──────────────────┴──────────────────────┴──────────────────────┘
+sqlite> .read act4Potter.sql
+┌──────────────────┬──────────────────────┐
+│      Parent      │        Child         │
+├──────────────────┼──────────────────────┤
+│ James Potter     │ Harry Potter         │
+│ Lily Evans       │ Harry Potter         │
+│ Harry Potter     │ James Potter         │
+│ Harry Potter     │ Albus Potter         │
+│ Harry Potter     │ Lily Potter          │
+│ Ginny Weasley    │ James Potter         │
+│ Ginny Weasley    │ Albus Potter         │
+│ Ginny Weasley    │ Lily Potter          │
+│ Arthur Weasley   │ Ginny Weasley        │
+│ Molly Prewett    │ Ginny Weasley        │
+│ Cedrella Black   │ Arthur Weasley       │
+│ Septimus Weasley │ Arthur Weasley       │
+│ Cedrella Black   │ Bilius Weasley       │
+│ Septimus Weasley │ Bilius Weasley       │
+│ Arthur Weasley   │ Ron Weasley          │
+│ Molly Prewett    │ Ron Weasley          │
+│ Ron Weasley      │ Rose Granger-Weasley │
+│ Ron Weasley      │ Hugo Granger-Weasley │
+│ Hermione Granger │ Rose Granger-Weasley │
+│ Hermione Granger │ Hugo Granger-Weasley │
+│ Arthur Weasley   │ Bill Weasley         │
+│ Molly Prewett    │ Bill Weasley         │
+│ Arthur Weasley   │ Charlie Weasley      │
+│ Molly Prewett    │ Charlie Weasley      │
+│ Arthur Weasley   │ Fred Weasley         │
+│ Molly Prewett    │ Fred Weasley         │
+│ Arthur Weasley   │ George Weasley       │
+│ Molly Prewett    │ George Weasley       │
+└──────────────────┴──────────────────────┘
+┌───────────┐
+│ firstName │
+├───────────┤
+│ Bill      │
+│ Charlie   │
+│ Fred      │
+│ George    │
+│ Ginny     │
+└───────────┘
+┌──────────────────┬────────────────┬──────────────────────┐
+│   Grand Parent   │     Parent     │        Child         │
+├──────────────────┼────────────────┼──────────────────────┤
+│ James Potter     │ Harry Potter   │ James Potter         │
+│ James Potter     │ Harry Potter   │ Albus Potter         │
+│ James Potter     │ Harry Potter   │ Lily Potter          │
+│ Lily Evans       │ Harry Potter   │ James Potter         │
+│ Lily Evans       │ Harry Potter   │ Albus Potter         │
+│ Lily Evans       │ Harry Potter   │ Lily Potter          │
+│ Arthur Weasley   │ Ginny Weasley  │ James Potter         │
+│ Arthur Weasley   │ Ginny Weasley  │ Albus Potter         │
+│ Arthur Weasley   │ Ginny Weasley  │ Lily Potter          │
+│ Molly Prewett    │ Ginny Weasley  │ James Potter         │
+│ Molly Prewett    │ Ginny Weasley  │ Albus Potter         │
+│ Molly Prewett    │ Ginny Weasley  │ Lily Potter          │
+│ Cedrella Black   │ Arthur Weasley │ Ginny Weasley        │
+│ Cedrella Black   │ Arthur Weasley │ Ron Weasley          │
+│ Cedrella Black   │ Arthur Weasley │ Bill Weasley         │
+│ Cedrella Black   │ Arthur Weasley │ Charlie Weasley      │
+│ Cedrella Black   │ Arthur Weasley │ Fred Weasley         │
+│ Cedrella Black   │ Arthur Weasley │ George Weasley       │
+│ Septimus Weasley │ Arthur Weasley │ Ginny Weasley        │
+│ Septimus Weasley │ Arthur Weasley │ Ron Weasley          │
+│ Septimus Weasley │ Arthur Weasley │ Bill Weasley         │
+│ Septimus Weasley │ Arthur Weasley │ Charlie Weasley      │
+│ Septimus Weasley │ Arthur Weasley │ Fred Weasley         │
+│ Septimus Weasley │ Arthur Weasley │ George Weasley       │
+│ Arthur Weasley   │ Ron Weasley    │ Rose Granger-Weasley │
+│ Arthur Weasley   │ Ron Weasley    │ Hugo Granger-Weasley │
+│ Molly Prewett    │ Ron Weasley    │ Rose Granger-Weasley │
+│ Molly Prewett    │ Ron Weasley    │ Hugo Granger-Weasley │
+└──────────────────┴────────────────┴──────────────────────┘
+sqlite> [Ksqlite> ]0;~/csc270/Activities/A04-Queries-on-Multiple-Tables[01;34m~/csc270/Activities/A04-Queries-on-Multiple-Tables[00m$ ]0;~/csc270/Activities/A04-Queries-on-Multiple-Tables[01;34m~/csc270/Activities/A04-Queries-on-Multiple-Tables[00m$ ]0;~/csc270/Activities/A04-Queries-on-Multiple-Tables[01;34m~/csc270/Activities/A04-Queries-on-Multiple-Tables[00m$ 

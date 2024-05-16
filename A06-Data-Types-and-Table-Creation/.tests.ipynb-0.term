@@ -1,0 +1,19 @@
+]0;~/csc270/Activities/A06-Data-Types-and-Table-Creation[01;34m~/csc270/Activities/A06-Data-Types-and-Table-Creation[00m$ clearsqlite3
+SQLite version 3.37.2 2022-01-06 13:25:41
+Enter ".help" for usage hints.
+Connected to a [1mtransient in-memory database[0m.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite> ;exit.read act6create.sql[C[C[C[C[C[C[C[C[Ctables[Kopen act6create.sql[C[C[C[C[C[C[C[C[Ctables[Kopen act6create.sql
+sqlite> .open act6create.sql[C[C[C[C[C[C[C[C;[Kexit.read act6create.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sqli.sqln.sqls.sqle.sqlr.sqlt.sql[C[C[C[C
+Error: near line 2: in prepare, file is not a database (26)
+Error: near line 10: in prepare, file is not a database (26)
+Error: near line 19: in prepare, file is not a database (26)
+Error: near line 27: in prepare, file is not a database (26)
+Error: near line 36: in prepare, file is not a database (26)
+Error: near line 47: in prepare, file is not a database (26)
+Error: near line 58: in prepare, file is not a database (26)
+Error: near line 77: in prepare, file is not a database (26)
+Error: near line 78: in prepare, file is not a database (26)
+Error: near line 80: in prepare, file is not a database (26)
+Error: near line 85: in prepare, file is not a database (26)
+sqlite> 

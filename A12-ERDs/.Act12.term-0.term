@@ -1,0 +1,324 @@
+]0;~/csc270/Activities/A12-ERDs[01;34m~/csc270/Activities/A12-ERDs[00m$ ]0;~/csc270/Activities/A12-ERDs[01;34m~/csc270/Activities/A12-ERDs[00m$ ]0;~/csc270/Activities/A12-ERDs[01;34m~/csc270/Activities/A12-ERDs[00m$ .open Noth[K[Krthwind [K.db
+bash: .open: command not found
+]0;~/csc270/Activities/A12-ERDs[01;34m~/csc270/Activities/A12-ERDs[00m$ .open Northwind.db[11Psqlite3[2Pclearsqlite3
+SQLite version 3.37.2 2022-01-06 13:25:41
+Enter ".help" for usage hints.
+Connected to a [1mtransient in-memory database[0m.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite> clearWHERE p.firstname = 'Barack';[C[C[C[C[C[C[C[C[9PFROM Politician AS p[C[C[C[C[C[C[C[CSELECT p.politician_id, 1, '2009-01-20', '2017-01-20'[C[C[C[C[C[C[C[CINSERT INTO PoliticianOffice (politician_id, office_id, start_date, end_date)[C[C[C[C[C[C[C[C[27Pdelete from Politician where firstname = 'Barack';[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[2@* [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[2P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CINSERT INTO PoliticianOffice (politician_id, office_id, start_date, end_date)[C[C[C[C[C[C[C[C[24PSELECT p.politician_id, 1, '2009-01-20', '2017-01-20'[C[C[C[C[C[C[C[C[33PFROM Politician AS p[C[C[C[C[C[C[C[CWHERE p.firstname = 'Barack';[C[C[C[C[C[C[C[Cclear[K[K.open Not[Krthwind.db
+sqlite> .tables
+Categories            Employees             Shippers            
+CustomerCustomerDemo  Order Details         Suppliers           
+CustomerDemographics  Orders                Territories         
+Customers             Products            
+EmployeeTerritories   Regions             
+sqlite> c[K.mode bx[Kix[K[Kox
+sqlite> .schema
+CREATE TABLE [Categories]
+(      [CategoryID] INTEGER PRIMARY KEY AUTOINCREMENT,
+       [CategoryName] TEXT,
+       [Description] TEXT,
+       [Picture] BLOB
+);
+CREATE TABLE sqlite_sequence(name,seq);
+CREATE TABLE [CustomerCustomerDemo](
+   [CustomerID]TEXT NOT NULL,
+   [CustomerTypeID]TEXT NOT NULL,
+   PRIMARY KEY ("CustomerID","CustomerTypeID"),
+   FOREIGN KEY ([CustomerID]) REFERENCES [Customers] ([CustomerID]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+	FOREIGN KEY ([CustomerTypeID]) REFERENCES [CustomerDemographics] ([CustomerTypeID]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [CustomerDemographics](
+   [CustomerTypeID]TEXT NOT NULL,
+   [CustomerDesc]TEXT,
+    PRIMARY KEY ("CustomerTypeID")
+);
+CREATE TABLE [Customers]
+(      [CustomerID] TEXT,
+       [CompanyName] TEXT,
+       [ContactName] TEXT,
+       [ContactTitle] TEXT,
+       [Address] TEXT,
+       [City] TEXT,
+       [Region] TEXT,
+       [PostalCode] TEXT,
+       [Country] TEXT,
+       [Phone] TEXT,
+       [Fax] TEXT,
+       PRIMARY KEY (`CustomerID`)
+);
+CREATE TABLE [Employees]
+(      [EmployeeID] INTEGER PRIMARY KEY AUTOINCREMENT,
+       [LastName] TEXT,
+       [FirstName] TEXT,
+       [Title] TEXT,
+       [TitleOfCourtesy] TEXT,
+       [BirthDate] DATE,
+       [HireDate] DATE,
+       [Address] TEXT,
+       [City] TEXT,
+       [Region] TEXT,
+       [PostalCode] TEXT,
+       [Country] TEXT,
+       [HomePhone] TEXT,
+       [Extension] TEXT,
+       [Photo] BLOB,
+       [Notes] TEXT,
+       [ReportsTo] INTEGER,
+       [PhotoPath] TEXT,
+	   FOREIGN KEY ([ReportsTo]) REFERENCES [Employees] ([EmployeeID]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [EmployeeTerritories](
+   [EmployeeID]INTEGER NOT NULL,
+   [TerritoryID]TEXT NOT NULL,
+    PRIMARY KEY ("EmployeeID","TerritoryID"),
+	FOREIGN KEY ([EmployeeID]) REFERENCES [Employees] ([EmployeeID]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+	FOREIGN KEY ([TerritoryID]) REFERENCES [Territories] ([TerritoryID]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [Order Details](
+   [OrderID]INTEGER NOT NULL,
+   [ProductID]INTEGER NOT NULL,
+   [UnitPrice]NUMERIC NOT NULL DEFAULT 0,
+   [Quantity]INTEGER NOT NULL DEFAULT 1,
+   [Discount]REAL NOT NULL DEFAULT 0,
+    PRIMARY KEY ("OrderID","ProductID"),
+    CHECK ([Discount]>=(0) AND [Discount]<=(1)),
+    CHECK ([Quantity]>(0)),
+    CHECK ([UnitPrice]>=(0)),
+	FOREIGN KEY ([OrderID]) REFERENCES [Orders] ([OrderID]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+	FOREIGN KEY ([ProductID]) REFERENCES [Products] ([ProductID]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [Orders](
+   [OrderID]INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+   [CustomerID]TEXT,
+   [EmployeeID]INTEGER,
+   [OrderDate]DATETIME,
+   [RequiredDate]DATETIME,
+   [ShippedDate]DATETIME,
+   [ShipVia]INTEGER,
+   [Freight]NUMERIC DEFAULT 0,
+   [ShipName]TEXT,
+   [ShipAddress]TEXT,
+   [ShipCity]TEXT,
+   [ShipRegion]TEXT,
+   [ShipPostalCode]TEXT,
+   [ShipCountry]TEXT,
+   FOREIGN KEY ([EmployeeID]) REFERENCES [Employees] ([EmployeeID]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+	FOREIGN KEY ([CustomerID]) REFERENCES [Customers] ([CustomerID]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+	FOREIGN KEY ([ShipVia]) REFERENCES [Shippers] ([ShipperID]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [Products](
+   [ProductID]INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+   [ProductName]TEXT NOT NULL,
+   [SupplierID]INTEGER,
+   [CategoryID]INTEGER,
+   [QuantityPerUnit]TEXT,
+   [UnitPrice]NUMERIC DEFAULT 0,
+   [UnitsInStock]INTEGER DEFAULT 0,
+   [UnitsOnOrder]INTEGER DEFAULT 0,
+   [ReorderLevel]INTEGER DEFAULT 0,
+   [Discontinued]TEXT NOT NULL DEFAULT '0',
+    CHECK ([UnitPrice]>=(0)),
+    CHECK ([ReorderLevel]>=(0)),
+    CHECK ([UnitsInStock]>=(0)),
+    CHECK ([UnitsOnOrder]>=(0)),
+	FOREIGN KEY ([CategoryID]) REFERENCES [Categories] ([CategoryID]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+	FOREIGN KEY ([SupplierID]) REFERENCES [Suppliers] ([SupplierID]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [Regions](
+   [RegionID]INTEGER NOT NULL PRIMARY KEY,
+   [RegionDescription]TEXT NOT NULL
+);
+CREATE TABLE [Shippers](
+   [ShipperID]INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+   [CompanyName]TEXT NOT NULL,
+   [Phone]TEXT
+);
+CREATE TABLE [Suppliers](
+   [SupplierID]INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+   [CompanyName]TEXT NOT NULL,
+   [ContactName]TEXT,
+   [ContactTitle]TEXT,
+   [Address]TEXT,
+   [City]TEXT,
+   [Region]TEXT,
+   [PostalCode]TEXT,
+   [Country]TEXT,
+   [Phone]TEXT,
+   [Fax]TEXT,
+   [HomePage]TEXT
+);
+CREATE TABLE [Territories](
+   [TerritoryID]TEXT NOT NULL,
+   [TerritoryDescription]TEXT NOT NULL,
+   [RegionID]INTEGER NOT NULL,
+    PRIMARY KEY ("TerritoryID"),
+	FOREIGN KEY ([RegionID]) REFERENCES [Regions] ([RegionID]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+sqlite> o .open.ch.....]0;~/csc270/Activities/A12-ERDs[01;34m~/csc270/Activities/A12-ERDs[00m$ .open.ch.....[K[K[K[K[K[K[K[K[K[K[K[K[Kclear
+[H[2J[3J]0;~/csc270/Activities/A12-ERDs[01;34m~/csc270/Activities/A12-ERDs[00m$ clear.open Northwind.db[11Psqlite3.open Northwind.db[11Psqlite3
+SQLite version 3.37.2 2022-01-06 13:25:41
+Enter ".help" for usage hints.
+Connected to a [1mtransient in-memory database[0m.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite> clearWHERE p.firstname = 'Barack';[C[C[C[C[C[C[C[Cclear[K[K.opne [K[K[Ken Chno[K[Kinook.db
+sqlite> .moe[Kde box
+sqlite> clear[K[K[K[K[K.tables
+Album          Employee       InvoiceLine    PlaylistTrack
+Artist         Genre          MediaType      Track        
+Customer       Invoice        Playlist     
+sqlite> .schema
+CREATE TABLE [Album]
+(
+    [AlbumId] INTEGER  NOT NULL,
+    [Title] NVARCHAR(160)  NOT NULL,
+    [ArtistId] INTEGER  NOT NULL,
+    CONSTRAINT [PK_Album] PRIMARY KEY  ([AlbumId]),
+    FOREIGN KEY ([ArtistId]) REFERENCES [Artist] ([ArtistId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [Artist]
+(
+    [ArtistId] INTEGER  NOT NULL,
+    [Name] NVARCHAR(120),
+    CONSTRAINT [PK_Artist] PRIMARY KEY  ([ArtistId])
+);
+CREATE TABLE [Customer]
+(
+    [CustomerId] INTEGER  NOT NULL,
+    [FirstName] NVARCHAR(40)  NOT NULL,
+    [LastName] NVARCHAR(20)  NOT NULL,
+    [Company] NVARCHAR(80),
+    [Address] NVARCHAR(70),
+    [City] NVARCHAR(40),
+    [State] NVARCHAR(40),
+    [Country] NVARCHAR(40),
+    [PostalCode] NVARCHAR(10),
+    [Phone] NVARCHAR(24),
+    [Fax] NVARCHAR(24),
+    [Email] NVARCHAR(60)  NOT NULL,
+    [SupportRepId] INTEGER,
+    CONSTRAINT [PK_Customer] PRIMARY KEY  ([CustomerId]),
+    FOREIGN KEY ([SupportRepId]) REFERENCES [Employee] ([EmployeeId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [Employee]
+(
+    [EmployeeId] INTEGER  NOT NULL,
+    [LastName] NVARCHAR(20)  NOT NULL,
+    [FirstName] NVARCHAR(20)  NOT NULL,
+    [Title] NVARCHAR(30),
+    [ReportsTo] INTEGER,
+    [BirthDate] DATETIME,
+    [HireDate] DATETIME,
+    [Address] NVARCHAR(70),
+    [City] NVARCHAR(40),
+    [State] NVARCHAR(40),
+    [Country] NVARCHAR(40),
+    [PostalCode] NVARCHAR(10),
+    [Phone] NVARCHAR(24),
+    [Fax] NVARCHAR(24),
+    [Email] NVARCHAR(60),
+    CONSTRAINT [PK_Employee] PRIMARY KEY  ([EmployeeId]),
+    FOREIGN KEY ([ReportsTo]) REFERENCES [Employee] ([EmployeeId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [Genre]
+(
+    [GenreId] INTEGER  NOT NULL,
+    [Name] NVARCHAR(120),
+    CONSTRAINT [PK_Genre] PRIMARY KEY  ([GenreId])
+);
+CREATE TABLE [Invoice]
+(
+    [InvoiceId] INTEGER  NOT NULL,
+    [CustomerId] INTEGER  NOT NULL,
+    [InvoiceDate] DATETIME  NOT NULL,
+    [BillingAddress] NVARCHAR(70),
+    [BillingCity] NVARCHAR(40),
+    [BillingState] NVARCHAR(40),
+    [BillingCountry] NVARCHAR(40),
+    [BillingPostalCode] NVARCHAR(10),
+    [Total] NUMERIC(10,2)  NOT NULL,
+    CONSTRAINT [PK_Invoice] PRIMARY KEY  ([InvoiceId]),
+    FOREIGN KEY ([CustomerId]) REFERENCES [Customer] ([CustomerId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [InvoiceLine]
+(
+    [InvoiceLineId] INTEGER  NOT NULL,
+    [InvoiceId] INTEGER  NOT NULL,
+    [TrackId] INTEGER  NOT NULL,
+    [UnitPrice] NUMERIC(10,2)  NOT NULL,
+    [Quantity] INTEGER  NOT NULL,
+    CONSTRAINT [PK_InvoiceLine] PRIMARY KEY  ([InvoiceLineId]),
+    FOREIGN KEY ([InvoiceId]) REFERENCES [Invoice] ([InvoiceId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+    FOREIGN KEY ([TrackId]) REFERENCES [Track] ([TrackId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [MediaType]
+(
+    [MediaTypeId] INTEGER  NOT NULL,
+    [Name] NVARCHAR(120),
+    CONSTRAINT [PK_MediaType] PRIMARY KEY  ([MediaTypeId])
+);
+CREATE TABLE [Playlist]
+(
+    [PlaylistId] INTEGER  NOT NULL,
+    [Name] NVARCHAR(120),
+    CONSTRAINT [PK_Playlist] PRIMARY KEY  ([PlaylistId])
+);
+CREATE TABLE [PlaylistTrack]
+(
+    [PlaylistId] INTEGER  NOT NULL,
+    [TrackId] INTEGER  NOT NULL,
+    CONSTRAINT [PK_PlaylistTrack] PRIMARY KEY  ([PlaylistId], [TrackId]),
+    FOREIGN KEY ([PlaylistId]) REFERENCES [Playlist] ([PlaylistId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+    FOREIGN KEY ([TrackId]) REFERENCES [Track] ([TrackId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [Track]
+(
+    [TrackId] INTEGER  NOT NULL,
+    [Name] NVARCHAR(200)  NOT NULL,
+    [AlbumId] INTEGER,
+    [MediaTypeId] INTEGER  NOT NULL,
+    [GenreId] INTEGER,
+    [Composer] NVARCHAR(220),
+    [Milliseconds] INTEGER  NOT NULL,
+    [Bytes] INTEGER,
+    [UnitPrice] NUMERIC(10,2)  NOT NULL,
+    CONSTRAINT [PK_Track] PRIMARY KEY  ([TrackId]),
+    FOREIGN KEY ([AlbumId]) REFERENCES [Album] ([AlbumId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+    FOREIGN KEY ([GenreId]) REFERENCES [Genre] ([GenreId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+    FOREIGN KEY ([MediaTypeId]) REFERENCES [MediaType] ([MediaTypeId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE INDEX [IFK_AlbumArtistId] ON [Album] ([ArtistId]);
+CREATE INDEX [IFK_CustomerSupportRepId] ON [Customer] ([SupportRepId]);
+CREATE INDEX [IFK_EmployeeReportsTo] ON [Employee] ([ReportsTo]);
+CREATE INDEX [IFK_InvoiceCustomerId] ON [Invoice] ([CustomerId]);
+CREATE INDEX [IFK_InvoiceLineInvoiceId] ON [InvoiceLine] ([InvoiceId]);
+CREATE INDEX [IFK_InvoiceLineTrackId] ON [InvoiceLine] ([TrackId]);
+CREATE INDEX [IFK_PlaylistTrackTrackId] ON [PlaylistTrack] ([TrackId]);
+CREATE INDEX [IFK_TrackAlbumId] ON [Track] ([AlbumId]);
+CREATE INDEX [IFK_TrackGenreId] ON [Track] ([GenreId]);
+CREATE INDEX [IFK_TrackMediaTypeId] ON [Track] ([MediaTypeId]);
+sqlite> [Ksqlite> [Ksqlite> [Ksqlite> [Ksqlite> [Ksqlite> [Ksqlite> [Ksqlite> [Ksqlite> [Ksqlite> [Ksqlite> ]0;~/csc270/Activities/A12-ERDs[01;34m~/csc270/Activities/A12-ERDs[00m$ ]0;~/csc270/Activities/A12-ERDs[01;34m~/csc270/Activities/A12-ERDs[00m$ ]0;~/csc270/Activities/A12-ERDs[01;34m~/csc270/Activities/A12-ERDs[00m$ ]0;~/csc270/Activities/A12-ERDs[01;34m~/csc270/Activities/A12-ERDs[00m$ [K]0;~/csc270/Activities/A12-ERDs[01;34m~/csc270/Activities/A12-ERDs[00m$ 

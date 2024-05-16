@@ -1,0 +1,616 @@
+]0;~/csc270/Activities/A06-Data-Types-and-Table-Creation[01;34m~/csc270/Activities/A06-Data-Types-and-Table-Creation[00m$ clearsqlite3
+SQLite version 3.37.2 2022-01-06 13:25:41
+Enter ".help" for usage hints.
+Connected to a [1mtransient in-memory database[0m.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite> s[Khe[K[Kmode[K[K[K[K.headers on
+sqlite> .mode box
+sqlite> .opne [K[K[Krn[K[Ken act6c[KC[Kcreate.sql
+sqlite> .tables
+Error: file is not a database
+sqlite> .tablesopen act6create.sql[C[C[C[C[C[C[C[C[C[11Pmode boxopen act6create.sql[C[1P act6create.sql[C[C[C[C[C[C[C[C[C[C[C[C[1P act6create.sql[C[C[C[C[C[C[C[C[C[C[C[1P act6create.sql[C[C[C[C[C[C[C[C[C[C[1P act6create.sql[C[C[C[C[C[C[C[C[Cr act6create.sql[C[C[C[C[C[C[C[C[C[Ce act6create.sql[C[C[C[C[C[C[C[C[C[C[Ca act6create.sql[C[C[C[C[C[C[C[C[C[C[C[Cd act6create.sql[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+Error: near line 1: in prepare, file is not a database (26)
+Error: near line 2: in prepare, file is not a database (26)
+Error: near line 3: in prepare, file is not a database (26)
+Error: near line 4: in prepare, file is not a database (26)
+Error: near line 5: in prepare, file is not a database (26)
+Error: near line 9: in prepare, file is not a database (26)
+sqlite> .read act6create.sql
+Error: near line 1: in prepare, file is not a database (26)
+Error: near line 2: in prepare, file is not a database (26)
+Error: near line 3: in prepare, file is not a database (26)
+Error: near line 4: in prepare, file is not a database (26)
+Error: near line 5: in prepare, file is not a database (26)
+Error: near line 9: in prepare, file is not a database (26)
+sqlite> .read act6create.sql
+Error: near line 1: in prepare, file is not a database (26)
+Error: near line 2: in prepare, file is not a database (26)
+Error: near line 3: in prepare, file is not a database (26)
+Error: near line 4: in prepare, file is not a database (26)
+Error: near line 5: in prepare, file is not a database (26)
+Error: near line 9: in prepare, file is not a database (26)
+sqlite> exit
+   ...> ;
+Error: in prepare, near "exit": syntax error (1)
+sqlite> 
+sqlite> 
+]0;~/csc270/Activities/A06-Data-Types-and-Table-Creation[01;34m~/csc270/Activities/A06-Data-Types-and-Table-Creation[00m$ clear
+[H[2J[3J]0;~/csc270/Activities/A06-Data-Types-and-Table-Creation[01;34m~/csc270/Activities/A06-Data-Types-and-Table-Creation[00m$ clearsqlite3
+SQLite version 3.37.2 2022-01-06 13:25:41
+Enter ".help" for usage hints.
+Connected to a [1mtransient in-memory database[0m.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite> ;exit.read act6create.sql
+sqlite> .tables
+Yotes
+sqlite> .tablesread act6create.sql
+sqlite> .read act6create.sql[C[C[C[C[C[C[C[C[Ctables[K
+Courses  Yotes  
+sqlite> .tablesread act6create.sql
+sqlite> .read act6create.sql[C[C[C[C[C[C[C[C[Ctables[K
+CourseMeetings  Courses         Yotes         
+sqlite> .tablesread act6create.sql
+sqlite> .read act6create.sql[C[C[C[C[C[C[C[C[Ctables[K
+CourseMeetings  CourseStudent   Courses         Yotes         
+sqlite> .tablesread act6create.sql
+Error: near line 48: in prepare, table CourseMeetings already exists (1)
+sqlite> .read act6create.sql[C[C[C[C[C[C[C[C[Ctables[Kread act6create.sql
+sqlite> .read act6create.sql[C[C[C[C[C[C[C[C[Ctables[K
+CourseDetails   CourseMeetings  CourseStudent   Courses         Yotes         
+sqlite> .tablesread act6create.sql
+sqlite> .read act6create.sql[C[C[C[C[C[C[C[C[Ctables[K
+CourseDetails   CourseMeetings  CourseStudent   Courses         Yotes         
+sqlite> select a[K&[K* from Yotes;
+sqlite> [Ksqlite> [Ksqlite> ]0;~/csc270/Activities/A06-Data-Types-and-Table-Creation[01;34m~/csc270/Activities/A06-Data-Types-and-Table-Creation[00m$ clearsqlite3
+SQLite version 3.37.2 2022-01-06 13:25:41
+Enter ".help" for usage hints.
+Connected to a [1mtransient in-memory database[0m.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite> .headers on
+sqlite> .n[Kmode bix[K[Kox
+sqlite> .mode boxheaders on[C[C[C[C[C[C[C[C;[Kexit.read act6create.sql
+sqlite> .tables
+CourseDetails   CourseMeetings  CourseStudent   Courses         Yotes         
+sqlite> select all [K[K[K[K* from Courses
+   ...> ;
+sqlite> ;select * from CoursesCourseDetails[C[1PDetails[1PDetails[1PDetails[1PDetails[1PDetails[1PDetails[C[C[C[C[C[C[C;
+Error: in prepare, no such table: CoursesDetails (1)
+sqlite> select * from CoursesDetails;[1PDetails;
+sqlite> select * from CourseDetails;[1P;[1P;[1P;[1P;[1P;[1P;[1P;[1P;[1P;[1P;[1P;[1P;[1P;Y;o;t;e;s;
+sqlite> select * from Yotes;CourseDetails;sDetails;[C[C[C[C[C[C[C[C;[Kselect * from Courses[C[C[C[C[C[C[C[C[14P.tablesread act6create.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sqli.sqln.sqls.sqle.sqlr.sqlt.sql[C[C[C[C
+sqlite> .read act6insert.sql[C[C[C[C[C[C[C[Cselect * from Yotes;CourseDetails;[8PYotes;
+┌────────┬───────────┬──────────┬────────────────────────────────────┐
+│ YoteId │ FirstName │ LastName │               Email                │
+├────────┼───────────┼──────────┼────────────────────────────────────┤
+│ 12     │ Jim       │ Dull     │ jdull@collegeofidaho.edu           │
+│ 256    │ Jonny     │ Comes    │ jcomes@collegeofidaho.edu          │
+│ 201    │ Clara     │ Madsen   │ cmadsen@yotes.collegeofidaho.edu   │
+│ 153    │ Alice     │ Simurdak │ asimurdak@yotes.collegeofidaho.edu │
+└────────┴───────────┴──────────┴────────────────────────────────────┘
+sqlite> select * from Yotes;[C[C[C[C[C[C[C[C.read act6insert.sql[C[C[C[C[C[C[C[Cselect * from Yotes;CourseDetails;
+┌───────────────┬──────────────┬──────────────────────────┬─────────┬──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ CourseSubject │ CourseNumber │          Title           │ Credits │                                                                                                            CourseDescription                                                                                                             │
+├───────────────┼──────────────┼──────────────────────────┼─────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ CSC           │ 270          │ Applied Databases        │ 3       │ An introduction to the fundamental concepts of database design and management. Topics may include entity-relationship and relational data models, normalization, relational database design and implementation, SQL, and administration. │
+│ MAT           │ 461          │ Abstract Algebra         │ 3       │ An introduction to the study of abstract algebra via the theory of groups and rings.                                                                                                                                                     │
+│ PHY           │ 271L         │ Analytical Physics I Lab │ 1       │ An integral part of PHY-271, with which it should normally be taken concurrently. One laboratory period weekly. Credit for PHY-271L will not be granted to students who have completed PHY-231L.                                         │
+└───────────────┴──────────────┴──────────────────────────┴─────────┴──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+sqlite> [Ksqlite> [Ksqlite> [Ksqlite> [Ksqlite> select * from CourseDetails;[8PYotes;[C[C[C[C[C[C[C[C.read act6insert.sql[C[C[C[C[C[C[C[Cselect * from Yotes;CourseDetails;sDetails;[C[C[C[C[C[C[C[C;[Kselect * from Courses[C[C[C[C[C[C[C[C[14P.tablesread act6create.sql[C[C[C[C[C[C[C[C[C[11Pmode boxread act6create.sql
+sqlite> .read act6create.sql[C[C[C[C[C[C[C[Cselect * from CourseDetails;[8PYotes;[C[C[C[C[C[C[C[C.read act6insert.sql[C[C[C[C[C[C[C[Cselect * from Yotes;[C[C[C[C[C[C[C[C.read act6insert.sql
+Error: near line 10: in prepare, near "INSERT": syntax error (1)
+sqlite> .read act6insert.sqlcreate.sql
+sqlite> .read act6create.sqlinsert.sqlcreate.sqlinsert.sql
+sqlite> sel.read act6insert.sqlcreate.sqlinsert.sqlcreate.sql[C[C[C[C[C[C[C[Cselect * from CourseDetails;[C[1P;[1P;[1P;[1P;[1P;[1P;[1P;s;
+┌──────────┬───────────────┬──────────────┬─────────┬──────┬────────┬──────────────┐
+│ CourseId │ CourseSubject │ CourseNumber │ Section │ Year │  Term  │ InstructorId │
+├──────────┼───────────────┼──────────────┼─────────┼──────┼────────┼──────────────┤
+│ 1234     │ CSC           │ 270          │ 1       │ 2024 │ Spring │ 256          │
+│ 1111     │ CSC           │ 270          │ 1       │ 2023 │ Spring │ 256          │
+│ 1012     │ MAT           │ 461          │ 1       │ 2022 │ Fall   │ 256          │
+│ 2468     │ PHY           │ 271L         │ 1       │ 2024 │ Fall   │ 12           │
+└──────────┴───────────────┴──────────────┴─────────┴──────┴────────┴──────────────┘
+sqlite> select * from Courses;[C[C[C[C[C[C[C[C[2P.read act6insert.sql
+sqlite> .read act6insert.sql[C[C[C[C[C[C[C[Cselect * from Courses;[C[C[C[C[C[C[C[C[2P.read act6insert.sqlcreate.sqlinsert.sqlcreate.sql[C[C[C[C[C[C[C[Cselect * from CourseDetails;[8PYotes;[C[C[C[C[C[C[C[C.read act6insert.sql[C[C[C[C[C[C[C[Cselect * from Yotes;[C[C[C[C[C[C[C[C.read act6insert.sql[C[C[C[C[C[C[C[Cselect * from Yotes;
+┌────────┬───────────┬──────────┬─────────────────────────────────────────┐
+│ YoteId │ FirstName │ LastName │                  Email                  │
+├────────┼───────────┼──────────┼─────────────────────────────────────────┤
+│ 12     │ Jim       │ Dull     │ jdull@collegeofidaho.edu                │
+│ 256    │ Jonny     │ Comes    │ jcomes@collegeofidaho.edu               │
+│ 201    │ Clara     │ Madsen   │ cmadsen@yotes.collegeofidaho.edu        │
+│ 153    │ Alice     │ Simurdak │ asimurdak@yotes.collegeofidaho.edu      │
+│ 12     │ Jim       │ Dull     │ jdull@collegeofidaho.edu                │
+│ 256    │ Jonny     │ Comes    │ jcomes@collegeofidaho.edu               │
+│ 201    │ Clara     │ Madsen   │ cmadsen@yotes.collegeofidaho.edu        │
+│ 153    │ Alice     │ Simurdak │ asimurdak@yotes.collegeofidaho.edu      │
+│ 646282 │ Rabin     │ Kalikote │ rabin.kalikote@yotes.collegeofidaho.edu │
+└────────┴───────────┴──────────┴─────────────────────────────────────────┘
+sqlite> select * from Yotes;[C[C[C[C[C[C[C[C.read act6insert.sql[C[C[C[C[C[C[C[Cselect * from Courses;[C[C[C[C[C[C[C[C[2P.read act6insert.sqlcreate.sql
+sqlite> .read act6create.sql[C[C[C[C[C[C[C[Cselect * from Yotes;[C[C[C[C[C[C[C[C.read act6insert.sql[C[C[C[C[C[C[C[Cselect * from Courses;[C[C[C[C[C[C[C[C[2P.read act6insert.sql
+Error: near line 36: in prepare, near "(": syntax error (1)
+Error: near line 47: in prepare, table CourseMeetings has 6 columns but 2 values were supplied (1)
+sqlite> .read act6insert.sqlcreate.sqlinsert.sql
+Error: near line 36: in prepare, near "(": syntax error (1)
+sqlite> .read act6insert.sql
+sqlite> celar[K[K[K[K[Kclear
+   ...> ;
+Error: in prepare, near "clear": syntax error (1)
+sqlite> ;clear.read act6insert.sqlcreate.sql[C[C[C[C[C[C[C[Cselect * from Yotes;[C[C[C[C[C[C[C[C.read act6insert.sql[C[C[C[C[C[C[C[Cselect * from Yotes;
+┌────────┬───────────┬───────────┬─────────────────────────────────────────┐
+│ YoteId │ FirstName │ LastName  │                  Email                  │
+├────────┼───────────┼───────────┼─────────────────────────────────────────┤
+│ 12     │ Jim       │ Dull      │ jdull@collegeofidaho.edu                │
+│ 256    │ Jonny     │ Comes     │ jcomes@collegeofidaho.edu               │
+│ 201    │ Clara     │ Madsen    │ cmadsen@yotes.collegeofidaho.edu        │
+│ 153    │ Alice     │ Simurdak  │ asimurdak@yotes.collegeofidaho.edu      │
+│ 646282 │ Rabin     │ Kalikote  │ rabin.kalikote@yotes.collegeofidaho.edu │
+│ 1      │ Lynda     │ Danielson │ ldanielson@collegeofidaho.edu           │
+│ 2      │ Timothy   │ Lee       │ tlee@collegeofidaho.edu                 │
+│ 3      │ Mike      │ Hartwell  │ mhartwell@yotes.collegeofidaho.edu      │
+│ 12     │ Jim       │ Dull      │ jdull@collegeofidaho.edu                │
+│ 256    │ Jonny     │ Comes     │ jcomes@collegeofidaho.edu               │
+│ 201    │ Clara     │ Madsen    │ cmadsen@yotes.collegeofidaho.edu        │
+│ 153    │ Alice     │ Simurdak  │ asimurdak@yotes.collegeofidaho.edu      │
+│ 646282 │ Rabin     │ Kalikote  │ rabin.kalikote@yotes.collegeofidaho.edu │
+│ 1      │ Lynda     │ Danielson │ ldanielson@collegeofidaho.edu           │
+│ 2      │ Timothy   │ Lee       │ tlee@collegeofidaho.edu                 │
+│ 3      │ Mike      │ Hartwell  │ mhartwell@yotes.collegeofidaho.edu      │
+│ 12     │ Jim       │ Dull      │ jdull@collegeofidaho.edu                │
+│ 256    │ Jonny     │ Comes     │ jcomes@collegeofidaho.edu               │
+│ 201    │ Clara     │ Madsen    │ cmadsen@yotes.collegeofidaho.edu        │
+│ 153    │ Alice     │ Simurdak  │ asimurdak@yotes.collegeofidaho.edu      │
+│ 646282 │ Rabin     │ Kalikote  │ rabin.kalikote@yotes.collegeofidaho.edu │
+│ 1      │ Lynda     │ Danielson │ ldanielson@collegeofidaho.edu           │
+│ 2      │ Timothy   │ Lee       │ tlee@collegeofidaho.edu                 │
+│ 3      │ Mike      │ Hartwell  │ mhartwell@yotes.collegeofidaho.edu      │
+└────────┴───────────┴───────────┴─────────────────────────────────────────┘
+sqlite> select * from Yotes;[C[C[C[C[C[C[C[C;[Kclear.read act6insert.sqlcreate.sql
+sqlite> .read act6create.sql[C[C[C[C[C[C[C[Cselect * from Yotes;[C[C[C[C[C[C[C[C;[Kclear.read act6insert.sql
+sqlite> .read act6insert.sqlcreate.sql[C[C[C[C[C[C[C[Cselect * from Yotes;
+┌────────┬───────────┬───────────┬─────────────────────────────────────────┐
+│ YoteId │ FirstName │ LastName  │                  Email                  │
+├────────┼───────────┼───────────┼─────────────────────────────────────────┤
+│ 12     │ Jim       │ Dull      │ jdull@collegeofidaho.edu                │
+│ 256    │ Jonny     │ Comes     │ jcomes@collegeofidaho.edu               │
+│ 201    │ Clara     │ Madsen    │ cmadsen@yotes.collegeofidaho.edu        │
+│ 153    │ Alice     │ Simurdak  │ asimurdak@yotes.collegeofidaho.edu      │
+│ 646282 │ Rabin     │ Kalikote  │ rabin.kalikote@yotes.collegeofidaho.edu │
+│ 1      │ Lynda     │ Danielson │ ldanielson@collegeofidaho.edu           │
+│ 2      │ Timothy   │ Lee       │ tlee@collegeofidaho.edu                 │
+│ 3      │ Mike      │ Hartwell  │ mhartwell@yotes.collegeofidaho.edu      │
+└────────┴───────────┴───────────┴─────────────────────────────────────────┘
+sqlite> select * from Yotes;[1P;[1P;[1P;[1P;[1P;C;o;u;t;[1P;r;s;e;D;e;t;a;o;l;[1P;[1P;i;l;s;
+┌───────────────┬──────────────┬────────────────────────────────┬─────────┬──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ CourseSubject │ CourseNumber │             Title              │ Credits │                                                                                                            CourseDescription                                                                                                             │
+├───────────────┼──────────────┼────────────────────────────────┼─────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ CSC           │ 270          │ Applied Databases              │ 3       │ An introduction to the fundamental concepts of database design and management. Topics may include entity-relationship and relational data models, normalization, relational database design and implementation, SQL, and administration. │
+│ MAT           │ 461          │ Abstract Algebra               │ 3       │ An introduction to the study of abstract algebra via the theory of groups and rings.                                                                                                                                                     │
+│ PHY           │ 271L         │ Analytical Physics I Lab       │ 1       │ An integral part of PHY-271, with which it should normally be taken concurrently. One laboratory period weekly. Credit for PHY-271L will not be granted to students who have completed PHY-231L.                                         │
+│ CSC           │ 340          │ Algorithms Design and Analysis │ 1       │ Fairly difficult class.                                                                                                                                                                                                                  │
+│ PSY           │ 206          │ Social Psychology              │ 1       │ Has a lot of readings.                                                                                                                                                                                                                   │
+│ MAT           │ 252          │ Discrete Mathematics           │ 1       │ Interesting proofs and graphs.                                                                                                                                                                                                           │
+│ THE           │ 185          │ Stagecraft                     │ 1       │ There are more than 100 tools to use. Also, there are chances you will talk to beautiful girls.                                                                                                                                          │
+└───────────────┴──────────────┴────────────────────────────────┴─────────┴──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+sqlite> [Ksqlite> [Ksqlite> select * from CourseDetails;[8PYotes;[C[C[C[C[C[C[C[C.read act6insert.sqlcreate.sql
+sqlite> .read act6create.sql[C[C[C[C[C[C[C[Cselect * from CourseDetails;[8PYotes;[C[C[C[C[C[C[C[C.read act6insert.sql
+sqlite> .read act6insert.sqlcreate.sql[C[C[C[C[C[C[C[Cselect * from CourseDetails;[8PYotes;
+┌────────┬───────────┬────────────┬─────────────────────────────────────────┐
+│ YoteId │ FirstName │  LastName  │                  Email                  │
+├────────┼───────────┼────────────┼─────────────────────────────────────────┤
+│ 12     │ Jim       │ Dull       │ jdull@collegeofidaho.edu                │
+│ 256    │ Jonny     │ Comes      │ jcomes@collegeofidaho.edu               │
+│ 201    │ Clara     │ Madsen     │ cmadsen@yotes.collegeofidaho.edu        │
+│ 153    │ Alice     │ Simurdak   │ asimurdak@yotes.collegeofidaho.edu      │
+│ 646282 │ Rabin     │ Kalikote   │ rabin.kalikote@yotes.collegeofidaho.edu │
+│ 1      │ Lynda     │ Danielson  │ ldanielson@collegeofidaho.edu           │
+│ 2      │ Timothy   │ Lee        │ tlee@collegeofidaho.edu                 │
+│ 3      │ Mike      │ Hartwell   │ mhartwell@yotes.collegeofidaho.edu      │
+│ 333333 │ Jason     │ McClelland │ jmcclelland@collegeofidaho.edu          │
+│ 333334 │ Robin     │ Cruz       │ rcruz@collegeofidaho.edu                │
+└────────┴───────────┴────────────┴─────────────────────────────────────────┘
+sqlite> select * from Yotes;[C[C[C[C[C[C[C[C.read act6insert.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sql1.sql[1P.sqlq.sqlu.sqle.sqlr.sqly.sql
+┌───────────┬────────────┐
+│ FirstName │  LastName  │
+├───────────┼────────────┤
+│ Jonny     │ Comes      │
+│ Jonny     │ Comes      │
+│ Jason     │ McClelland │
+│ Robin     │ Cruz       │
+└───────────┴────────────┘
+sqlite> .read act6query.sql[C[C[C[C[C[C[C[Cselect * from Yotes;[C[C[C[C[C[C[C[C[1P.read act6query.sql
+┌───────────┬────────────┐
+│ FirstName │  LastName  │
+├───────────┼────────────┤
+│ Jonny     │ Comes      │
+│ Robin     │ Cruz       │
+│ Jason     │ McClelland │
+└───────────┴────────────┘
+sqlite> .read act6query.sql[C[C[C[C[C[C[C[Cselect * from Yotes;[C[C[C[C[C[C[C[C.read act6insert.sqlcreate.sql
+sqlite> .read act6create.sql[1Pquery.sql[C[C[C[C[C[C[C[Cselect * from Yotes;[C[C[C[C[C[C[C[C.read act6insert.sqlcreate.sqlinsert.sql
+sqlite> .read act6insert.sqlcreate.sql[1Pquery.sql
+┌───────────┬────────────┐
+│ FirstName │  LastName  │
+├───────────┼────────────┤
+│ Jonny     │ Comes      │
+│ Robin     │ Cruz       │
+│ Jason     │ McClelland │
+└───────────┴────────────┘
+sqlite> .read act6query.sqlinsert.sqlcreate.sql
+sqlite> .read act6create.sql[1Pquery.sqlinsert.sql
+sqlite> .read act6insert.sqlcreate.sql[1Pquery.sql
+┌───────────┬────────────┐
+│ FirstName │  LastName  │
+├───────────┼────────────┤
+│ Jonny     │ Comes      │
+│ Robin     │ Cruz       │
+│ Jason     │ McClelland │
+└───────────┴────────────┘
+sqlite> .read act6query.sqlinsert.sqlcreate.sql
+sqlite> .read act6create.sql[1Pquery.sqlinsert.sql
+Error: near line 36: in prepare, near "(": syntax error (1)
+sqlite> .read act6insert.sqlcreate.sql[1Pquery.sqlcreate.sql
+sqlite> .read act6create.sqlinsert.sqlcreate.sqlinsert.sql
+sqlite> .read act6insert.sqlcreate.sqlinsert.sqlcreate.sql
+sqlite> .read act6create.sqlinsert.sqlcreate.sqlinsert.sql
+Error: near line 50: in prepare, near "(": syntax error (1)
+sqlite> .read act6insert.sqlcreate.sql
+sqlite> .read act6create.sqlinsert.sql
+sqlite> .read act6insert.sqlcreate.sqlinsert.sqlcreate.sqlinsert.sqlcreate.sqlinsert.sqlcreate.sql[1Pquery.sqlinsert.sql[1Pquery.sql
+┌───────────┬────────────┐
+│ FirstName │  LastName  │
+├───────────┼────────────┤
+│ Jonny     │ Comes      │
+│ Robin     │ Cruz       │
+│ Jason     │ McClelland │
+└───────────┴────────────┘
+┌────────────┬────────────────────────────────┬────────────┬──────┬────────────┬──────────┬─────────────┐
+│   course   │          course_title          │ instructor │ days │ start_time │ end_time │    room     │
+├────────────┼────────────────────────────────┼────────────┼──────┼────────────┼──────────┼─────────────┤
+│ CSC-270-01 │ Algorithms Design and Analysis │ Comes      │ TH   │ 08:00      │ 09:15    │ CML 105     │
+│ CSC-270-01 │ Algorithms Design and Analysis │ Comes      │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ CSC-270-01 │ Applied Databases              │ Comes      │ TH   │ 08:00      │ 09:15    │ CML 105     │
+│ CSC-270-01 │ Applied Databases              │ Comes      │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ CSC-340-01 │ Algorithms Design and Analysis │ Danielson  │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ CSC-340-01 │ Applied Databases              │ Danielson  │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ PSY-206-01 │ Social Psychology              │ Lee        │ TH   │ 13:00      │ 13:50    │ Jweet 110   │
+│ MAT-252-01 │ Abstract Algebra               │ Comes      │ MWF  │ 09:00      │ 09:50    │ Boone 124   │
+│ MAT-252-01 │ Discrete Mathematics           │ Comes      │ MWF  │ 09:00      │ 09:50    │ Boone 124   │
+│ THE-185-01 │ Stagecraft                     │ Hartwell   │ MWF  │ 11:00      │ 11:50    │ Langrise ST │
+└────────────┴────────────────────────────────┴────────────┴──────┴────────────┴──────────┴─────────────┘
+sqlite> .read act6query.sql
+┌───────────┬────────────┐
+│ FirstName │  LastName  │
+├───────────┼────────────┤
+│ Jonny     │ Comes      │
+│ Robin     │ Cruz       │
+│ Jason     │ McClelland │
+└───────────┴────────────┘
+┌────────────┬────────────────────────────────┬────────────┬──────┬────────────┬──────────┬─────────────┐
+│   course   │          course_title          │ instructor │ days │ start_time │ end_time │    room     │
+├────────────┼────────────────────────────────┼────────────┼──────┼────────────┼──────────┼─────────────┤
+│ CSC-270-01 │ Algorithms Design and Analysis │ Comes      │ TH   │ 08:00      │ 09:15    │ CML 105     │
+│ CSC-270-01 │ Algorithms Design and Analysis │ Comes      │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ CSC-270-01 │ Applied Databases              │ Comes      │ TH   │ 08:00      │ 09:15    │ CML 105     │
+│ CSC-270-01 │ Applied Databases              │ Comes      │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ CSC-340-01 │ Algorithms Design and Analysis │ Danielson  │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ CSC-340-01 │ Applied Databases              │ Danielson  │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ PSY-206-01 │ Social Psychology              │ Lee        │ TH   │ 13:00      │ 13:50    │ Jweet 110   │
+│ MAT-252-01 │ Abstract Algebra               │ Comes      │ MWF  │ 09:00      │ 09:50    │ Boone 124   │
+│ MAT-252-01 │ Discrete Mathematics           │ Comes      │ MWF  │ 09:00      │ 09:50    │ Boone 124   │
+│ THE-185-01 │ Stagecraft                     │ Hartwell   │ MWF  │ 11:00      │ 11:50    │ Langrise ST │
+└────────────┴────────────────────────────────┴────────────┴──────┴────────────┴──────────┴─────────────┘
+sqlite> .read act6query.sqlinsert.sqlcreate.sqlinsert.sqlcreate.sql
+sqlite> .read act6create.sql[1Pquery.sqlinsert.sql
+sqlite> .read act6insert.sqlcreate.sql[1Pquery.sql
+┌───────────┬────────────┐
+│ FirstName │  LastName  │
+├───────────┼────────────┤
+│ Jonny     │ Comes      │
+│ Robin     │ Cruz       │
+│ Jason     │ McClelland │
+└───────────┴────────────┘
+┌────────────┬────────────────────────────────┬────────────┬──────┬────────────┬──────────┬─────────────┐
+│   course   │          course_title          │ instructor │ days │ start_time │ end_time │    room     │
+├────────────┼────────────────────────────────┼────────────┼──────┼────────────┼──────────┼─────────────┤
+│ CSC-270-01 │ Algorithms Design and Analysis │ Comes      │ TH   │ 08:00      │ 09:15    │ CML 105     │
+│ CSC-270-01 │ Algorithms Design and Analysis │ Comes      │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ CSC-270-01 │ Applied Databases              │ Comes      │ TH   │ 08:00      │ 09:15    │ CML 105     │
+│ CSC-270-01 │ Applied Databases              │ Comes      │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ CSC-340-01 │ Algorithms Design and Analysis │ Danielson  │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ CSC-340-01 │ Applied Databases              │ Danielson  │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ PSY-206-01 │ Social Psychology              │ Lee        │ TH   │ 13:00      │ 13:50    │ Jweet 110   │
+│ MAT-252-01 │ Abstract Algebra               │ Comes      │ MWF  │ 09:00      │ 09:50    │ Boone 124   │
+│ MAT-252-01 │ Discrete Mathematics           │ Comes      │ MWF  │ 09:00      │ 09:50    │ Boone 124   │
+│ THE-185-01 │ Stagecraft                     │ Hartwell   │ MWF  │ 11:00      │ 11:50    │ Langrise ST │
+└────────────┴────────────────────────────────┴────────────┴──────┴────────────┴──────────┴─────────────┘
+sqlite> .read act6query.sqlinsert.sqlcreate.sql
+sqlite> .read act6create.sql[1Pquery.sqlinsert.sqlcreate.sqlinsert.sql[1Pquery.sqlcreate.sql[C[C[C[C[C[C[C[C[K.read act6create.sql[1Pquery.sqlinsert.sqlcreate.sql[1Pquery.sqlinsert.sqlcreate.sqlinsert.sqlcreate.sqlinsert.sqlcreate.sqlinsert.sqlcreate.sql[1Pquery.sqlinsert.sqlcreate.sql[1Pquery.sqlinsert.sqlcreate.sql[1Pquery.sql[C[C[C[C[C[C[C[Cselect * from Yotes;[C[C[C[C[C[C[C[C.read act6insert.sqlcreate.sqlinsert.sql[C[C[C[C[C[C[C[Cselect * from Yotes;
+sqlite> select * from Yotes;[C[C[C[C[C[C[C[C.read act6create.sql[1Pquery.sqlinsert.sqlcreate.sql[1Pquery.sqlcreate.sql[1Pquery.sqlcreate.sqlinsert.sqlcreate.sqlinsert.sql[1Pquery.sqlinsert.sql
+sqlite> .read act6insert.sql[C[C[C[C[C[C[C[Cselect * from Yotes;[C[C[C[C[C[C[C[C.read act6create.sql[1Pquery.sqlinsert.sqlcreate.sql[1Pquery.sqlinsert.sqlcreate.sqlinsert.sqlcreate.sqlinsert.sqlcreate.sqlinsert.sqlcreate.sqlinsert.sql[1Pquery.sqlcreate.sqlinsert.sql[1Pquery.sqlcreate.sql[C[C[C[C[C[C[C[Cselect * from Yotes;[C[C[C[C[C[C[C[C.read act6insert.sql[C[C[C[C[C[C[C[Cselect * from Yotes;
+┌────────┬───────────┬────────────┬─────────────────────────────────────────┐
+│ YoteId │ FirstName │  LastName  │                  Email                  │
+├────────┼───────────┼────────────┼─────────────────────────────────────────┤
+│ 12     │ Jim       │ Dull       │ jdull@collegeofidaho.edu                │
+│ 256    │ Jonny     │ Comes      │ jcomes@collegeofidaho.edu               │
+│ 201    │ Clara     │ Madsen     │ cmadsen@yotes.collegeofidaho.edu        │
+│ 153    │ Alice     │ Simurdak   │ asimurdak@yotes.collegeofidaho.edu      │
+│ 646282 │ Rabin     │ Kalikote   │ rabin.kalikote@yotes.collegeofidaho.edu │
+│ 1      │ Lynda     │ Danielson  │ ldanielson@collegeofidaho.edu           │
+│ 2      │ Timothy   │ Lee        │ tlee@collegeofidaho.edu                 │
+│ 3      │ Mike      │ Hartwell   │ mhartwell@yotes.collegeofidaho.edu      │
+│ 333333 │ Jason     │ McClelland │ jmcclelland@collegeofidaho.edu          │
+│ 333334 │ Robin     │ Cruz       │ rcruz@collegeofidaho.edu                │
+└────────┴───────────┴────────────┴─────────────────────────────────────────┘
+sqlite> select * from Yotes;[C[C[C[C[C[C[C[C.read act6insert.sql[C[C[C[C[C[C[C[Cselect * from Yotes;[C[C[C[C[C[C[C[C.read act6create.sql[1Pquery.sqlinsert.sqlcreate.sqlinsert.sql[1Pquery.sql
+┌───────────┬────────────┐
+│ FirstName │  LastName  │
+├───────────┼────────────┤
+│ Jonny     │ Comes      │
+│ Robin     │ Cruz       │
+│ Jason     │ McClelland │
+└───────────┴────────────┘
+┌────────────┬────────────────────────────────┬────────────┬──────┬────────────┬──────────┬─────────────┐
+│   course   │          course_title          │ instructor │ days │ start_time │ end_time │    room     │
+├────────────┼────────────────────────────────┼────────────┼──────┼────────────┼──────────┼─────────────┤
+│ CSC-270-01 │ Algorithms Design and Analysis │ Comes      │ TH   │ 08:00      │ 09:15    │ CML 105     │
+│ CSC-270-01 │ Algorithms Design and Analysis │ Comes      │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ CSC-270-01 │ Applied Databases              │ Comes      │ TH   │ 08:00      │ 09:15    │ CML 105     │
+│ CSC-270-01 │ Applied Databases              │ Comes      │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ CSC-340-01 │ Algorithms Design and Analysis │ Danielson  │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ CSC-340-01 │ Applied Databases              │ Danielson  │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ PSY-206-01 │ Social Psychology              │ Lee        │ TH   │ 13:00      │ 13:50    │ Jweet 110   │
+│ MAT-252-01 │ Abstract Algebra               │ Comes      │ MWF  │ 09:00      │ 09:50    │ Boone 124   │
+│ MAT-252-01 │ Discrete Mathematics           │ Comes      │ MWF  │ 09:00      │ 09:50    │ Boone 124   │
+│ THE-185-01 │ Stagecraft                     │ Hartwell   │ MWF  │ 11:00      │ 11:50    │ Langrise ST │
+└────────────┴────────────────────────────────┴────────────┴──────┴────────────┴──────────┴─────────────┘
+sqlite> .read act6query.sql[C[C[C[C[C[C[C[Cselect * from Yotes;[C[C[C[C[C[C[C[C[1P.read act6query.sql
+┌───────────┬────────────┐
+│ FirstName │  LastName  │
+├───────────┼────────────┤
+│ Jonny     │ Comes      │
+│ Robin     │ Cruz       │
+│ Jason     │ McClelland │
+└───────────┴────────────┘
+┌────────────┬────────────────────────────────┬────────────┬──────┬────────────┬──────────┬─────────────┐
+│   course   │          course_title          │ instructor │ days │ start_time │ end_time │    room     │
+├────────────┼────────────────────────────────┼────────────┼──────┼────────────┼──────────┼─────────────┤
+│ CSC-270-01 │ Algorithms Design and Analysis │ Comes      │ TH   │ 08:00      │ 09:15    │ CML 105     │
+│ CSC-270-01 │ Algorithms Design and Analysis │ Comes      │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ CSC-270-01 │ Applied Databases              │ Comes      │ TH   │ 08:00      │ 09:15    │ CML 105     │
+│ CSC-270-01 │ Applied Databases              │ Comes      │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ CSC-340-01 │ Algorithms Design and Analysis │ Danielson  │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ CSC-340-01 │ Applied Databases              │ Danielson  │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ PSY-206-01 │ Social Psychology              │ Lee        │ TH   │ 13:00      │ 13:50    │ Jweet 110   │
+│ MAT-252-01 │ Abstract Algebra               │ Comes      │ MWF  │ 09:00      │ 09:50    │ Boone 124   │
+│ MAT-252-01 │ Discrete Mathematics           │ Comes      │ MWF  │ 09:00      │ 09:50    │ Boone 124   │
+│ THE-185-01 │ Stagecraft                     │ Hartwell   │ MWF  │ 11:00      │ 11:50    │ Langrise ST │
+└────────────┴────────────────────────────────┴────────────┴──────┴────────────┴──────────┴─────────────┘
+sqlite> .read act6query.sql
+┌───────────┬────────────┐
+│ FirstName │  LastName  │
+├───────────┼────────────┤
+│ Jonny     │ Comes      │
+│ Robin     │ Cruz       │
+│ Jason     │ McClelland │
+└───────────┴────────────┘
+Error: near line 11: in prepare, ambiguous column name: cs.StudentId (1)
+sqlite> .read act6query.sql
+┌───────────┬────────────┐
+│ FirstName │  LastName  │
+├───────────┼────────────┤
+│ Jonny     │ Comes      │
+│ Robin     │ Cruz       │
+│ Jason     │ McClelland │
+└───────────┴────────────┘
+Error: near line 11: in prepare, no such column: s.CourseId (1)
+sqlite> .read act6query.sql
+┌───────────┬────────────┐
+│ FirstName │  LastName  │
+├───────────┼────────────┤
+│ Jonny     │ Comes      │
+│ Robin     │ Cruz       │
+│ Jason     │ McClelland │
+└───────────┴────────────┘
+┌────────────┬────────────────────────────────┬────────────┬──────┬────────────┬──────────┬─────────────┐
+│   course   │          course_title          │ instructor │ days │ start_time │ end_time │    room     │
+├────────────┼────────────────────────────────┼────────────┼──────┼────────────┼──────────┼─────────────┤
+│ CSC-340-01 │ Algorithms Design and Analysis │ Danielson  │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ CSC-340-01 │ Applied Databases              │ Danielson  │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ CSC-270-01 │ Algorithms Design and Analysis │ Comes      │ TH   │ 08:00      │ 09:15    │ CML 105     │
+│ CSC-270-01 │ Algorithms Design and Analysis │ Comes      │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ CSC-270-01 │ Applied Databases              │ Comes      │ TH   │ 08:00      │ 09:15    │ CML 105     │
+│ CSC-270-01 │ Applied Databases              │ Comes      │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ PSY-206-01 │ Social Psychology              │ Lee        │ TH   │ 13:00      │ 13:50    │ Jweet 110   │
+│ MAT-252-01 │ Abstract Algebra               │ Comes      │ MWF  │ 09:00      │ 09:50    │ Boone 124   │
+│ MAT-252-01 │ Discrete Mathematics           │ Comes      │ MWF  │ 09:00      │ 09:50    │ Boone 124   │
+│ THE-185-01 │ Stagecraft                     │ Hartwell   │ MWF  │ 11:00      │ 11:50    │ Langrise ST │
+└────────────┴────────────────────────────────┴────────────┴──────┴────────────┴──────────┴─────────────┘
+sqlite> .read act6query.sql
+┌───────────┬────────────┐
+│ FirstName │  LastName  │
+├───────────┼────────────┤
+│ Jonny     │ Comes      │
+│ Robin     │ Cruz       │
+│ Jason     │ McClelland │
+└───────────┴────────────┘
+┌────────────┬────────────────────────────────┬────────────┬──────┬────────────┬──────────┬─────────────┐
+│   course   │          course_title          │ instructor │ days │ start_time │ end_time │    room     │
+├────────────┼────────────────────────────────┼────────────┼──────┼────────────┼──────────┼─────────────┤
+│ CSC-340-01 │ Algorithms Design and Analysis │ Danielson  │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ CSC-340-01 │ Applied Databases              │ Danielson  │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ CSC-270-01 │ Algorithms Design and Analysis │ Comes      │ TH   │ 08:00      │ 09:15    │ CML 105     │
+│ CSC-270-01 │ Algorithms Design and Analysis │ Comes      │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ CSC-270-01 │ Applied Databases              │ Comes      │ TH   │ 08:00      │ 09:15    │ CML 105     │
+│ CSC-270-01 │ Applied Databases              │ Comes      │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ PSY-206-01 │ Social Psychology              │ Lee        │ TH   │ 13:00      │ 13:50    │ Jweet 110   │
+│ MAT-252-01 │ Abstract Algebra               │ Comes      │ MWF  │ 09:00      │ 09:50    │ Boone 124   │
+│ MAT-252-01 │ Discrete Mathematics           │ Comes      │ MWF  │ 09:00      │ 09:50    │ Boone 124   │
+│ THE-185-01 │ Stagecraft                     │ Hartwell   │ MWF  │ 11:00      │ 11:50    │ Langrise ST │
+└────────────┴────────────────────────────────┴────────────┴──────┴────────────┴──────────┴─────────────┘
+sqlite> .read act6query.sql
+┌───────────┬────────────┐
+│ FirstName │  LastName  │
+├───────────┼────────────┤
+│ Jonny     │ Comes      │
+│ Robin     │ Cruz       │
+│ Jason     │ McClelland │
+└───────────┴────────────┘
+┌────────────┬────────────────────────────────┬────────────┬──────┬────────────┬──────────┬─────────────┐
+│   course   │          course_title          │ instructor │ days │ start_time │ end_time │    room     │
+├────────────┼────────────────────────────────┼────────────┼──────┼────────────┼──────────┼─────────────┤
+│ CSC-340-01 │ Algorithms Design and Analysis │ Danielson  │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ CSC-340-01 │ Applied Databases              │ Danielson  │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ CSC-270-01 │ Algorithms Design and Analysis │ Comes      │ TH   │ 08:00      │ 09:15    │ CML 105     │
+│ CSC-270-01 │ Algorithms Design and Analysis │ Comes      │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ CSC-270-01 │ Applied Databases              │ Comes      │ TH   │ 08:00      │ 09:15    │ CML 105     │
+│ CSC-270-01 │ Applied Databases              │ Comes      │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ PSY-206-01 │ Social Psychology              │ Lee        │ TH   │ 13:00      │ 13:50    │ Jweet 110   │
+│ MAT-252-01 │ Abstract Algebra               │ Comes      │ MWF  │ 09:00      │ 09:50    │ Boone 124   │
+│ MAT-252-01 │ Discrete Mathematics           │ Comes      │ MWF  │ 09:00      │ 09:50    │ Boone 124   │
+│ THE-185-01 │ Stagecraft                     │ Hartwell   │ MWF  │ 11:00      │ 11:50    │ Langrise ST │
+└────────────┴────────────────────────────────┴────────────┴──────┴────────────┴──────────┴─────────────┘
+sqlite> .read act6query.sql
+┌───────────┬────────────┐
+│ FirstName │  LastName  │
+├───────────┼────────────┤
+│ Jonny     │ Comes      │
+│ Robin     │ Cruz       │
+│ Jason     │ McClelland │
+└───────────┴────────────┘
+┌────────────┬────────────────────────────────┬────────────┬──────┬────────────┬──────────┬─────────────┐
+│   course   │          course_title          │ instructor │ days │ start_time │ end_time │    room     │
+├────────────┼────────────────────────────────┼────────────┼──────┼────────────┼──────────┼─────────────┤
+│ CSC-270-01 │ Applied Databases              │ Comes      │ TH   │ 08:00      │ 09:15    │ CML 105     │
+│ CSC-270-01 │ Applied Databases              │ Comes      │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ CSC-340-01 │ Algorithms Design and Analysis │ Danielson  │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ PSY-206-01 │ Social Psychology              │ Lee        │ TH   │ 13:00      │ 13:50    │ Jweet 110   │
+│ MAT-252-01 │ Discrete Mathematics           │ Comes      │ MWF  │ 09:00      │ 09:50    │ Boone 124   │
+│ THE-185-01 │ Stagecraft                     │ Hartwell   │ MWF  │ 11:00      │ 11:50    │ Langrise ST │
+└────────────┴────────────────────────────────┴────────────┴──────┴────────────┴──────────┴─────────────┘
+sqlite> .read act6query.sql
+┌───────────┬────────────┐
+│ FirstName │  LastName  │
+├───────────┼────────────┤
+│ Jonny     │ Comes      │
+│ Robin     │ Cruz       │
+│ Jason     │ McClelland │
+└───────────┴────────────┘
+┌────────────┬────────────────────────────────┬────────────┬──────┬────────────┬──────────┬─────────────┐
+│   course   │          course_title          │ instructor │ days │ start_time │ end_time │    room     │
+├────────────┼────────────────────────────────┼────────────┼──────┼────────────┼──────────┼─────────────┤
+│ CSC-270-01 │ Applied Databases              │ Comes      │ TH   │ 08:00      │ 09:15    │ CML 105     │
+│ CSC-270-01 │ Applied Databases              │ Comes      │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ CSC-340-01 │ Algorithms Design and Analysis │ Danielson  │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ PSY-206-01 │ Social Psychology              │ Lee        │ TH   │ 13:00      │ 13:50    │ Jweet 110   │
+│ MAT-252-01 │ Discrete Mathematics           │ Comes      │ MWF  │ 09:00      │ 09:50    │ Boone 124   │
+│ THE-185-01 │ Stagecraft                     │ Hartwell   │ MWF  │ 11:00      │ 11:50    │ Langrise ST │
+└────────────┴────────────────────────────────┴────────────┴──────┴────────────┴──────────┴─────────────┘
+sqlite> .read act6query.sql
+┌───────────┬────────────┐
+│ FirstName │  LastName  │
+├───────────┼────────────┤
+│ Jonny     │ Comes      │
+│ Robin     │ Cruz       │
+│ Jason     │ McClelland │
+└───────────┴────────────┘
+┌────────────┬────────────────────────────────┬────────────┬──────┬────────────┬──────────┬─────────────┐
+│   course   │          course_title          │ instructor │ days │ start_time │ end_time │    room     │
+├────────────┼────────────────────────────────┼────────────┼──────┼────────────┼──────────┼─────────────┤
+│ CSC-270-01 │ Applied Databases              │ Comes      │ TH   │ 08:00      │ 09:15    │ CML 105     │
+│ CSC-270-01 │ Applied Databases              │ Comes      │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ CSC-340-01 │ Algorithms Design and Analysis │ Danielson  │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ PSY-206-01 │ Social Psychology              │ Lee        │ TH   │ 13:00      │ 13:50    │ Jweet 110   │
+│ MAT-252-01 │ Discrete Mathematics           │ Comes      │ MWF  │ 09:00      │ 09:50    │ Boone 124   │
+│ THE-185-01 │ Stagecraft                     │ Hartwell   │ MWF  │ 11:00      │ 11:50    │ Langrise ST │
+└────────────┴────────────────────────────────┴────────────┴──────┴────────────┴──────────┴─────────────┘
+sqlite> .read act6query.sql
+┌───────────┬────────────┐
+│ FirstName │  LastName  │
+├───────────┼────────────┤
+│ Jonny     │ Comes      │
+│ Robin     │ Cruz       │
+│ Jason     │ McClelland │
+└───────────┴────────────┘
+┌────────────┬────────────────────────────────┬────────────┬──────┬────────────┬──────────┬─────────────┐
+│   course   │          course_title          │ instructor │ days │ start_time │ end_time │    room     │
+├────────────┼────────────────────────────────┼────────────┼──────┼────────────┼──────────┼─────────────┤
+│ CSC-270-01 │ Applied Databases              │ Comes      │ TH   │ 08:00      │ 09:15    │ CML 105     │
+│ CSC-270-01 │ Applied Databases              │ Comes      │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ CSC-340-01 │ Algorithms Design and Analysis │ Danielson  │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ PSY-206-01 │ Social Psychology              │ Lee        │ TH   │ 13:00      │ 13:50    │ Jweet 110   │
+│ MAT-252-01 │ Discrete Mathematics           │ Comes      │ MWF  │ 09:00      │ 09:50    │ Boone 124   │
+│ THE-185-01 │ Stagecraft                     │ Hartwell   │ MWF  │ 11:00      │ 11:50    │ Langrise ST │
+└────────────┴────────────────────────────────┴────────────┴──────┴────────────┴──────────┴─────────────┘
+sqlite> .read act6query.sql
+┌───────────┬────────────┐
+│ FirstName │  LastName  │
+├───────────┼────────────┤
+│ Jonny     │ Comes      │
+│ Robin     │ Cruz       │
+│ Jason     │ McClelland │
+└───────────┴────────────┘
+┌────────────┬────────────────────────────────┬────────────┬──────┬────────────┬──────────┬─────────────┐
+│   course   │          course_title          │ instructor │ days │ start_time │ end_time │    room     │
+├────────────┼────────────────────────────────┼────────────┼──────┼────────────┼──────────┼─────────────┤
+│ CSC-270-01 │ Applied Databases              │ Comes      │ TH   │ 08:00      │ 09:15    │ CML 105     │
+│ CSC-270-01 │ Applied Databases              │ Comes      │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ CSC-340-01 │ Algorithms Design and Analysis │ Danielson  │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ PSY-206-01 │ Social Psychology              │ Lee        │ TH   │ 13:00      │ 13:50    │ Jweet 110   │
+│ MAT-252-01 │ Discrete Mathematics           │ Comes      │ MWF  │ 09:00      │ 09:50    │ Boone 124   │
+│ THE-185-01 │ Stagecraft                     │ Hartwell   │ MWF  │ 11:00      │ 11:50    │ Langrise ST │
+└────────────┴────────────────────────────────┴────────────┴──────┴────────────┴──────────┴─────────────┘
+sqlite> .read act6query.sql
+┌───────────┬────────────┐
+│ FirstName │  LastName  │
+├───────────┼────────────┤
+│ Jonny     │ Comes      │
+│ Robin     │ Cruz       │
+│ Jason     │ McClelland │
+└───────────┴────────────┘
+┌────────────┬────────────────────────────────┬────────────┬──────┬────────────┬──────────┬─────────────┐
+│   course   │          course_title          │ instructor │ days │ start_time │ end_time │    room     │
+├────────────┼────────────────────────────────┼────────────┼──────┼────────────┼──────────┼─────────────┤
+│ CSC-270-01 │ Applied Databases              │ Comes      │ TH   │ 08:00      │ 09:15    │ CML 105     │
+│ CSC-270-01 │ Applied Databases              │ Comes      │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ CSC-340-01 │ Algorithms Design and Analysis │ Danielson  │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ PSY-206-01 │ Social Psychology              │ Lee        │ TH   │ 13:00      │ 13:50    │ Jweet 110   │
+│ MAT-252-01 │ Discrete Mathematics           │ Comes      │ MWF  │ 09:00      │ 09:50    │ Boone 124   │
+│ THE-185-01 │ Stagecraft                     │ Hartwell   │ MWF  │ 11:00      │ 11:50    │ Langrise ST │
+└────────────┴────────────────────────────────┴────────────┴──────┴────────────┴──────────┴─────────────┘
+sqlite> .read act6query.sql
+┌───────────┬────────────┐
+│ FirstName │  LastName  │
+├───────────┼────────────┤
+│ Jonny     │ Comes      │
+│ Robin     │ Cruz       │
+│ Jason     │ McClelland │
+└───────────┴────────────┘
+┌────────────┬────────────────────────────────┬────────────┬──────┬────────────┬──────────┬─────────────┐
+│   course   │          course_title          │ instructor │ days │ start_time │ end_time │    room     │
+├────────────┼────────────────────────────────┼────────────┼──────┼────────────┼──────────┼─────────────┤
+│ CSC-270-01 │ Applied Databases              │ Comes      │ TH   │ 08:00      │ 09:15    │ CML 105     │
+│ CSC-270-01 │ Applied Databases              │ Comes      │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ CSC-340-01 │ Algorithms Design and Analysis │ Danielson  │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ PSY-206-01 │ Social Psychology              │ Lee        │ TH   │ 13:00      │ 13:50    │ Jweet 110   │
+│ MAT-252-01 │ Discrete Mathematics           │ Comes      │ MWF  │ 09:00      │ 09:50    │ Boone 124   │
+│ THE-185-01 │ Stagecraft                     │ Hartwell   │ MWF  │ 11:00      │ 11:50    │ Langrise ST │
+└────────────┴────────────────────────────────┴────────────┴──────┴────────────┴──────────┴─────────────┘
+sqlite> .read act6query.sql[C[C[C[C[C[C[C[Cselect * from Yotes;[C[C[C[C[C[C[C[C.read act6insert.sql[C[C[C[C[C[C[C[Cselect * from Yotes;[C[C[C[C[C[C[C[C.read act6create.sql[1Pquery.sqlcreate.sql
+sqlite> .read act6create.sql[1Pquery.sql[C[C[C[C[C[C[C[Cselect * from Yotes;[C[C[C[C[C[C[C[C.read act6insert.sql[C[C[C[C[C[C[C[Cselect * from Yotes;[C[C[C[C[C[C[C[C.read act6create.sql[1Pquery.sqlinsert.sqlcreate.sqlinsert.sql
+sqlite> .read act6insert.sqlcreate.sql[1Pquery.sql
+┌───────────┬────────────┐
+│ FirstName │  LastName  │
+├───────────┼────────────┤
+│ Jonny     │ Comes      │
+│ Robin     │ Cruz       │
+│ Jason     │ McClelland │
+└───────────┴────────────┘
+┌────────────┬────────────────────────────────┬────────────┬──────┬────────────┬──────────┬─────────────┐
+│   course   │          course_title          │ instructor │ days │ start_time │ end_time │    room     │
+├────────────┼────────────────────────────────┼────────────┼──────┼────────────┼──────────┼─────────────┤
+│ CSC-270-01 │ Applied Databases              │ Comes      │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ CSC-340-01 │ Algorithms Design and Analysis │ Danielson  │ TH   │ 09:25      │ 10:40    │ CML 105     │
+│ PSY-206-01 │ Social Psychology              │ Lee        │ TH   │ 13:00      │ 13:50    │ Jweet 110   │
+│ MAT-252-01 │ Discrete Mathematics           │ Comes      │ MWF  │ 09:00      │ 09:50    │ Boone 124   │
+│ THE-185-01 │ Stagecraft                     │ Hartwell   │ MWF  │ 11:00      │ 11:50    │ Langrise ST │
+└────────────┴────────────────────────────────┴────────────┴──────┴────────────┴──────────┴─────────────┘
+sqlite> ]0;~/csc270/Activities/A06-Data-Types-and-Table-Creation[01;34m~/csc270/Activities/A06-Data-Types-and-Table-Creation[00m$ ]0;~/csc270/Activities/A06-Data-Types-and-Table-Creation[01;34m~/csc270/Activities/A06-Data-Types-and-Table-Creation[00m$ ]0;~/csc270/Activities/A06-Data-Types-and-Table-Creation[01;34m~/csc270/Activities/A06-Data-Types-and-Table-Creation[00m$ [K]0;~/csc270/Activities/A06-Data-Types-and-Table-Creation[01;34m~/csc270/Activities/A06-Data-Types-and-Table-Creation[00m$ ]0;~/csc270/Activities/A06-Data-Types-and-Table-Creation[01;34m~/csc270/Activities/A06-Data-Types-and-Table-Creation[00m$ 

@@ -1,0 +1,207 @@
+]0;~/csc270/Activities/A05-Modifying-Data[01;34m~/csc270/Activities/A05-Modifying-Data[00m$ clearsqlite3
+SQLite version 3.37.2 2022-01-06 13:25:41
+Enter ".help" for usage hints.
+Connected to a [1mtransient in-memory database[0m.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite> .headers on
+sqlite> .n[Kmode box
+sqlite> cel[K[K[K.open Chinook.db
+sqlite> .schema
+CREATE TABLE [Album]
+(
+    [AlbumId] INTEGER  NOT NULL,
+    [Title] NVARCHAR(160)  NOT NULL,
+    [ArtistId] INTEGER  NOT NULL,
+    CONSTRAINT [PK_Album] PRIMARY KEY  ([AlbumId]),
+    FOREIGN KEY ([ArtistId]) REFERENCES [Artist] ([ArtistId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [Artist]
+(
+    [ArtistId] INTEGER  NOT NULL,
+    [Name] NVARCHAR(120),
+    CONSTRAINT [PK_Artist] PRIMARY KEY  ([ArtistId])
+);
+CREATE TABLE [Customer]
+(
+    [CustomerId] INTEGER  NOT NULL,
+    [FirstName] NVARCHAR(40)  NOT NULL,
+    [LastName] NVARCHAR(20)  NOT NULL,
+    [Company] NVARCHAR(80),
+    [Address] NVARCHAR(70),
+    [City] NVARCHAR(40),
+    [State] NVARCHAR(40),
+    [Country] NVARCHAR(40),
+    [PostalCode] NVARCHAR(10),
+    [Phone] NVARCHAR(24),
+    [Fax] NVARCHAR(24),
+    [Email] NVARCHAR(60)  NOT NULL,
+    [SupportRepId] INTEGER,
+    CONSTRAINT [PK_Customer] PRIMARY KEY  ([CustomerId]),
+    FOREIGN KEY ([SupportRepId]) REFERENCES [Employee] ([EmployeeId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [Employee]
+(
+    [EmployeeId] INTEGER  NOT NULL,
+    [LastName] NVARCHAR(20)  NOT NULL,
+    [FirstName] NVARCHAR(20)  NOT NULL,
+    [Title] NVARCHAR(30),
+    [ReportsTo] INTEGER,
+    [BirthDate] DATETIME,
+    [HireDate] DATETIME,
+    [Address] NVARCHAR(70),
+    [City] NVARCHAR(40),
+    [State] NVARCHAR(40),
+    [Country] NVARCHAR(40),
+    [PostalCode] NVARCHAR(10),
+    [Phone] NVARCHAR(24),
+    [Fax] NVARCHAR(24),
+    [Email] NVARCHAR(60),
+    CONSTRAINT [PK_Employee] PRIMARY KEY  ([EmployeeId]),
+    FOREIGN KEY ([ReportsTo]) REFERENCES [Employee] ([EmployeeId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [Genre]
+(
+    [GenreId] INTEGER  NOT NULL,
+    [Name] NVARCHAR(120),
+    CONSTRAINT [PK_Genre] PRIMARY KEY  ([GenreId])
+);
+CREATE TABLE [Invoice]
+(
+    [InvoiceId] INTEGER  NOT NULL,
+    [CustomerId] INTEGER  NOT NULL,
+    [InvoiceDate] DATETIME  NOT NULL,
+    [BillingAddress] NVARCHAR(70),
+    [BillingCity] NVARCHAR(40),
+    [BillingState] NVARCHAR(40),
+    [BillingCountry] NVARCHAR(40),
+    [BillingPostalCode] NVARCHAR(10),
+    [Total] NUMERIC(10,2)  NOT NULL,
+    CONSTRAINT [PK_Invoice] PRIMARY KEY  ([InvoiceId]),
+    FOREIGN KEY ([CustomerId]) REFERENCES [Customer] ([CustomerId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [InvoiceLine]
+(
+    [InvoiceLineId] INTEGER  NOT NULL,
+    [InvoiceId] INTEGER  NOT NULL,
+    [TrackId] INTEGER  NOT NULL,
+    [UnitPrice] NUMERIC(10,2)  NOT NULL,
+    [Quantity] INTEGER  NOT NULL,
+    CONSTRAINT [PK_InvoiceLine] PRIMARY KEY  ([InvoiceLineId]),
+    FOREIGN KEY ([InvoiceId]) REFERENCES [Invoice] ([InvoiceId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+    FOREIGN KEY ([TrackId]) REFERENCES [Track] ([TrackId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [MediaType]
+(
+    [MediaTypeId] INTEGER  NOT NULL,
+    [Name] NVARCHAR(120),
+    CONSTRAINT [PK_MediaType] PRIMARY KEY  ([MediaTypeId])
+);
+CREATE TABLE [Playlist]
+(
+    [PlaylistId] INTEGER  NOT NULL,
+    [Name] NVARCHAR(120),
+    CONSTRAINT [PK_Playlist] PRIMARY KEY  ([PlaylistId])
+);
+CREATE TABLE [PlaylistTrack]
+(
+    [PlaylistId] INTEGER  NOT NULL,
+    [TrackId] INTEGER  NOT NULL,
+    CONSTRAINT [PK_PlaylistTrack] PRIMARY KEY  ([PlaylistId], [TrackId]),
+    FOREIGN KEY ([PlaylistId]) REFERENCES [Playlist] ([PlaylistId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+    FOREIGN KEY ([TrackId]) REFERENCES [Track] ([TrackId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [Track]
+(
+    [TrackId] INTEGER  NOT NULL,
+    [Name] NVARCHAR(200)  NOT NULL,
+    [AlbumId] INTEGER,
+    [MediaTypeId] INTEGER  NOT NULL,
+    [GenreId] INTEGER,
+    [Composer] NVARCHAR(220),
+    [Milliseconds] INTEGER  NOT NULL,
+    [Bytes] INTEGER,
+    [UnitPrice] NUMERIC(10,2)  NOT NULL,
+    CONSTRAINT [PK_Track] PRIMARY KEY  ([TrackId]),
+    FOREIGN KEY ([AlbumId]) REFERENCES [Album] ([AlbumId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+    FOREIGN KEY ([GenreId]) REFERENCES [Genre] ([GenreId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+    FOREIGN KEY ([MediaTypeId]) REFERENCES [MediaType] ([MediaTypeId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE INDEX [IFK_AlbumArtistId] ON [Album] ([ArtistId]);
+CREATE INDEX [IFK_CustomerSupportRepId] ON [Customer] ([SupportRepId]);
+CREATE INDEX [IFK_EmployeeReportsTo] ON [Employee] ([ReportsTo]);
+CREATE INDEX [IFK_InvoiceCustomerId] ON [Invoice] ([CustomerId]);
+CREATE INDEX [IFK_InvoiceLineInvoiceId] ON [InvoiceLine] ([InvoiceId]);
+CREATE INDEX [IFK_InvoiceLineTrackId] ON [InvoiceLine] ([TrackId]);
+CREATE INDEX [IFK_PlaylistTrackTrackId] ON [PlaylistTrack] ([TrackId]);
+CREATE INDEX [IFK_TrackAlbumId] ON [Track] ([AlbumId]);
+CREATE INDEX [IFK_TrackGenreId] ON [Track] ([GenreId]);
+CREATE INDEX [IFK_TrackMediaTypeId] ON [Track] ([MediaTypeId]);
+sqlite> MediaTypeId[K[K[K[K[K[K[K[K[K[K[K.schemaopen Chinook.db[C[C[C[C[C[C[C[C[C[7Pmode boxheaders on[6Pexitread schedule.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sql .sqla.sqlc.sqlt.sql5.sqlI.sqln.sqls.sqle.sqlr.sqlt.sql
+sqlite> clear
+   ...> ;
+Error: in prepare, near "clear": syntax error (1)
+sqlite> ;clear.read act5Insert.sql
+Error: near line 27: in prepare, all VALUES must have the same number of terms (1)
+sqlite> .read act5Insert.sql
+Error: near line 27: in prepare, all VALUES must have the same number of terms (1)
+sqlite> .read act5Insert.sql
+Error: near line 27: in prepare, all VALUES must have the same number of terms (1)
+sqlite> .read act5Insert.sql
+sqlite> .tables
+A              C              Employee       MediaType    
+Album          Customer       Genre          Playlist     
+Artist         D              Invoice        PlaylistTrack
+B              E              InvoiceLine    Track        
+sqlite> select all[K[K[K* from C
+   ...> ;
+┌────┬────┬────┬────┐
+│ x  │ y  │ z  │ w  │
+├────┼────┼────┼────┤
+│ 0  │ 0  │ 0  │ 0  │
+│ 1  │ 0  │ 1  │ 0  │
+│ 1  │ 2  │ 3  │ 4  │
+│ 2  │ 4  │ 6  │ 8  │
+│ 10 │ -4 │ -5 │ -1 │
+│ -1 │ 3  │ 10 │ -3 │
+└────┴────┴────┴────┘
+sqlite> ;select * from C[C[C[C[C[C[C[C[C[8P.tablesread act5Insert.sql
+Error: near line 33: in prepare, near "INSERT": syntax error (1)
+sqlite> .read act5Insert.sql
+Error: near line 33: in prepare, near "(": syntax error (1)
+sqlite> .read act5Insert.sql
+sqlite> select * from D;
+┌────┬──────┐
+│ a  │  b   │
+├────┼──────┤
+│ 0  │ 0    │
+│ 2  │ 0    │
+│ 10 │ 24   │
+│ 20 │ 384  │
+│ 0  │ -200 │
+│ 9  │ 90   │
+└────┴──────┘
+sqlite> select * from D;[C[C[C[C[C[C[C[C.read act5Insert.sql
+sqlite> .read act5Insert.sql[C[C[C[C[C[C[C[C[4Pselect * from D;[C[C[C[C[C[C[C[C.read act5Insert.sql[C[C[C[C[C[C[C[C[4Pselect * from D;[C[C[C[C[C[C[C[C.read act5Insert.sql[C[C[C[C[C[C[C[C[4Pselect * from D;[1P;E;
+┌──────┬───┬──────┐
+│  q   │ r │  s   │
+├──────┼───┼──────┤
+│ 0    │   │      │
+│ 2    │   │ 2    │
+│ 34   │   │ 10   │
+│ 404  │   │ 20   │
+│ -200 │   │ -200 │
+│ 99   │   │ 9    │
+└──────┴───┴──────┘
+sqlite> select * from E;[C[C[C[C[C[C[C[C.read act5Insert.sql
+sqlite> 

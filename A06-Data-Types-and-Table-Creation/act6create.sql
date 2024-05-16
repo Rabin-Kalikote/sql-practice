@@ -18,9 +18,9 @@ CREATE TABLE Yotes (
 CREATE TABLE Courses (
   CourseId INTEGER,
   CourseSubject VARCHAR(8),
-  CourseNumber INTEGER,
+  CourseNumber VARCHAR(7),
   Section INTEGER,
-  Year INTEGER,
+  "Year" VARCHAR(6),
   Term VARCHAR(7),
   InstructorId INTEGER
 );
@@ -47,8 +47,9 @@ CREATE TABLE CourseStudent (
 -- Your code to create the CourseDetails table here:
 CREATE TABLE CourseDetails (
   CourseSubject VARCHAR(5),
-  CourseNumber INTEGER,
+  CourseNumber VARCHAR(5),
   Title VARCHAR(50),
   Credits INTEGER,
   CourseDescription VARCHAR(2500)
 );
+

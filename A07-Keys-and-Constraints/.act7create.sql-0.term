@@ -1,0 +1,188 @@
+]0;~/csc270/Activities/A07-Keys-and-Constraints[01;34m~/csc270/Activities/A07-Keys-and-Constraints[00m$ clearsqlite3
+SQLite version 3.37.2 2022-01-06 13:25:41
+Enter ".help" for usage hints.
+Connected to a [1mtransient in-memory database[0m.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite> .mode box
+sqlite> .hear[Kders on
+sqlite> .read.[K act7.[Kcreare[K[Kte.sql
+sqlite> .read act7create.sql[C[C[C[C[C[C[C[C[C[9Pheaders onread act7create.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sqli.sqln.sqls.sqle.sqlr.sqlt.sql[C[C[C[C
+Error: near line 14: stepping, FOREIGN KEY constraint failed (19)
+Error: near line 32: stepping, FOREIGN KEY constraint failed (19)
+Error: near line 41: stepping, FOREIGN KEY constraint failed (19)
+Error: near line 55: stepping, FOREIGN KEY constraint failed (19)
+sqlite> .read act7insert.sqlcreate.sql
+Error: near line 3: stepping, FOREIGN KEY constraint failed (19)
+Error: near line 4: stepping, FOREIGN KEY constraint failed (19)
+Error: near line 7: stepping, FOREIGN KEY constraint failed (19)
+Error: near line 13: in prepare, table Yotes already exists (1)
+Error: near line 23: in prepare, table Courses already exists (1)
+Error: near line 55: in prepare, table CourseDetails already exists (1)
+sqlite> .read act7create.sql[C[C[C[C[C[C[C[C[K.read act7create.sqlinsert.sqlcreate.sql
+Error: near line 3: stepping, FOREIGN KEY constraint failed (19)
+Error: near line 13: in prepare, table Yotes already exists (1)
+sqlite> .read act7create.sql
+sqlite> .read act7create.sqlinsert.sql
+sqlite> slect all[K[K[K[KY[KT[K * from Yotes;
+Error: in prepare, near "slect": syntax error (1)
+sqlite> slect * from Yotes;[1@e[1P[C[1@e
+┌────────┬───────────┬────────────┬─────────────────────────────────────────┐
+│ YoteId │ FirstName │  LastName  │                  Email                  │
+├────────┼───────────┼────────────┼─────────────────────────────────────────┤
+│ 1      │ Lynda     │ Danielson  │ ldanielson@collegeofidaho.edu           │
+│ 2      │ Timothy   │ Lee        │ tlee@collegeofidaho.edu                 │
+│ 3      │ Mike      │ Hartwell   │ mhartwell@yotes.collegeofidaho.edu      │
+│ 12     │ Jim       │ Dull       │ jdull@collegeofidaho.edu                │
+│ 153    │ Alice     │ Simurdak   │ asimurdak@yotes.collegeofidaho.edu      │
+│ 201    │ Clara     │ Madsen     │ cmadsen@yotes.collegeofidaho.edu        │
+│ 256    │ Jonny     │ Comes      │ jcomes@collegeofidaho.edu               │
+│ 333333 │ Jason     │ McClelland │ jmcclelland@collegeofidaho.edu          │
+│ 333334 │ Robin     │ Cruz       │ rcruz@collegeofidaho.edu                │
+│ 646282 │ Rabin     │ Kalikote   │ rabin.kalikote@yotes.collegeofidaho.edu │
+└────────┴───────────┴────────────┴─────────────────────────────────────────┘
+sqlite> select * from Yotes;[C[C[C[C[C[C[C[C[1P;[1P;[1P;[1P;[1P;C;o;u;r;s;e;s;[C
+┌──────────┬───────────────┬──────────────┬─────────┬──────┬────────┬──────────────┐
+│ CourseId │ CourseSubject │ CourseNumber │ Section │ Year │  Term  │ InstructorId │
+├──────────┼───────────────┼──────────────┼─────────┼──────┼────────┼──────────────┤
+│ 1012     │ MAT           │ 461          │ 1       │ 2022 │ Fall   │ 256          │
+│ 1111     │ CSC           │ 270          │ 1       │ 2023 │ Spring │ 256          │
+│ 1234     │ CSC           │ 270          │ 1       │ 2024 │ Spring │ 256          │
+│ 2468     │ PHY           │ 271L         │ 2       │ 2024 │ Fall   │ 12           │
+│ 33333    │ CSC           │ 270          │ 1       │ 2020 │ Spring │ 333333       │
+│ 33334    │ CSC           │ 270          │ 1       │ 2021 │ Spring │ 333334       │
+│ 1000001  │ CSC           │ 340          │ 1       │ 2024 │ Spring │ 1            │
+│ 1000002  │ PSY           │ 206          │ 1       │ 2024 │ Spring │ 2            │
+│ 1000003  │ MAT           │ 252          │ 1       │ 2024 │ Spring │ 256          │
+│ 1000004  │ THE           │ 185          │ 1       │ 2024 │ Spring │ 3            │
+└──────────┴───────────────┴──────────────┴─────────┴──────┴────────┴──────────────┘
+sqlite> clear
+   ...> ;
+Error: in prepare, near "clear": syntax error (1)
+sqlite> 
+]0;~/csc270/Activities/A07-Keys-and-Constraints[01;34m~/csc270/Activities/A07-Keys-and-Constraints[00m$ clear
+[H[2J[3J]0;~/csc270/Activities/A07-Keys-and-Constraints[01;34m~/csc270/Activities/A07-Keys-and-Constraints[00m$ clearsqlite3
+SQLite version 3.37.2 2022-01-06 13:25:41
+Enter ".help" for usage hints.
+Connected to a [1mtransient in-memory database[0m.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite> ;clearselect * from Courses;[2PYotes;[C[C[C[C[C[C[C[C[C[1P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C.read act7insert.sqlcreate.sqlinsert.sqlcreate.sql[C[C[C[C[C[C[C[C[C[9Pheaders on[2Pmode boxinsert into Album (Title) values ('Rajesh hamal's song');[C[C[C[C[C[C[C[C.mode box[K
+sqlite> .mode box;[Kclearselect * from Courses;[2PYotes;[C[C[C[C[C[C[C[C[C[1P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C.read act7insert.sqlcreate.sqlinsert.sqlcreate.sql[C[C[C[C[C[C[C[C[C[9Pheaders on[2Pmode boxheaders on
+sqlite> .headers on[2Pmode box;[Kclearselect * from Courses;[2PYotes;[C[C[C[C[C[C[C[C[C[1P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C.read act7insert.sqlcreate.sql
+sqlite> .read act7create.sql[C[C[C[C[C[C[C[C[C[9Pheaders on[2Pmode box;[Kclearselect * from Courses;[2PYotes;[C[C[C[C[C[C[C[C[C[1P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C.read act7insert.sqlcreate.sqlinsert.sql
+sqlite> .read act7insert.sqlcreate.sql
+Error: near line 3: stepping, FOREIGN KEY constraint failed (19)
+Error: near line 13: in prepare, table Yotes already exists (1)
+sqlite> .read act7create.sqlinsert.sqlcreate.sql
+Error: near line 4: in prepare, no such table: main.Yotes (1)
+Error: near line 7: in prepare, no such table: main.Yotes (1)
+Error: near line 23: in prepare, table Courses already exists (1)
+Error: near line 56: in prepare, table CourseDetails already exists (1)
+sqlite> ^C
+]0;~/csc270/Activities/A07-Keys-and-Constraints[01;34m~/csc270/Activities/A07-Keys-and-Constraints[00m$ clear
+[H[2J[3J]0;~/csc270/Activities/A07-Keys-and-Constraints[01;34m~/csc270/Activities/A07-Keys-and-Constraints[00m$ clearsqlite3[2Pclearsqlite3
+SQLite version 3.37.2 2022-01-06 13:25:41
+Enter ".help" for usage hints.
+Connected to a [1mtransient in-memory database[0m.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite> .read act7create.sqlinsert.sqlcreate.sql[C[C[C[C[C[C[C[C[C[9Pheaders on[2Pmode box
+sqlite> .mode boxread act7create.sqlinsert.sqlcreate.sql[C[C[C[C[C[C[C[C[C[9Pheaders on
+sqlite> .headers on[2Pmode boxread act7create.sql
+sqlite> .read act7create.sql[C[C[C[C[C[C[C[C[C[9Pheaders on[2Pmode boxheaders onread act7create.sql[C[C[C[C[C[C[C[C[C[9Pheaders on[2Pmode boxread act7create.sqlinsert.sql
+Error: near line 61: stepping, CHECK constraint failed: EndTime > StartTime (19)
+sqlite> .read act7insert.sqlcreate.sql
+Error: near line 3: stepping, FOREIGN KEY constraint failed (19)
+Error: near line 13: in prepare, table Yotes already exists (1)
+sqlite> DROP TABLE IF EXISTS Yotes;
+sqlite> DROP TABLE IF EXISTS Courses;
+Error: in prepare, no such table: main.Yotes (1)
+sqlite> DROP TABLE IF EXISTS CourseMeetings;
+sqlite> DROP TABLE IF EXISTS CourseStudent;
+sqlite> DROP TABLE IF EXISTS CourseDetails;
+Error: in prepare, no such table: main.Yotes (1)
+sqlite> DROP TABLE IF EXISTS CourseDetails;Student;Meetings;s;[K[2PYotes;[C[C[C[C[C[C[C[C[7P.read act7create.sqlinsert.sqlcreate.sql
+sqlite> .read act7create.sql[C[C[C[C[C[C[C[CDROP TABLE IF EXISTS CourseDetails;Student;Meetings;s;[K[2PYotes;[C[C[C[C[C[C[C[C[7P.read act7create.sqlinsert.sql
+sqlite> clear[K[K[K[K[K.read act7insert.sqlcreate.sql
+Error: near line 3: stepping, FOREIGN KEY constraint failed (19)
+Error: near line 13: in prepare, table Yotes already exists (1)
+sqlite> DROP TABLE IF EXISTS Yotes;
+sqlite> DROP TABLE IF EXISTS Courses;
+Error: in prepare, no such table: main.Yotes (1)
+sqlite> DROP TABLE IF EXISTS CourseMeetings;
+sqlite> DROP TABLE IF EXISTS CourseStudent;
+sqlite> DROP TABLE IF EXISTS CourseDetails;
+Error: in prepare, no such table: main.Yotes (1)
+sqlite> DROP TABLE IF EXISTS CourseDetails;Student;Meetings;s;[K[2PYotes;[C[C[C[C[C[C[C[C[7P.read act7create.sql
+sqlite> .read act7create.sql[C[C[C[C[C[C[C[CDROP TABLE IF EXISTS CourseDetails;Student;Meetings;s;[K[2PYotes;[C[C[C[C[C[C[C[C[7P.read act7create.sqlinsert.sql
+Error: near line 52: stepping, CHECK constraint failed: Term IN ('Summer', 'Spring', 'Winter', 'Fall') (19)
+Error: near line 61: stepping, FOREIGN KEY constraint failed (19)
+Error: near line 75: stepping, FOREIGN KEY constraint failed (19)
+sqlite> .read act7insert.sqlcreate.sqlinsert.sql
+Error: near line 6: stepping, UNIQUE constraint failed: Yotes.YoteId (19)
+Error: near line 16: stepping, UNIQUE constraint failed: CourseDetails.CourseSubject, CourseDetails.CourseNumber (19)
+Error: near line 34: stepping, UNIQUE constraint failed: Courses.CourseId (19)
+Error: near line 43: stepping, UNIQUE constraint failed: Yotes.YoteId (19)
+Error: near line 90: stepping, UNIQUE constraint failed: Yotes.YoteId (19)
+Error: near line 91: stepping, UNIQUE constraint failed: Yotes.YoteId (19)
+Error: near line 94: stepping, UNIQUE constraint failed: Courses.CourseId (19)
+Error: near line 99: stepping, UNIQUE constraint failed: CourseMeetings.CourseMeetingId (19)
+sqlite> ce[Klear
+   ...> ;
+Error: in prepare, near "clear": syntax error (1)
+sqlite> 
+]0;~/csc270/Activities/A07-Keys-and-Constraints[01;34m~/csc270/Activities/A07-Keys-and-Constraints[00m$ clear
+[H[2J[3J]0;~/csc270/Activities/A07-Keys-and-Constraints[01;34m~/csc270/Activities/A07-Keys-and-Constraints[00m$ clearsqlite3[2Pclearsqlite3
+SQLite version 3.37.2 2022-01-06 13:25:41
+Enter ".help" for usage hints.
+Connected to a [1mtransient in-memory database[0m.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite> ;clear.read act7insert.sqlcreate.sql[C[C[C[C[C[C[C[CDROP TABLE IF EXISTS CourseDetails;Student;Meetings;s;[K[2PYotes;[C[C[C[C[C[C[C[C[7P.read act7create.sqlinsert.sqlcreate.sql[C[C[C[C[C[C[C[CDROP TABLE IF EXISTS CourseDetails;Student;Meetings;s;[K[2PYotes;[C[C[C[C[C[C[C[C[7P.read act7create.sqlinsert.sqlcreate.sql[C[C[C[C[C[C[C[C[C[9Pheaders on[2Pmode boxread act7create.sql[C[C[C[C[C[C[C[C[C[11Pmode box
+sqlite> .hears[Kd[K[Kders on
+sqlite> .headers on[2Pmode box;[Kclear.read act7insert.sqlcreate.sql
+sqlite> .read act7create.sql[C[C[C[C[C[C[C[C[C[9Pheaders on[2Pmode box;[Kclear.read act7insert.sql
+sqlite> PRAGMA foreign_key_check;
+sqlite> [Ksqlite> PRAGMA foreign_key_check;[C[C[C[C[C[C[C[C[5P.read act7insert.sqlcreate.sql
+Error: near line 3: stepping, FOREIGN KEY constraint failed (19)
+Error: near line 13: in prepare, table Yotes already exists (1)
+sqlite> .read act7create.sql[C[C[C[C[C[C[C[C[KDROP TABLE IF EXISTS Yotes;
+sqlite> DROP TABLE IF EXISTS Courses;
+Error: in prepare, no such table: main.Yotes (1)
+sqlite> DROP TABLE IF EXISTS CourseMeetings;
+sqlite> DROP TABLE IF EXISTS CourseStudent;
+sqlite> DROP TABLE IF EXISTS CourseDetails;
+Error: in prepare, no such table: main.Yotes (1)
+sqlite> DROP TABLE IF EXISTS CourseDetails;Student;Meetings;s;[K[2PYotes;[C[C[C[C[C[C[C[C[7P.read act7create.sql[C[C[C[C[C[C[C[CPRAGMA foreign_key_check;[C[C[C[C[C[C[C[C[5P.read act7insert.sql[C[C[C[C[C[C[C[CPRAGMA foreign_key_check;[C[C[C[C[C[C[C[C[5P.read act7insert.sqlcreate.sql
+sqlite> .read act7create.sql[C[C[C[C[C[C[C[CDROP TABLE IF EXISTS CourseDetails;Student;Meetings;s;[K[2PYotes;[C[C[C[C[C[C[C[C[7P.read act7create.sql[C[C[C[C[C[C[C[CPRAGMA foreign_key_check;[C[C[C[C[C[C[C[C[5P.read act7insert.sqlcreate.sqlinsert.sql
+sqlite> .read act7insert.sqlcreate.sql
+Error: near line 3: stepping, FOREIGN KEY constraint failed (19)
+Error: near line 13: in prepare, table Yotes already exists (1)
+sqlite> .read act7create.sqlinsert.sqlcreate.sqlinsert.sql
+Error: near line 6: stepping, UNIQUE constraint failed: Yotes.YoteId (19)
+Error: near line 43: stepping, UNIQUE constraint failed: Yotes.YoteId (19)
+Error: near line 90: stepping, UNIQUE constraint failed: Yotes.YoteId (19)
+Error: near line 91: stepping, UNIQUE constraint failed: Yotes.YoteId (19)
+sqlite> .read act7insert.sqlcreate.sqlinsert.sql
+Error: near line 6: stepping, UNIQUE constraint failed: Yotes.YoteId (19)
+Error: near line 16: stepping, UNIQUE constraint failed: CourseDetails.CourseSubject, CourseDetails.CourseNumber (19)
+Error: near line 34: stepping, UNIQUE constraint failed: Courses.CourseId (19)
+Error: near line 43: stepping, UNIQUE constraint failed: Yotes.YoteId (19)
+Error: near line 52: stepping, UNIQUE constraint failed: Courses.CourseId (19)
+Error: near line 61: stepping, UNIQUE constraint failed: CourseMeetings.CourseMeetingId (19)
+Error: near line 75: stepping, UNIQUE constraint failed: CourseStudent.CourseId, CourseStudent.StudentId (19)
+Error: near line 90: stepping, UNIQUE constraint failed: Yotes.YoteId (19)
+Error: near line 91: stepping, UNIQUE constraint failed: Yotes.YoteId (19)
+Error: near line 94: stepping, UNIQUE constraint failed: Courses.CourseId (19)
+Error: near line 99: stepping, UNIQUE constraint failed: CourseMeetings.CourseMeetingId (19)
+sqlite> exit
+   ...> ;
+Error: in prepare, near "exit": syntax error (1)
+sqlite> 
+]0;~/csc270/Activities/A07-Keys-and-Constraints[01;34m~/csc270/Activities/A07-Keys-and-Constraints[00m$ clear
+[H[2J[3J]0;~/csc270/Activities/A07-Keys-and-Constraints[01;34m~/csc270/Activities/A07-Keys-and-Constraints[00m$ clearsqlite3
+SQLite version 3.37.2 2022-01-06 13:25:41
+Enter ".help" for usage hints.
+Connected to a [1mtransient in-memory database[0m.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite> ;exit.read act7insert.sqlcreate.sqlinsert.sqlcreate.sql
+sqlite> .read act7create.sql[C[C[C[C[C[C[C[C;[Kexit.read act7insert.sql
+sqlite> _[KPr[KEA[K[KRAF[KGMA foreign [K_key_check;
+sqlite> ]0;~/csc270/Activities/A07-Keys-and-Constraints[01;34m~/csc270/Activities/A07-Keys-and-Constraints[00m$ ]0;~/csc270/Activities/A07-Keys-and-Constraints[01;34m~/csc270/Activities/A07-Keys-and-Constraints[00m$ ]0;~/csc270/Activities/A07-Keys-and-Constraints[01;34m~/csc270/Activities/A07-Keys-and-Constraints[00m$ [K]0;~/csc270/Activities/A07-Keys-and-Constraints[01;34m~/csc270/Activities/A07-Keys-and-Constraints[00m$ [K]0;~/csc270/Activities/A07-Keys-and-Constraints[01;34m~/csc270/Activities/A07-Keys-and-Constraints[00m$ [K]0;~/csc270/Activities/A07-Keys-and-Constraints[01;34m~/csc270/Activities/A07-Keys-and-Constraints[00m$ [K]0;~/csc270/Activities/A07-Keys-and-Constraints[01;34m~/csc270/Activities/A07-Keys-and-Constraints[00m$ ]0;~/csc270/Activities/A07-Keys-and-Constraints[01;34m~/csc270/Activities/A07-Keys-and-Constraints[00m$ ]0;~/csc270/Activities/A07-Keys-and-Constraints[01;34m~/csc270/Activities/A07-Keys-and-Constraints[00m$ ]0;~/csc270/Activities/A07-Keys-and-Constraints[01;34m~/csc270/Activities/A07-Keys-and-Constraints[00m$ 

@@ -1,0 +1,772 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "collapsed": false,
+    "deletable": false,
+    "editable": false,
+    "nbgrader": {
+     "grade": false,
+     "grade_id": "d17866",
+     "locked": true,
+     "schema_version": 3,
+     "solution": false,
+     "task": false
+    }
+   },
+   "source": [
+    "# Tests for Activity 6"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "collapsed": false,
+    "deletable": false,
+    "editable": false,
+    "nbgrader": {
+     "grade": false,
+     "grade_id": "2cb37d",
+     "locked": true,
+     "schema_version": 3,
+     "solution": false,
+     "task": false
+    }
+   },
+   "source": [
+    "## Tests: creating tables"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {
+    "collapsed": false,
+    "deletable": false,
+    "editable": false,
+    "nbgrader": {
+     "grade": true,
+     "grade_id": "2b1440",
+     "locked": true,
+     "points": 1,
+     "schema_version": 3,
+     "solution": false,
+     "task": false
+    }
+   },
+   "outputs": [
+   ],
+   "source": [
+    "# Tests for creating the table Yotes\n",
+    "import sqlite3\n",
+    "from nose.tools import assert_equal, assert_in\n",
+    "\n",
+    "# Setting up sqlite3 for unit tests\n",
+    "con = sqlite3.connect(':memory:')\n",
+    "cur = con.cursor()\n",
+    "\n",
+    "# Running all the code in act6create.sql\n",
+    "with open('act6create.sql') as file:\n",
+    "    cur.executescript(file.read())\n",
+    "\n",
+    "# Checking that the table exists \n",
+    "tables = [t[0] for t in cur.execute(\"SELECT tbl_name FROM sqlite_master;\").fetchall()]\n",
+    "\n",
+    "assert_in('Yotes', tables, 'Checking the table has the correct name')\n",
+    "\n",
+    "# Checking the column names\n",
+    "cur.execute(\"SELECT * FROM Yotes\")\n",
+    "columns = {c[0] for c in cur.description}\n",
+    "\n",
+    "assert_equal(columns, {'LastName', 'FirstName', 'Email', 'YoteId'})\n",
+    "\n",
+    "con.close()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {
+    "collapsed": false,
+    "deletable": false,
+    "editable": false,
+    "nbgrader": {
+     "grade": true,
+     "grade_id": "b8780a",
+     "locked": true,
+     "points": 1,
+     "schema_version": 3,
+     "solution": false,
+     "task": false
+    }
+   },
+   "outputs": [
+   ],
+   "source": [
+    "# Tests for creating the table Courses\n",
+    "import sqlite3\n",
+    "from nose.tools import assert_equal, assert_in\n",
+    "\n",
+    "# Setting up sqlite3 for unit tests\n",
+    "con = sqlite3.connect(':memory:')\n",
+    "cur = con.cursor()\n",
+    "\n",
+    "# Running all the code in act6create.sql\n",
+    "with open('act6create.sql') as file:\n",
+    "    cur.executescript(file.read())\n",
+    "\n",
+    "# Checking that the table exists \n",
+    "tables = [t[0] for t in cur.execute(\"SELECT tbl_name FROM sqlite_master;\").fetchall()]\n",
+    "\n",
+    "assert_in('Courses', tables, 'Checking the table has the correct name')\n",
+    "\n",
+    "# Checking the column names\n",
+    "cur.execute(\"SELECT * FROM Courses\")\n",
+    "columns = {c[0] for c in cur.description}\n",
+    "\n",
+    "assert_equal(columns, {'CourseId','CourseNumber','CourseSubject','InstructorId','Section','Term','Year'})\n",
+    "\n",
+    "con.close()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {
+    "collapsed": false,
+    "deletable": false,
+    "editable": false,
+    "nbgrader": {
+     "grade": true,
+     "grade_id": "8bfa39",
+     "locked": true,
+     "points": 1,
+     "schema_version": 3,
+     "solution": false,
+     "task": false
+    }
+   },
+   "outputs": [
+   ],
+   "source": [
+    "# Tests for creating the table CourseMeetings\n",
+    "import sqlite3\n",
+    "from nose.tools import assert_equal, assert_in\n",
+    "\n",
+    "# Setting up sqlite3 for unit tests\n",
+    "con = sqlite3.connect(':memory:')\n",
+    "cur = con.cursor()\n",
+    "\n",
+    "# Running all the code in act6create.sql\n",
+    "with open('act6create.sql') as file:\n",
+    "    cur.executescript(file.read())\n",
+    "\n",
+    "# Checking that the table exists \n",
+    "tables = [t[0] for t in cur.execute(\"SELECT tbl_name FROM sqlite_master;\").fetchall()]\n",
+    "\n",
+    "assert_in('CourseMeetings', tables, 'Checking the table has the correct name')\n",
+    "\n",
+    "# Checking the column names\n",
+    "cur.execute(\"SELECT * FROM CourseMeetings\")\n",
+    "columns = {c[0] for c in cur.description}\n",
+    "\n",
+    "assert_equal(columns, {'CourseId', 'CourseMeetingId', 'Days', 'EndTime', 'Location', 'StartTime'})\n",
+    "\n",
+    "con.close()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {
+    "collapsed": false,
+    "deletable": false,
+    "editable": false,
+    "nbgrader": {
+     "grade": true,
+     "grade_id": "140893",
+     "locked": true,
+     "points": 1,
+     "schema_version": 3,
+     "solution": false,
+     "task": false
+    }
+   },
+   "outputs": [
+   ],
+   "source": [
+    "# Tests for creating the table CourseStudent\n",
+    "import sqlite3\n",
+    "from nose.tools import assert_equal, assert_in\n",
+    "\n",
+    "# Setting up sqlite3 for unit tests\n",
+    "con = sqlite3.connect(':memory:')\n",
+    "cur = con.cursor()\n",
+    "\n",
+    "# Running all the code in act6create.sql\n",
+    "with open('act6create.sql') as file:\n",
+    "    cur.executescript(file.read())\n",
+    "\n",
+    "# Checking that the table exists \n",
+    "tables = [t[0] for t in cur.execute(\"SELECT tbl_name FROM sqlite_master;\").fetchall()]\n",
+    "\n",
+    "assert_in('CourseStudent', tables, 'Checking the table has the correct name')\n",
+    "\n",
+    "# Checking the column names\n",
+    "cur.execute(\"SELECT * FROM CourseStudent\")\n",
+    "columns = {c[0] for c in cur.description}\n",
+    "\n",
+    "assert_equal(columns, {'CourseId', 'StudentId'})\n",
+    "\n",
+    "con.close()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {
+    "collapsed": false,
+    "deletable": false,
+    "editable": false,
+    "nbgrader": {
+     "grade": true,
+     "grade_id": "3140ca",
+     "locked": true,
+     "points": 1,
+     "schema_version": 3,
+     "solution": false,
+     "task": false
+    }
+   },
+   "outputs": [
+   ],
+   "source": [
+    "# Tests for creating the table CourseDetails\n",
+    "import sqlite3\n",
+    "from nose.tools import assert_equal, assert_in\n",
+    "\n",
+    "# Setting up sqlite3 for unit tests\n",
+    "con = sqlite3.connect(':memory:')\n",
+    "cur = con.cursor()\n",
+    "\n",
+    "# Running all the code in act6create.sql\n",
+    "with open('act6create.sql') as file:\n",
+    "    cur.executescript(file.read())\n",
+    "\n",
+    "# Checking that the table exists \n",
+    "tables = [t[0] for t in cur.execute(\"SELECT tbl_name FROM sqlite_master;\").fetchall()]\n",
+    "\n",
+    "assert_in('CourseDetails', tables, 'Checking the table has the correct name')\n",
+    "\n",
+    "# Checking the column names\n",
+    "cur.execute(\"SELECT * FROM CourseDetails\")\n",
+    "columns = {c[0] for c in cur.description}\n",
+    "\n",
+    "assert_equal(columns, {'CourseDescription', 'CourseNumber', 'CourseSubject', 'Credits', 'Title'})\n",
+    "\n",
+    "con.close()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "collapsed": false,
+    "deletable": false,
+    "editable": false,
+    "nbgrader": {
+     "grade": false,
+     "grade_id": "419f1a",
+     "locked": true,
+     "schema_version": 3,
+     "solution": false,
+     "task": false
+    }
+   },
+   "source": [
+    "## Tests: Inserting Data"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {
+    "collapsed": false,
+    "deletable": false,
+    "editable": false,
+    "nbgrader": {
+     "grade": true,
+     "grade_id": "b80e75",
+     "locked": true,
+     "points": 1,
+     "schema_version": 3,
+     "solution": false,
+     "task": false
+    }
+   },
+   "outputs": [
+    {
+     "ename": "AssertionError",
+     "evalue": "(1324, '270', 'CSC', 256, 1, 'Spring', '2024') not found in [] : Checking one row exists",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[0;31mAssertionError\u001b[0m                            Traceback (most recent call last)",
+      "\u001b[0;32m/tmp/ipykernel_967/2755961034.py\u001b[0m in \u001b[0;36m<cell line: 22>\u001b[0;34m()\u001b[0m\n\u001b[1;32m     20\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     21\u001b[0m \u001b[0mrow\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;34m(\u001b[0m\u001b[0;36m1324\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'270'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'CSC'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;36m256\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;36m1\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'Spring'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'2024'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---> 22\u001b[0;31m \u001b[0massert_in\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mrow\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mrows\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'Checking one row exists'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m     23\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     24\u001b[0m \u001b[0mrow\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;34m(\u001b[0m\u001b[0;36m2468\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'271L'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'PHY'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;36m12\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;36m2\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'Fall'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'2024'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;32m/usr/lib/python3.10/unittest/case.py\u001b[0m in \u001b[0;36massertIn\u001b[0;34m(self, member, container, msg)\u001b[0m\n\u001b[1;32m   1110\u001b[0m             standardMsg = '%s not found in %s' % (safe_repr(member),\n\u001b[1;32m   1111\u001b[0m                                                   safe_repr(container))\n\u001b[0;32m-> 1112\u001b[0;31m             \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mfail\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_formatMessage\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mmsg\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mstandardMsg\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m   1113\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1114\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0massertNotIn\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mmember\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mcontainer\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mmsg\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;32mNone\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;32m/usr/lib/python3.10/unittest/case.py\u001b[0m in \u001b[0;36mfail\u001b[0;34m(self, msg)\u001b[0m\n\u001b[1;32m    673\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0mfail\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mmsg\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;32mNone\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    674\u001b[0m         \u001b[0;34m\"\"\"Fail immediately, with the given message.\"\"\"\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--> 675\u001b[0;31m         \u001b[0;32mraise\u001b[0m \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mfailureException\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mmsg\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    676\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    677\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0massertFalse\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mexpr\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mmsg\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;32mNone\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;31mAssertionError\u001b[0m: (1324, '270', 'CSC', 256, 1, 'Spring', '2024') not found in [] : Checking one row exists"
+     ]
+    }
+   ],
+   "source": [
+    "# Testing the sample data inserted into Courses\n",
+    "import sqlite3\n",
+    "from nose.tools import assert_in\n",
+    "\n",
+    "# Setting up sqlite3 for unit tests\n",
+    "con = sqlite3.connect(':memory:')\n",
+    "cur = con.cursor()\n",
+    "\n",
+    "# Running all the code in act6create.sql\n",
+    "with open('act6create.sql') as file:\n",
+    "    cur.executescript(file.read())\n",
+    "    \n",
+    "# Running all the code in act6insert.sql\n",
+    "with open('act6insert.sql') as file:\n",
+    "    cur.executescript(file.read())\n",
+    "\n",
+    "# Checking for sample data \n",
+    "rows = cur.execute(\"SELECT CourseId, CourseNumber, CourseSubject, InstructorId, Section, Term, Year FROM Courses;\").fetchall()\n",
+    "con.close()\n",
+    "\n",
+    "row = (1324, '270', 'CSC', 256, 1, 'Spring', '2024')\n",
+    "assert_in(row, rows, 'Checking one row exists')\n",
+    "\n",
+    "row = (2468, '271L', 'PHY', 12, 2, 'Fall', '2024')\n",
+    "assert_in(row, rows, 'Checking another row exists')\n",
+    "\n",
+    "# There are hidden tests which will *completely* check your solution."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {
+    "collapsed": false,
+    "deletable": false,
+    "editable": false,
+    "nbgrader": {
+     "grade": true,
+     "grade_id": "eadacc",
+     "locked": true,
+     "points": 1,
+     "schema_version": 3,
+     "solution": false,
+     "task": false
+    }
+   },
+   "outputs": [
+    {
+     "ename": "AssertionError",
+     "evalue": "(12, 1012, 'MWF', '13:00', '13:50', 'Boone 132') not found in [] : Checking one row exists",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[0;31mAssertionError\u001b[0m                            Traceback (most recent call last)",
+      "\u001b[0;32m/tmp/ipykernel_967/1501302606.py\u001b[0m in \u001b[0;36m<cell line: 22>\u001b[0;34m()\u001b[0m\n\u001b[1;32m     20\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     21\u001b[0m \u001b[0mrow\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;34m(\u001b[0m\u001b[0;36m12\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;36m1012\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'MWF'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'13:00'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'13:50'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'Boone 132'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---> 22\u001b[0;31m \u001b[0massert_in\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mrow\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mrows\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'Checking one row exists'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m     23\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     24\u001b[0m \u001b[0;31m# There are hidden tests which will *completely* check your solution.\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;32m/usr/lib/python3.10/unittest/case.py\u001b[0m in \u001b[0;36massertIn\u001b[0;34m(self, member, container, msg)\u001b[0m\n\u001b[1;32m   1110\u001b[0m             standardMsg = '%s not found in %s' % (safe_repr(member),\n\u001b[1;32m   1111\u001b[0m                                                   safe_repr(container))\n\u001b[0;32m-> 1112\u001b[0;31m             \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mfail\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_formatMessage\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mmsg\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mstandardMsg\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m   1113\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1114\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0massertNotIn\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mmember\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mcontainer\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mmsg\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;32mNone\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;32m/usr/lib/python3.10/unittest/case.py\u001b[0m in \u001b[0;36mfail\u001b[0;34m(self, msg)\u001b[0m\n\u001b[1;32m    673\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0mfail\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mmsg\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;32mNone\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    674\u001b[0m         \u001b[0;34m\"\"\"Fail immediately, with the given message.\"\"\"\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--> 675\u001b[0;31m         \u001b[0;32mraise\u001b[0m \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mfailureException\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mmsg\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    676\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    677\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0massertFalse\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mexpr\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mmsg\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;32mNone\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;31mAssertionError\u001b[0m: (12, 1012, 'MWF', '13:00', '13:50', 'Boone 132') not found in [] : Checking one row exists"
+     ]
+    }
+   ],
+   "source": [
+    "# Testing the sample data inserted into CourseMeetings\n",
+    "import sqlite3\n",
+    "from nose.tools import assert_in\n",
+    "\n",
+    "# Setting up sqlite3 for unit tests\n",
+    "con = sqlite3.connect(':memory:')\n",
+    "cur = con.cursor()\n",
+    "\n",
+    "# Running all the code in act6create.sql\n",
+    "with open('act6create.sql') as file:\n",
+    "    cur.executescript(file.read())\n",
+    "    \n",
+    "# Running all the code in act6insert.sql\n",
+    "with open('act6insert.sql') as file:\n",
+    "    cur.executescript(file.read())\n",
+    "\n",
+    "# Checking for sample data \n",
+    "rows = cur.execute(\"SELECT CourseMeetingId, CourseId, Days, StartTime, EndTime, Location FROM CourseMeetings;\").fetchall()\n",
+    "con.close()\n",
+    "\n",
+    "row = (12, 1012, 'MWF', '13:00', '13:50', 'Boone 132')\n",
+    "assert_in(row, rows, 'Checking one row exists')\n",
+    "\n",
+    "# There are hidden tests which will *completely* check your solution."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "metadata": {
+    "collapsed": false,
+    "deletable": false,
+    "editable": false,
+    "nbgrader": {
+     "grade": true,
+     "grade_id": "ea09db",
+     "locked": true,
+     "points": 1,
+     "schema_version": 3,
+     "solution": false,
+     "task": false
+    }
+   },
+   "outputs": [
+    {
+     "ename": "AssertionError",
+     "evalue": "(201, 1111) not found in [] : Checking one row exists",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[0;31mAssertionError\u001b[0m                            Traceback (most recent call last)",
+      "\u001b[0;32m/tmp/ipykernel_967/648548668.py\u001b[0m in \u001b[0;36m<cell line: 21>\u001b[0;34m()\u001b[0m\n\u001b[1;32m     19\u001b[0m \u001b[0mcon\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mclose\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     20\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---> 21\u001b[0;31m \u001b[0massert_in\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;36m201\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;36m1111\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mrows\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'Checking one row exists'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m     22\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     23\u001b[0m \u001b[0;31m# There are hidden tests which will *completely* check your solution.\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;32m/usr/lib/python3.10/unittest/case.py\u001b[0m in \u001b[0;36massertIn\u001b[0;34m(self, member, container, msg)\u001b[0m\n\u001b[1;32m   1110\u001b[0m             standardMsg = '%s not found in %s' % (safe_repr(member),\n\u001b[1;32m   1111\u001b[0m                                                   safe_repr(container))\n\u001b[0;32m-> 1112\u001b[0;31m             \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mfail\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_formatMessage\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mmsg\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mstandardMsg\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m   1113\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1114\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0massertNotIn\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mmember\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mcontainer\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mmsg\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;32mNone\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;32m/usr/lib/python3.10/unittest/case.py\u001b[0m in \u001b[0;36mfail\u001b[0;34m(self, msg)\u001b[0m\n\u001b[1;32m    673\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0mfail\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mmsg\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;32mNone\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    674\u001b[0m         \u001b[0;34m\"\"\"Fail immediately, with the given message.\"\"\"\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--> 675\u001b[0;31m         \u001b[0;32mraise\u001b[0m \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mfailureException\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mmsg\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    676\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    677\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0massertFalse\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mexpr\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mmsg\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;32mNone\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;31mAssertionError\u001b[0m: (201, 1111) not found in [] : Checking one row exists"
+     ]
+    }
+   ],
+   "source": [
+    "# Testing the sample data inserted into CourseStudent\n",
+    "import sqlite3\n",
+    "from nose.tools import assert_in\n",
+    "\n",
+    "# Setting up sqlite3 for unit tests\n",
+    "con = sqlite3.connect(':memory:')\n",
+    "cur = con.cursor()\n",
+    "\n",
+    "# Running all the code in act6create.sql\n",
+    "with open('act6create.sql') as file:\n",
+    "    cur.executescript(file.read())\n",
+    "    \n",
+    "# Running all the code in act6insert.sql\n",
+    "with open('act6insert.sql') as file:\n",
+    "    cur.executescript(file.read())\n",
+    "\n",
+    "# Checking for sample data \n",
+    "rows = cur.execute(\"SELECT StudentId, CourseId FROM CourseStudent;\").fetchall()\n",
+    "con.close()\n",
+    "\n",
+    "assert_in((201, 1111), rows, 'Checking one row exists')\n",
+    "\n",
+    "# There are hidden tests which will *completely* check your solution."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "metadata": {
+    "collapsed": false,
+    "deletable": false,
+    "editable": false,
+    "nbgrader": {
+     "grade": true,
+     "grade_id": "b895aa",
+     "locked": true,
+     "points": 1,
+     "schema_version": 3,
+     "solution": false,
+     "task": false
+    }
+   },
+   "outputs": [
+    {
+     "ename": "AssertionError",
+     "evalue": "('Robin', 'Cruz', '2021') not found in [] : Checking for Robin Cruz",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[0;31mAssertionError\u001b[0m                            Traceback (most recent call last)",
+      "\u001b[0;32m/tmp/ipykernel_967/3244400568.py\u001b[0m in \u001b[0;36m<cell line: 29>\u001b[0;34m()\u001b[0m\n\u001b[1;32m     27\u001b[0m \u001b[0mcon\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mclose\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     28\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---> 29\u001b[0;31m \u001b[0massert_in\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'Robin'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'Cruz'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'2021'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mrows\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'Checking for Robin Cruz'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m     30\u001b[0m \u001b[0massert_in\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'Jason'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'McClelland'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'2020'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mrows\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'Checking for Jason McClelland'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;32m/usr/lib/python3.10/unittest/case.py\u001b[0m in \u001b[0;36massertIn\u001b[0;34m(self, member, container, msg)\u001b[0m\n\u001b[1;32m   1110\u001b[0m             standardMsg = '%s not found in %s' % (safe_repr(member),\n\u001b[1;32m   1111\u001b[0m                                                   safe_repr(container))\n\u001b[0;32m-> 1112\u001b[0;31m             \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mfail\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_formatMessage\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mmsg\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mstandardMsg\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m   1113\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1114\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0massertNotIn\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mmember\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mcontainer\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mmsg\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;32mNone\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;32m/usr/lib/python3.10/unittest/case.py\u001b[0m in \u001b[0;36mfail\u001b[0;34m(self, msg)\u001b[0m\n\u001b[1;32m    673\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0mfail\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mmsg\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;32mNone\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    674\u001b[0m         \u001b[0;34m\"\"\"Fail immediately, with the given message.\"\"\"\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--> 675\u001b[0;31m         \u001b[0;32mraise\u001b[0m \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mfailureException\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mmsg\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    676\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    677\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0massertFalse\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mexpr\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mmsg\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;32mNone\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;31mAssertionError\u001b[0m: ('Robin', 'Cruz', '2021') not found in [] : Checking for Robin Cruz"
+     ]
+    }
+   ],
+   "source": [
+    "# Tests for part 6\n",
+    "import sqlite3\n",
+    "from nose.tools import assert_in\n",
+    "\n",
+    "# Setting up sqlite3 for unit tests\n",
+    "con = sqlite3.connect(':memory:')\n",
+    "cur = con.cursor()\n",
+    "\n",
+    "# Running all the code in act6create.sql\n",
+    "with open('act6create.sql') as file:\n",
+    "    cur.executescript(file.read())\n",
+    "    \n",
+    "# Running all the code in act6insert.sql\n",
+    "with open('act6insert.sql') as file:\n",
+    "    cur.executescript(file.read())\n",
+    "\n",
+    "# Checking for sample data \n",
+    "rows = cur.execute(\"\"\"\n",
+    "                   SELECT y.FirstName, y.LastName, c.Year\n",
+    "                   FROM Yotes AS y JOIN Courses AS c ON c.InstructorId = y.YoteId\n",
+    "                   WHERE c.CourseSubject = 'CSC'\n",
+    "                        AND c.CourseNumber = '270'\n",
+    "                        AND c.Section = 1\n",
+    "                        AND c.Term = 'Spring'\n",
+    "                        \n",
+    "                   \"\"\").fetchall()\n",
+    "con.close()\n",
+    "\n",
+    "assert_in(('Robin', 'Cruz', '2021'), rows, 'Checking for Robin Cruz')\n",
+    "assert_in(('Jason', 'McClelland', '2020'), rows, 'Checking for Jason McClelland')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "collapsed": false,
+    "deletable": false,
+    "editable": false,
+    "nbgrader": {
+     "grade": false,
+     "grade_id": "0aa2ba",
+     "locked": true,
+     "schema_version": 3,
+     "solution": false,
+     "task": false
+    }
+   },
+   "source": [
+    "## Tests: Querying the database"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "metadata": {
+    "collapsed": false,
+    "deletable": false,
+    "editable": false,
+    "nbgrader": {
+     "grade": true,
+     "grade_id": "589937",
+     "locked": true,
+     "points": 2,
+     "schema_version": 3,
+     "solution": false,
+     "task": false
+    }
+   },
+   "outputs": [
+    {
+     "ename": "AssertionError",
+     "evalue": "Lists differ: [] != [('Jonny', 'Comes'), ('Robin', 'Cruz'), ('Jason', 'McClelland')]\n\nSecond list contains 3 additional elements.\nFirst extra element 0:\n('Jonny', 'Comes')\n\n- []\n+ [('Jonny', 'Comes'), ('Robin', 'Cruz'), ('Jason', 'McClelland')] : Checking the rows",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[0;31mAssertionError\u001b[0m                            Traceback (most recent call last)",
+      "\u001b[0;32m/tmp/ipykernel_967/1480125634.py\u001b[0m in \u001b[0;36m<cell line: 23>\u001b[0;34m()\u001b[0m\n\u001b[1;32m     21\u001b[0m \u001b[0mcon\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mclose\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     22\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---> 23\u001b[0;31m \u001b[0massert_equal\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mrows\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m[\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'Jonny'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'Comes'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m(\u001b[0m\u001b[0;34m'Robin'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'Cruz'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m(\u001b[0m\u001b[0;34m'Jason'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'McClelland'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'Checking the rows'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m",
+      "\u001b[0;32m/usr/lib/python3.10/unittest/case.py\u001b[0m in \u001b[0;36massertEqual\u001b[0;34m(self, first, second, msg)\u001b[0m\n\u001b[1;32m    843\u001b[0m         \"\"\"\n\u001b[1;32m    844\u001b[0m         \u001b[0massertion_func\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_getAssertEqualityFunc\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mfirst\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0msecond\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--> 845\u001b[0;31m         \u001b[0massertion_func\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mfirst\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0msecond\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mmsg\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0mmsg\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    846\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    847\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0massertNotEqual\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mfirst\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0msecond\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mmsg\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;32mNone\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;32m/usr/lib/python3.10/unittest/case.py\u001b[0m in \u001b[0;36massertListEqual\u001b[0;34m(self, list1, list2, msg)\u001b[0m\n\u001b[1;32m   1049\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1050\u001b[0m         \"\"\"\n\u001b[0;32m-> 1051\u001b[0;31m         \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0massertSequenceEqual\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mlist1\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mlist2\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mmsg\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mseq_type\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0mlist\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m   1052\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1053\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0massertTupleEqual\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mtuple1\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mtuple2\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mmsg\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;32mNone\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;32m/usr/lib/python3.10/unittest/case.py\u001b[0m in \u001b[0;36massertSequenceEqual\u001b[0;34m(self, seq1, seq2, msg, seq_type)\u001b[0m\n\u001b[1;32m   1031\u001b[0m         \u001b[0mstandardMsg\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_truncateMessage\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mstandardMsg\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mdiffMsg\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1032\u001b[0m         \u001b[0mmsg\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_formatMessage\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mmsg\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mstandardMsg\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m-> 1033\u001b[0;31m         \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mfail\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mmsg\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m   1034\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1035\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0m_truncateMessage\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mmessage\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mdiff\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;32m/usr/lib/python3.10/unittest/case.py\u001b[0m in \u001b[0;36mfail\u001b[0;34m(self, msg)\u001b[0m\n\u001b[1;32m    673\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0mfail\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mmsg\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;32mNone\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    674\u001b[0m         \u001b[0;34m\"\"\"Fail immediately, with the given message.\"\"\"\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--> 675\u001b[0;31m         \u001b[0;32mraise\u001b[0m \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mfailureException\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mmsg\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    676\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    677\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0massertFalse\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mexpr\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mmsg\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;32mNone\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;31mAssertionError\u001b[0m: Lists differ: [] != [('Jonny', 'Comes'), ('Robin', 'Cruz'), ('Jason', 'McClelland')]\n\nSecond list contains 3 additional elements.\nFirst extra element 0:\n('Jonny', 'Comes')\n\n- []\n+ [('Jonny', 'Comes'), ('Robin', 'Cruz'), ('Jason', 'McClelland')] : Checking the rows"
+     ]
+    }
+   ],
+   "source": [
+    "# Tests for part 7\n",
+    "import sqlite3\n",
+    "from nose.tools import assert_equal\n",
+    "from csc270tools import get_script\n",
+    "\n",
+    "# Setting up sqlite3 for unit tests\n",
+    "con = sqlite3.connect(':memory:')\n",
+    "cur = con.cursor()\n",
+    "\n",
+    "# Running all the code in act6create.sql\n",
+    "with open('act6create.sql') as file:\n",
+    "    cur.executescript(file.read())\n",
+    "    \n",
+    "# Running all the code in act6insert.sql\n",
+    "with open('act6insert.sql') as file:\n",
+    "    cur.executescript(file.read())\n",
+    "    \n",
+    "# executing the SQL query in act6query.sql for this part\n",
+    "rows = cur.execute(get_script('act6query.sql', 0)).fetchall()\n",
+    "\n",
+    "con.close()\n",
+    "\n",
+    "assert_equal(rows, [('Jonny', 'Comes'), ('Robin', 'Cruz'), ('Jason', 'McClelland')], 'Checking the rows')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "collapsed": false,
+    "deletable": false,
+    "editable": false,
+    "nbgrader": {
+     "grade": false,
+     "grade_id": "7f918c",
+     "locked": true,
+     "schema_version": 3,
+     "solution": false,
+     "task": false
+    }
+   },
+   "source": [
+    "### Grading the last part\n",
+    "\n",
+    "The following cell runs your solution for part 8. If your solution is correct, the cell should run without an error **and** your course schedule will be printed at the bottom of this notebook. I will manually check your course schedule by looking at the printout at the bottom of this notebook. "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "metadata": {
+    "collapsed": false,
+    "deletable": false,
+    "editable": false,
+    "nbgrader": {
+     "grade": true,
+     "grade_id": "a7c7ce",
+     "locked": true,
+     "points": 1,
+     "schema_version": 3,
+     "solution": false,
+     "task": false
+    }
+   },
+   "outputs": [
+    {
+     "ename": "TypeError",
+     "evalue": "'NoneType' object is not iterable",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[0;31mTypeError\u001b[0m                                 Traceback (most recent call last)",
+      "\u001b[0;32m/tmp/ipykernel_967/1941976837.py\u001b[0m in \u001b[0;36m<cell line: 20>\u001b[0;34m()\u001b[0m\n\u001b[1;32m     18\u001b[0m \u001b[0;31m# executing the SQL query in act6query.sql for this part\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     19\u001b[0m \u001b[0mrows\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mcur\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mexecute\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mget_script\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'act6query.sql'\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;36m1\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mfetchall\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---> 20\u001b[0;31m \u001b[0mheader\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;34m[\u001b[0m\u001b[0mc\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;36m0\u001b[0m\u001b[0;34m]\u001b[0m \u001b[0;32mfor\u001b[0m \u001b[0mc\u001b[0m \u001b[0;32min\u001b[0m \u001b[0mcur\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mdescription\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m     21\u001b[0m \u001b[0mcon\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mclose\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     22\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;31mTypeError\u001b[0m: 'NoneType' object is not iterable"
+     ]
+    }
+   ],
+   "source": [
+    "# Tests for part 8\n",
+    "import sqlite3\n",
+    "from nose.tools import assert_equal\n",
+    "from csc270tools import get_script\n",
+    "\n",
+    "# Setting up sqlite3 for unit tests\n",
+    "con = sqlite3.connect(':memory:')\n",
+    "cur = con.cursor()\n",
+    "\n",
+    "# Running all the code in act6create.sql\n",
+    "with open('act6create.sql') as file:\n",
+    "    cur.executescript(file.read())\n",
+    "    \n",
+    "# Running all the code in act6insert.sql\n",
+    "with open('act6insert.sql') as file:\n",
+    "    cur.executescript(file.read())\n",
+    "    \n",
+    "# executing the SQL query in act6query.sql for this part\n",
+    "rows = cur.execute(get_script('act6query.sql', 1)).fetchall()\n",
+    "header = [c[0] for c in cur.description]\n",
+    "con.close()\n",
+    "\n",
+    "assert_equal(header, ['course', 'course_title', 'instructor', 'days', 'start_time', 'end_time', 'room'], 'Checking the column names')\n",
+    "\n",
+    "# Print the output of your query for manual grading\n",
+    "a,b,c,d,e,f,g = header\n",
+    "print(f\"\\033[1m{a:14}{b:35}{c:20}{d:6}{e:12}{f:12}{g}\\033[0m\")\n",
+    "for a,b,c,d,e,f,g in rows:\n",
+    "    print(f\"{a:14}{b:35}{c:20}{d:6}{e:12}{f:12}{g}\")"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "argv": [
+    "/usr/bin/python3",
+    "-m",
+    "ipykernel",
+    "--HistoryManager.enabled=False",
+    "--matplotlib=inline",
+    "-c",
+    "%config InlineBackend.figure_formats = set(['retina'])\nimport matplotlib; matplotlib.rcParams['figure.figsize'] = (12, 7)",
+    "-f",
+    "{connection_file}"
+   ],
+   "display_name": "Python 3 (system-wide)",
+   "env": {
+   },
+   "language": "python",
+   "metadata": {
+    "cocalc": {
+     "description": "Python 3 programming language",
+     "priority": 100,
+     "url": "https://www.python.org/"
+    }
+   },
+   "name": "python3",
+   "resource_dir": "/ext/jupyter/kernels/python3"
+  },
+  "nbgrader": {
+   "__altered": false,
+   "__hash": 853781301,
+   "_root": {
+    "entries": [
+     [
+      "size",
+      1
+     ],
+     [
+      "_root",
+      {
+       "entries": [
+        [
+         "cocalc_minimal_stubs",
+         true
+        ]
+       ],
+       "ownerID": {
+       }
+      }
+     ],
+     [
+      "__ownerID",
+      null
+     ],
+     [
+      "__hash",
+      912286151
+     ],
+     [
+      "__altered",
+      false
+     ],
+     [
+      "cocalc_minimal_stubs",
+      true
+     ]
+    ],
+    "ownerID": {
+    }
+   },
+   "cocalc_minimal_stubs": true,
+   "size": 6
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}

@@ -1,0 +1,516 @@
+]0;~/csc270/Activities/A05-Modifying-Data[01;34m~/csc270/Activities/A05-Modifying-Data[00m$ clearsqlite3
+SQLite version 3.37.2 2022-01-06 13:25:41
+Enter ".help" for usage hints.
+Connected to a [1mtransient in-memory database[0m.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite> .hear[Kders on
+sqlite> .n[Kmode box
+sqlite> .open CHin[K[K[K[KCH[Khinook.db
+sqlite> .tables
+A              C              Employee       MediaType    
+Album          Customer       Genre          Playlist     
+Artist         D              Invoice        PlaylistTrack
+B              E              InvoiceLine    Track        
+sqlite> clear
+   ...> ;
+Error: in prepare, near "clear": syntax error (1)
+sqlite> .schema
+CREATE TABLE [Album]
+(
+    [AlbumId] INTEGER  NOT NULL,
+    [Title] NVARCHAR(160)  NOT NULL,
+    [ArtistId] INTEGER  NOT NULL,
+    CONSTRAINT [PK_Album] PRIMARY KEY  ([AlbumId]),
+    FOREIGN KEY ([ArtistId]) REFERENCES [Artist] ([ArtistId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [Artist]
+(
+    [ArtistId] INTEGER  NOT NULL,
+    [Name] NVARCHAR(120),
+    CONSTRAINT [PK_Artist] PRIMARY KEY  ([ArtistId])
+);
+CREATE TABLE [Customer]
+(
+    [CustomerId] INTEGER  NOT NULL,
+    [FirstName] NVARCHAR(40)  NOT NULL,
+    [LastName] NVARCHAR(20)  NOT NULL,
+    [Company] NVARCHAR(80),
+    [Address] NVARCHAR(70),
+    [City] NVARCHAR(40),
+    [State] NVARCHAR(40),
+    [Country] NVARCHAR(40),
+    [PostalCode] NVARCHAR(10),
+    [Phone] NVARCHAR(24),
+    [Fax] NVARCHAR(24),
+    [Email] NVARCHAR(60)  NOT NULL,
+    [SupportRepId] INTEGER,
+    CONSTRAINT [PK_Customer] PRIMARY KEY  ([CustomerId]),
+    FOREIGN KEY ([SupportRepId]) REFERENCES [Employee] ([EmployeeId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [Employee]
+(
+    [EmployeeId] INTEGER  NOT NULL,
+    [LastName] NVARCHAR(20)  NOT NULL,
+    [FirstName] NVARCHAR(20)  NOT NULL,
+    [Title] NVARCHAR(30),
+    [ReportsTo] INTEGER,
+    [BirthDate] DATETIME,
+    [HireDate] DATETIME,
+    [Address] NVARCHAR(70),
+    [City] NVARCHAR(40),
+    [State] NVARCHAR(40),
+    [Country] NVARCHAR(40),
+    [PostalCode] NVARCHAR(10),
+    [Phone] NVARCHAR(24),
+    [Fax] NVARCHAR(24),
+    [Email] NVARCHAR(60),
+    CONSTRAINT [PK_Employee] PRIMARY KEY  ([EmployeeId]),
+    FOREIGN KEY ([ReportsTo]) REFERENCES [Employee] ([EmployeeId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [Genre]
+(
+    [GenreId] INTEGER  NOT NULL,
+    [Name] NVARCHAR(120),
+    CONSTRAINT [PK_Genre] PRIMARY KEY  ([GenreId])
+);
+CREATE TABLE [Invoice]
+(
+    [InvoiceId] INTEGER  NOT NULL,
+    [CustomerId] INTEGER  NOT NULL,
+    [InvoiceDate] DATETIME  NOT NULL,
+    [BillingAddress] NVARCHAR(70),
+    [BillingCity] NVARCHAR(40),
+    [BillingState] NVARCHAR(40),
+    [BillingCountry] NVARCHAR(40),
+    [BillingPostalCode] NVARCHAR(10),
+    [Total] NUMERIC(10,2)  NOT NULL,
+    CONSTRAINT [PK_Invoice] PRIMARY KEY  ([InvoiceId]),
+    FOREIGN KEY ([CustomerId]) REFERENCES [Customer] ([CustomerId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [InvoiceLine]
+(
+    [InvoiceLineId] INTEGER  NOT NULL,
+    [InvoiceId] INTEGER  NOT NULL,
+    [TrackId] INTEGER  NOT NULL,
+    [UnitPrice] NUMERIC(10,2)  NOT NULL,
+    [Quantity] INTEGER  NOT NULL,
+    CONSTRAINT [PK_InvoiceLine] PRIMARY KEY  ([InvoiceLineId]),
+    FOREIGN KEY ([InvoiceId]) REFERENCES [Invoice] ([InvoiceId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+    FOREIGN KEY ([TrackId]) REFERENCES [Track] ([TrackId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [MediaType]
+(
+    [MediaTypeId] INTEGER  NOT NULL,
+    [Name] NVARCHAR(120),
+    CONSTRAINT [PK_MediaType] PRIMARY KEY  ([MediaTypeId])
+);
+CREATE TABLE [Playlist]
+(
+    [PlaylistId] INTEGER  NOT NULL,
+    [Name] NVARCHAR(120),
+    CONSTRAINT [PK_Playlist] PRIMARY KEY  ([PlaylistId])
+);
+CREATE TABLE [PlaylistTrack]
+(
+    [PlaylistId] INTEGER  NOT NULL,
+    [TrackId] INTEGER  NOT NULL,
+    CONSTRAINT [PK_PlaylistTrack] PRIMARY KEY  ([PlaylistId], [TrackId]),
+    FOREIGN KEY ([PlaylistId]) REFERENCES [Playlist] ([PlaylistId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+    FOREIGN KEY ([TrackId]) REFERENCES [Track] ([TrackId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [Track]
+(
+    [TrackId] INTEGER  NOT NULL,
+    [Name] NVARCHAR(200)  NOT NULL,
+    [AlbumId] INTEGER,
+    [MediaTypeId] INTEGER  NOT NULL,
+    [GenreId] INTEGER,
+    [Composer] NVARCHAR(220),
+    [Milliseconds] INTEGER  NOT NULL,
+    [Bytes] INTEGER,
+    [UnitPrice] NUMERIC(10,2)  NOT NULL,
+    CONSTRAINT [PK_Track] PRIMARY KEY  ([TrackId]),
+    FOREIGN KEY ([AlbumId]) REFERENCES [Album] ([AlbumId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+    FOREIGN KEY ([GenreId]) REFERENCES [Genre] ([GenreId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+    FOREIGN KEY ([MediaTypeId]) REFERENCES [MediaType] ([MediaTypeId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE INDEX [IFK_AlbumArtistId] ON [Album] ([ArtistId]);
+CREATE INDEX [IFK_CustomerSupportRepId] ON [Customer] ([SupportRepId]);
+CREATE INDEX [IFK_EmployeeReportsTo] ON [Employee] ([ReportsTo]);
+CREATE INDEX [IFK_InvoiceCustomerId] ON [Invoice] ([CustomerId]);
+CREATE INDEX [IFK_InvoiceLineInvoiceId] ON [InvoiceLine] ([InvoiceId]);
+CREATE INDEX [IFK_InvoiceLineTrackId] ON [InvoiceLine] ([TrackId]);
+CREATE INDEX [IFK_PlaylistTrackTrackId] ON [PlaylistTrack] ([TrackId]);
+CREATE INDEX [IFK_TrackAlbumId] ON [Track] ([AlbumId]);
+CREATE INDEX [IFK_TrackGenreId] ON [Track] ([GenreId]);
+CREATE INDEX [IFK_TrackMediaTypeId] ON [Track] ([MediaTypeId]);
+CREATE TABLE A (x, y);
+CREATE TABLE B (x, y, z, w);
+CREATE TABLE C (x, y, z, w);
+CREATE TABLE D (a, b);
+CREATE TABLE E (q, r, s);
+sqlite> MediaTypeId[C[C[C[C[C[C[C[C[4P.schema;[Kclear.tablesopen Chinook.db[C[C[C[C[C[C[C[C[C[7Pmode boxheaders on[6Pexitread schedule.sqlchinook_sandbox.sql[C[C[C[C[C[C[C[C[C[C[C[C[C[C[7Pschedule.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sqla.sqlc.sqlt.sql5.sqlC.sqlh.sqli.sqln.sqlo.sqlo.sqlk.sql
+Error: near line 2: stepping, UNIQUE constraint failed: MediaType.MediaTypeId (19)
+sqlite> select * from <[KMediaTye[Kpe
+   ...> ;
+┌─────────────┬─────────────────────────────┐
+│ MediaTypeId │            Name             │
+├─────────────┼─────────────────────────────┤
+│ 1           │ MPEG audio file             │
+│ 2           │ Protected AAC audio file    │
+│ 3           │ Protected MPEG-4 video file │
+│ 4           │ Purchased AAC audio file    │
+│ 5           │ AAC audio file              │
+│ 6           │ FLAC                        │
+└─────────────┴─────────────────────────────┘
+sqlite> Email[K[K[K[K[KFirstName;[Kselect * from MediaType[C[C[C[C[C[C[C[C[2P.read act5Chinook.sql
+sqlite> select * from Customer we[Khere fi[K[KFI[KirstName = 'Frank';
+┌────────────┬───────────┬──────────┬─────────────┬───────────────────────────┬───────────────┬───────┬─────────┬────────────┬───────────────────┬───────────────────┬────────────────────┬──────────────┐
+│ CustomerId │ FirstName │ LastName │   Company   │          Address          │     City      │ State │ Country │ PostalCode │       Phone       │        Fax        │       Email        │ SupportRepId │
+├────────────┼───────────┼──────────┼─────────────┼───────────────────────────┼───────────────┼───────┼─────────┼────────────┼───────────────────┼───────────────────┼────────────────────┼──────────────┤
+│ 16         │ Frank     │ Harris   │ Google Inc. │ 1600 Amphitheatre Parkway │ Mountain View │ CA    │ USA     │ 94043-1351 │ +1 (650) 253-0000 │ +1 (650) 253-0000 │ fharris@google.com │ 4            │
+│ 24         │ Frank     │ Ralston  │             │ 162 E Superior Street     │ Chicago       │ IL    │ USA     │ 60611      │ +1 (312) 332-3232 │                   │ fralston@gmail.com │ 3            │
+└────────────┴───────────┴──────────┴─────────────┴───────────────────────────┴───────────────┴───────┴─────────┴────────────┴───────────────────┴───────────────────┴────────────────────┴──────────────┘
+sqlite> [Ksqlite> [Ksqlite> A[K[Ksqlite> select * from Customer where FirstName = 'Frank';[C[C[C[C[C[C[C[C[28P.read act5Chinook.sql[C[C[C[C[C[C[C[C;[K.read act5Chinook.sql
+sqlite> .read act5Chinook.sql
+Error: near line 25: stepping, NOT NULL constraint failed: Customer.Email (19)
+sqlite> .read act5Chinook.sql
+sqlite> .read act5Chinook.sql
+Error: near line 36: in prepare, no such column: FristName (1)
+sqlite> .read act5Chinook.sql
+┌────────────┬───────────┬──────────┬─────────┬─────────┬──────┬───────┬─────────┬────────────┬───────┬─────┬──────────────────────────┬──────────────┐
+│ CustomerId │ FirstName │ LastName │ Company │ Address │ City │ State │ Country │ PostalCode │ Phone │ Fax │          Email           │ SupportRepId │
+├────────────┼───────────┼──────────┼─────────┼─────────┼──────┼───────┼─────────┼────────────┼───────┼─────┼──────────────────────────┼──────────────┤
+│ 60         │ Jim       │ Dull     │         │         │      │       │         │            │       │     │ jdull@collegeofidaho.edu │              │
+└────────────┴───────────┴──────────┴─────────┴─────────┴──────┴───────┴─────────┴────────────┴───────┴─────┴──────────────────────────┴──────────────┘
+sqlite> [Ksqlite> [Ksqlite> [Ksqlite> [Ksqlite> .read act5Chinook.sql
+sqlite> [Ksqlite> .read act5Chinook.sql
+sqlite> .read act5Chinook.sql
+┌───────────────────────┬─────────────────┐
+│       Customer        │   Support Rep   │
+├───────────────────────┼─────────────────┤
+│ Luís Gonçalves        │ Jane Peacock    │
+│ Leonie Köhler         │ Steve Johnson   │
+│ François Tremblay     │ Jane Peacock    │
+│ Bjørn Hansen          │ Margaret Park   │
+│ František Wichterlová │ Margaret Park   │
+│ Helena Holý           │ Steve Johnson   │
+│ Astrid Gruber         │ Steve Johnson   │
+│ Daan Peeters          │ Margaret Park   │
+│ Kara Nielsen          │ Margaret Park   │
+│ Eduardo Martins       │ Margaret Park   │
+│ Alexandre Rocha       │ Steve Johnson   │
+│ Roberto Almeida       │ Jane Peacock    │
+│ Fernanda Ramos        │ Margaret Park   │
+│ Mark Philips          │ Steve Johnson   │
+│ Jennifer Peterson     │ Jane Peacock    │
+│ Frank Harris          │ Margaret Park   │
+│ Jack Smith            │ Steve Johnson   │
+│ Michelle Brooks       │ Jane Peacock    │
+│ Tim Goyer             │ Jane Peacock    │
+│ Dan Miller            │ Margaret Park   │
+│ Kathy Chase           │ Steve Johnson   │
+│ Heather Leacock       │ Margaret Park   │
+│ John Gordon           │ Margaret Park   │
+│ Frank Ralston         │ Jane Peacock    │
+│ Victor Stevens        │ Steve Johnson   │
+│ Richard Cunningham    │ Margaret Park   │
+│ Patrick Gray          │ Margaret Park   │
+│ Julia Barnett         │ Steve Johnson   │
+│ Robert Brown          │ Jane Peacock    │
+│ Edward Francis        │ Jane Peacock    │
+│ Martha Silk           │ Steve Johnson   │
+│ Aaron Mitchell        │ Margaret Park   │
+│ Ellie Sullivan        │ Jane Peacock    │
+│ João Fernandes        │ Margaret Park   │
+│ Madalena Sampaio      │ Margaret Park   │
+│ Hannah Schneider      │ Steve Johnson   │
+│ Fynn Zimmermann       │ Jane Peacock    │
+│ Niklas Schröder       │ Jane Peacock    │
+│ Camille Bernard       │ Margaret Park   │
+│ Dominique Lefebvre    │ Margaret Park   │
+│ Marc Dubois           │ Steve Johnson   │
+│ Wyatt Girard          │ Jane Peacock    │
+│ Isabelle Mercier      │ Jane Peacock    │
+│ Terhi Hämäläinen      │ Jane Peacock    │
+│ Ladislav Kovács       │ Jane Peacock    │
+│ Hugh O'Reilly         │ Jane Peacock    │
+│ Lucas Mancini         │ Steve Johnson   │
+│ Johannes Van der Berg │ Steve Johnson   │
+│ Stanisław Wójcik      │ Margaret Park   │
+│ Enrique Muñoz         │ Steve Johnson   │
+│ Joakim Johansson      │ Steve Johnson   │
+│ Emma Jones            │ Jane Peacock    │
+│ Phil Hughes           │ Jane Peacock    │
+│ Steve Murray          │ Steve Johnson   │
+│ Mark Taylor           │ Margaret Park   │
+│ Diego Gutiérrez       │ Margaret Park   │
+│ Luis Rojas            │ Steve Johnson   │
+│ Manoj Pareek          │ Jane Peacock    │
+│ Puja Srivastava       │ Jane Peacock    │
+│ Jim Dull              │ Lynda Danielson │
+└───────────────────────┴─────────────────┘
+sqlite> .read act5Chinook.sql
+sqlite> .read act5Chinook.sql
+┌────────────┐
+│ EmployeeId │
+├────────────┤
+│ 5          │
+└────────────┘
+sqlite> .read act5Chinook.sql
+Error: near line 58: in prepare, near "WHERE": syntax error (1)
+sqlite> .read act5Chinook.sql
+sqlite> .read act5Chinook.sql
+sqlite> SELECT EmployeeId FROM Employee WHERE FirstName = 'Steve';
+┌────────────┐
+│ EmployeeId │
+├────────────┤
+│ 5          │
+└────────────┘
+sqlite> SELECT EmployeeId FROM Employee WHERE FirstName = 'Steve';[C[C[C[C[C[C[C[C[37P.read act5Chinook.sql
+Error: near line 63: in prepare, no such column: SupportRepId (1)
+sqlite> .read act5Chinook.sql
+sqlite> ]0;~/csc270/Activities/A05-Modifying-Data[01;34m~/csc270/Activities/A05-Modifying-Data[00m$ clearsqlite3
+SQLite version 3.37.2 2022-01-06 13:25:41
+Enter ".help" for usage hints.
+Connected to a [1mtransient in-memory database[0m.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite> header[K[K[K[K[K[K.headers on
+sqlite> .mode box
+sqlite> .open Chinook.db
+sqlite> .tables
+A              C              Employee       MediaType    
+Album          Customer       Genre          Playlist     
+Artist         D              Invoice        PlaylistTrack
+B              E              InvoiceLine    Track        
+sqlite> .tablesopen Chinook.db[C[C[C[C[C[C[C[C[C[7Pmode boxheaders on[6Pexitread schedule.sqlchinook_sandbox.sql[C[C[C[C[C[C[C[C[C[C[C[C[C[C[7Pschedule.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sqla.sqlt.sql[1P.sqlc.sqlt.sql5.sqlC.sqlh.sqli.sqln.sqln.sqlk.sql[1P.sql[1P.sqlo.sqlo.sqlk.sql
+┌───────────────────────┬─────────────────┐
+│       Customer        │   Support Rep   │
+├───────────────────────┼─────────────────┤
+│ Luís Gonçalves        │ Jane Peacock    │
+│ Leonie Köhler         │ Lynda Danielson │
+│ François Tremblay     │ Jane Peacock    │
+│ Bjørn Hansen          │ Margaret Park   │
+│ František Wichterlová │ Margaret Park   │
+│ Helena Holý           │ Lynda Danielson │
+│ Astrid Gruber         │ Lynda Danielson │
+│ Daan Peeters          │ Margaret Park   │
+│ Kara Nielsen          │ Margaret Park   │
+│ Eduardo Martins       │ Margaret Park   │
+│ Alexandre Rocha       │ Lynda Danielson │
+│ Roberto Almeida       │ Jane Peacock    │
+│ Fernanda Ramos        │ Margaret Park   │
+│ Mark Philips          │ Lynda Danielson │
+│ Jennifer Peterson     │ Jane Peacock    │
+│ Frank Harris          │ Margaret Park   │
+│ Jack Smith            │ Lynda Danielson │
+│ Michelle Brooks       │ Jane Peacock    │
+│ Tim Goyer             │ Jane Peacock    │
+│ Dan Miller            │ Margaret Park   │
+│ Kathy Chase           │ Lynda Danielson │
+│ Heather Leacock       │ Margaret Park   │
+│ John Gordon           │ Margaret Park   │
+│ Frank Ralston         │ Jane Peacock    │
+│ Victor Stevens        │ Lynda Danielson │
+│ Richard Cunningham    │ Margaret Park   │
+│ Patrick Gray          │ Margaret Park   │
+│ Julia Barnett         │ Lynda Danielson │
+│ Robert Brown          │ Jane Peacock    │
+│ Edward Francis        │ Jane Peacock    │
+│ Martha Silk           │ Lynda Danielson │
+│ Aaron Mitchell        │ Margaret Park   │
+│ Ellie Sullivan        │ Jane Peacock    │
+│ João Fernandes        │ Margaret Park   │
+│ Madalena Sampaio      │ Margaret Park   │
+│ Hannah Schneider      │ Lynda Danielson │
+│ Fynn Zimmermann       │ Jane Peacock    │
+│ Niklas Schröder       │ Jane Peacock    │
+│ Camille Bernard       │ Margaret Park   │
+│ Dominique Lefebvre    │ Margaret Park   │
+│ Marc Dubois           │ Lynda Danielson │
+│ Wyatt Girard          │ Jane Peacock    │
+│ Isabelle Mercier      │ Jane Peacock    │
+│ Terhi Hämäläinen      │ Jane Peacock    │
+│ Ladislav Kovács       │ Jane Peacock    │
+│ Hugh O'Reilly         │ Jane Peacock    │
+│ Lucas Mancini         │ Lynda Danielson │
+│ Johannes Van der Berg │ Lynda Danielson │
+│ Stanisław Wójcik      │ Margaret Park   │
+│ Enrique Muñoz         │ Lynda Danielson │
+│ Joakim Johansson      │ Lynda Danielson │
+│ Emma Jones            │ Jane Peacock    │
+│ Phil Hughes           │ Jane Peacock    │
+│ Steve Murray          │ Lynda Danielson │
+│ Mark Taylor           │ Margaret Park   │
+│ Diego Gutiérrez       │ Margaret Park   │
+│ Luis Rojas            │ Lynda Danielson │
+│ Manoj Pareek          │ Jane Peacock    │
+│ Puja Srivastava       │ Jane Peacock    │
+│ Jim Dull              │ Lynda Danielson │
+└───────────────────────┴─────────────────┘
+sqlite> .schema
+CREATE TABLE [Album]
+(
+    [AlbumId] INTEGER  NOT NULL,
+    [Title] NVARCHAR(160)  NOT NULL,
+    [ArtistId] INTEGER  NOT NULL,
+    CONSTRAINT [PK_Album] PRIMARY KEY  ([AlbumId]),
+    FOREIGN KEY ([ArtistId]) REFERENCES [Artist] ([ArtistId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [Artist]
+(
+    [ArtistId] INTEGER  NOT NULL,
+    [Name] NVARCHAR(120),
+    CONSTRAINT [PK_Artist] PRIMARY KEY  ([ArtistId])
+);
+CREATE TABLE [Customer]
+(
+    [CustomerId] INTEGER  NOT NULL,
+    [FirstName] NVARCHAR(40)  NOT NULL,
+    [LastName] NVARCHAR(20)  NOT NULL,
+    [Company] NVARCHAR(80),
+    [Address] NVARCHAR(70),
+    [City] NVARCHAR(40),
+    [State] NVARCHAR(40),
+    [Country] NVARCHAR(40),
+    [PostalCode] NVARCHAR(10),
+    [Phone] NVARCHAR(24),
+    [Fax] NVARCHAR(24),
+    [Email] NVARCHAR(60)  NOT NULL,
+    [SupportRepId] INTEGER,
+    CONSTRAINT [PK_Customer] PRIMARY KEY  ([CustomerId]),
+    FOREIGN KEY ([SupportRepId]) REFERENCES [Employee] ([EmployeeId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [Employee]
+(
+    [EmployeeId] INTEGER  NOT NULL,
+    [LastName] NVARCHAR(20)  NOT NULL,
+    [FirstName] NVARCHAR(20)  NOT NULL,
+    [Title] NVARCHAR(30),
+    [ReportsTo] INTEGER,
+    [BirthDate] DATETIME,
+    [HireDate] DATETIME,
+    [Address] NVARCHAR(70),
+    [City] NVARCHAR(40),
+    [State] NVARCHAR(40),
+    [Country] NVARCHAR(40),
+    [PostalCode] NVARCHAR(10),
+    [Phone] NVARCHAR(24),
+    [Fax] NVARCHAR(24),
+    [Email] NVARCHAR(60),
+    CONSTRAINT [PK_Employee] PRIMARY KEY  ([EmployeeId]),
+    FOREIGN KEY ([ReportsTo]) REFERENCES [Employee] ([EmployeeId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [Genre]
+(
+    [GenreId] INTEGER  NOT NULL,
+    [Name] NVARCHAR(120),
+    CONSTRAINT [PK_Genre] PRIMARY KEY  ([GenreId])
+);
+CREATE TABLE [Invoice]
+(
+    [InvoiceId] INTEGER  NOT NULL,
+    [CustomerId] INTEGER  NOT NULL,
+    [InvoiceDate] DATETIME  NOT NULL,
+    [BillingAddress] NVARCHAR(70),
+    [BillingCity] NVARCHAR(40),
+    [BillingState] NVARCHAR(40),
+    [BillingCountry] NVARCHAR(40),
+    [BillingPostalCode] NVARCHAR(10),
+    [Total] NUMERIC(10,2)  NOT NULL,
+    CONSTRAINT [PK_Invoice] PRIMARY KEY  ([InvoiceId]),
+    FOREIGN KEY ([CustomerId]) REFERENCES [Customer] ([CustomerId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [InvoiceLine]
+(
+    [InvoiceLineId] INTEGER  NOT NULL,
+    [InvoiceId] INTEGER  NOT NULL,
+    [TrackId] INTEGER  NOT NULL,
+    [UnitPrice] NUMERIC(10,2)  NOT NULL,
+    [Quantity] INTEGER  NOT NULL,
+    CONSTRAINT [PK_InvoiceLine] PRIMARY KEY  ([InvoiceLineId]),
+    FOREIGN KEY ([InvoiceId]) REFERENCES [Invoice] ([InvoiceId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+    FOREIGN KEY ([TrackId]) REFERENCES [Track] ([TrackId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [MediaType]
+(
+    [MediaTypeId] INTEGER  NOT NULL,
+    [Name] NVARCHAR(120),
+    CONSTRAINT [PK_MediaType] PRIMARY KEY  ([MediaTypeId])
+);
+CREATE TABLE [Playlist]
+(
+    [PlaylistId] INTEGER  NOT NULL,
+    [Name] NVARCHAR(120),
+    CONSTRAINT [PK_Playlist] PRIMARY KEY  ([PlaylistId])
+);
+CREATE TABLE [PlaylistTrack]
+(
+    [PlaylistId] INTEGER  NOT NULL,
+    [TrackId] INTEGER  NOT NULL,
+    CONSTRAINT [PK_PlaylistTrack] PRIMARY KEY  ([PlaylistId], [TrackId]),
+    FOREIGN KEY ([PlaylistId]) REFERENCES [Playlist] ([PlaylistId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+    FOREIGN KEY ([TrackId]) REFERENCES [Track] ([TrackId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [Track]
+(
+    [TrackId] INTEGER  NOT NULL,
+    [Name] NVARCHAR(200)  NOT NULL,
+    [AlbumId] INTEGER,
+    [MediaTypeId] INTEGER  NOT NULL,
+    [GenreId] INTEGER,
+    [Composer] NVARCHAR(220),
+    [Milliseconds] INTEGER  NOT NULL,
+    [Bytes] INTEGER,
+    [UnitPrice] NUMERIC(10,2)  NOT NULL,
+    CONSTRAINT [PK_Track] PRIMARY KEY  ([TrackId]),
+    FOREIGN KEY ([AlbumId]) REFERENCES [Album] ([AlbumId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+    FOREIGN KEY ([GenreId]) REFERENCES [Genre] ([GenreId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+    FOREIGN KEY ([MediaTypeId]) REFERENCES [MediaType] ([MediaTypeId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE INDEX [IFK_AlbumArtistId] ON [Album] ([ArtistId]);
+CREATE INDEX [IFK_CustomerSupportRepId] ON [Customer] ([SupportRepId]);
+CREATE INDEX [IFK_EmployeeReportsTo] ON [Employee] ([ReportsTo]);
+CREATE INDEX [IFK_InvoiceCustomerId] ON [Invoice] ([CustomerId]);
+CREATE INDEX [IFK_InvoiceLineInvoiceId] ON [InvoiceLine] ([InvoiceId]);
+CREATE INDEX [IFK_InvoiceLineTrackId] ON [InvoiceLine] ([TrackId]);
+CREATE INDEX [IFK_PlaylistTrackTrackId] ON [PlaylistTrack] ([TrackId]);
+CREATE INDEX [IFK_TrackAlbumId] ON [Track] ([AlbumId]);
+CREATE INDEX [IFK_TrackGenreId] ON [Track] ([GenreId]);
+CREATE INDEX [IFK_TrackMediaTypeId] ON [Track] ([MediaTypeId]);
+CREATE TABLE A (x, y);
+CREATE TABLE B (x, y, z, w);
+CREATE TABLE C (x, y, z, w);
+CREATE TABLE D (a, b);
+CREATE TABLE E (q, r, s);
+sqlite> .schemaread act5Chinook.sql
+┌──────────┐
+│ ArtistId │
+├──────────┤
+│ 197      │
+└──────────┘
+sqlite> .read act5Chinook.sql
+sqlite> .read act5Chinook.sql
+sqlite> [Ksqlite> [Ksqlite> ]0;~/csc270/Activities/A05-Modifying-Data[01;34m~/csc270/Activities/A05-Modifying-Data[00m$ [K]0;~/csc270/Activities/A05-Modifying-Data[01;34m~/csc270/Activities/A05-Modifying-Data[00m$ ]0;~/csc270/Activities/A05-Modifying-Data[01;34m~/csc270/Activities/A05-Modifying-Data[00m$ ]0;~/csc270/Activities/A05-Modifying-Data[01;34m~/csc270/Activities/A05-Modifying-Data[00m$ ]0;~/csc270/Activities/A05-Modifying-Data[01;34m~/csc270/Activities/A05-Modifying-Data[00m$ ]0;~/csc270/Activities/A05-Modifying-Data[01;34m~/csc270/Activities/A05-Modifying-Data[00m$ 

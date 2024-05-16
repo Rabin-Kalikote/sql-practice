@@ -1,0 +1,64 @@
+]0;~/csc270/Activities/A07-Keys-and-Constraints[01;34m~/csc270/Activities/A07-Keys-and-Constraints[00m$ sqlite3
+SQLite version 3.37.2 2022-01-06 13:25:41
+Enter ".help" for usage hints.
+Connected to a [1mtransient in-memory database[0m.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite> .mode box
+sqlite> .headers on
+sqlite> .read act7create.sql
+Error: near line 52: in prepare, table "CourseDetails" has more than one primary key (1)
+sqlite> .read act7create.sql
+Error: near line 52: in prepare, table "CourseDetails" has more than one primary key (1)
+sqlite> .read act7create.sql
+sqlite> clear
+   ...> ;
+Error: in prepare, near "clear": syntax error (1)
+sqlite> ;clear.read act7create.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sqlo.sql[1P.sqli.sqln.sqls.sqle.sqlr.sqlt.sql[C[C[C[C
+sqlite> .read act7insert.sql[C[C[C[C[C[C[C[C;[K.read act7insert.sql
+Error: near line 4: stepping, UNIQUE constraint failed: Yotes.YoteId (19)
+Error: near line 21: stepping, UNIQUE constraint failed: Yotes.YoteId (19)
+Error: near line 68: stepping, UNIQUE constraint failed: CourseDetails.CourseSubject, CourseDetails.CourseNumber (19)
+Error: near line 87: stepping, UNIQUE constraint failed: Yotes.YoteId (19)
+Error: near line 88: stepping, UNIQUE constraint failed: Yotes.YoteId (19)
+sqlite> .read act7insert.sql[C[C[C[C[C[C[C[C;[Kclear.read act7create.sql
+sqlite> .read act7create.sqlinsert.sql
+sqlite> .read act7insert.sqlcreate.sql
+sqlite> .read act7create.sqlinsert.sql
+Error: near line 53: stepping, UNIQUE constraint failed: CourseStudent.CourseId, CourseStudent.CourseId (19)
+sqlite> .read act7insert.sqlcreate.sql
+sqlite> .read act7create.sqlinsert.sql
+Error: near line 53: stepping, UNIQUE constraint failed: CourseStudent.CourseId, CourseStudent.CourseId (19)
+sqlite> .read act7insert.sqlcreate.sql
+Error: near line 54: in prepare, near ")": syntax error (1)
+sqlite> .read act7create.sqlinsert.sqlcreate.sqlinsert.sqlcreate.sql
+sqlite> .read act7create.sqlinsert.sql
+Error: near line 53: stepping, UNIQUE constraint failed: CourseStudent.CourseId, CourseStudent.CourseId (19)
+sqlite> .read act7insert.sqlcreate.sql
+sqlite> .read act7create.sqlinsert.sqlcreate.sqlinsert.sql
+Error: near line 53: stepping, UNIQUE constraint failed: CourseStudent.CourseId, CourseStudent.CourseId (19)
+sqlite> .read act7insert.sqlcreate.sql
+sqlite> .read act7create.sqlinsert.sql
+Error: near line 53: stepping, UNIQUE constraint failed: CourseStudent.CourseId, CourseStudent.CourseId (19)
+sqlite> .read act7insert.sqlcreate.sql
+sqlite> .read act7create.sqlinsert.sql
+Error: near line 53: stepping, UNIQUE constraint failed: CourseStudent.CourseId, CourseStudent.CourseId (19)
+sqlite> .read act7insert.sqlcreate.sql
+sqlite> .read act7create.sqlinsert.sql
+Error: near line 53: stepping, UNIQUE constraint failed: CourseStudent.CourseId, CourseStudent.CourseId (19)
+sqlite> .read act7insert.sqlcreate.sql
+sqlite> .read act7create.sqlinsert.sql
+sqlite> .read act7insert.sqlcreate.sqlinsert.sqlcreate.sql
+sqlite> .read act7create.sqlinsert.sql
+Error: near line 53: stepping, UNIQUE constraint failed: CourseStudent.CourseId, CourseStudent.StudentId (19)
+sqlite> .read act7insert.sqlcreate.sql
+sqlite> .read act7create.sqlinsert.sql
+sqlite> .read act7insert.sqlcreate.sql
+Error: near line 14: in prepare, near "YoteId": syntax error (1)
+Error: near line 25: in prepare, near "CourseId": syntax error (1)
+sqlite> .read act7create.sqlinsert.sqlcreate.sql
+sqlite> .read act7create.sql
+sqlite> .read act7create.sqlinsert.sql
+Error: near line 14: stepping, FOREIGN KEY constraint failed (19)
+Error: near line 32: stepping, FOREIGN KEY constraint failed (19)
+Error: near line 55: stepping, FOREIGN KEY constraint failed (19)
+sqlite> ]0;~/csc270/Activities/A07-Keys-and-Constraints[01;34m~/csc270/Activities/A07-Keys-and-Constraints[00m$ 

@@ -1,0 +1,380 @@
+
+reset;history -d $(history 1)
+]0;~/csc270/Activities/A02-Data-Retrieval[01;34m~/csc270/Activities/A02-Data-Retrieval[00m$ 
+]0;~/csc270/Activities/A02-Data-Retrieval[01;34m~/csc270/Activities/A02-Data-Retrieval[00m$ reset;history -d $(history 1)
+c]104[!p[?3;4l[4l>[?69l]0;~/csc270/Activities/A02-Data-Retrieval[01;34m~/csc270/Activities/A02-Data-Retrieval[00m$ clearsqlite3
+SQLite version 3.37.2 2022-01-06 13:25:41
+Enter ".help" for usage hints.
+Connected to a [1mtransient in-memory database[0m.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite> .exitread schedule.sqlchinook_sandbox.sql[C[C[C[C[C[C[C[C[C[C[C[C[C[C[7Pschedule.sqlchinook_sandbox.sql[C[1P.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sqlp.sqlr.sqla.sqlc.sql_.sqln.sqlo.sqlt.sqlt.sqlh.sql[1P.sql[1P.sql[1P.sqlr.sqlt.sqlh.sqlw.sqli.sqln.sqld.sql[C[C[C[C
+Error: near line 2: in prepare, no such table: Employee (1)
+sqlite> .open Northwind.b[Kdb
+sqlite> .tables
+Categories            Employees             Shippers            
+CustomerCustomerDemo  Order Details         Suppliers           
+CustomerDemographics  Orders                Territories         
+Customers             Products            
+EmployeeTerritories   Regions             
+sqlite> .mode bpx[K[Kox
+sqlite> hear[K[K[K[K.headers on
+sqlite> .headers on[2Pmode box[2Ptablesopen Northwind.db[C[C[C[C[C[C[C[C[Cread prac_northwind.sql
+Error: near line 2: in prepare, no such table: Employee (1)
+sqlite> .read prac_northwind.sql
+┌──────────────────────────┐
+│          Title           │
+├──────────────────────────┤
+│ Sales Representative     │
+│ Vice President, Sales    │
+│ Sales Manager            │
+│ Inside Sales Coordinator │
+└──────────────────────────┘
+sqlite> .schema Employees
+CREATE TABLE [Employees]
+(      [EmployeeID] INTEGER PRIMARY KEY AUTOINCREMENT,
+       [LastName] TEXT,
+       [FirstName] TEXT,
+       [Title] TEXT,
+       [TitleOfCourtesy] TEXT,
+       [BirthDate] DATE,
+       [HireDate] DATE,
+       [Address] TEXT,
+       [City] TEXT,
+       [Region] TEXT,
+       [PostalCode] TEXT,
+       [Country] TEXT,
+       [HomePhone] TEXT,
+       [Extension] TEXT,
+       [Photo] BLOB,
+       [Notes] TEXT,
+       [ReportsTo] INTEGER,
+       [PhotoPath] TEXT,
+	   FOREIGN KEY ([ReportsTo]) REFERENCES [Employees] ([EmployeeID]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+sqlite> sc[K[K.schema Orders
+CREATE TABLE [Orders](
+   [OrderID]INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+   [CustomerID]TEXT,
+   [EmployeeID]INTEGER,
+   [OrderDate]DATETIME,
+   [RequiredDate]DATETIME,
+   [ShippedDate]DATETIME,
+   [ShipVia]INTEGER,
+   [Freight]NUMERIC DEFAULT 0,
+   [ShipName]TEXT,
+   [ShipAddress]TEXT,
+   [ShipCity]TEXT,
+   [ShipRegion]TEXT,
+   [ShipPostalCode]TEXT,
+   [ShipCountry]TEXT,
+   FOREIGN KEY ([EmployeeID]) REFERENCES [Employees] ([EmployeeID]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+	FOREIGN KEY ([CustomerID]) REFERENCES [Customers] ([CustomerID]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+	FOREIGN KEY ([ShipVia]) REFERENCES [Shippers] ([ShipperID]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+sqlite> .schema OrdersDetails
+sqlite> .schema OrdersDetails Details[C[C[C[C[C[C[C
+Usage: .schema ?--indent? ?--nosys? ?LIKE-PATTERN?
+sqlite> .schema Orders Details[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Ka
+CREATE TABLE [Categories]
+(      [CategoryID] INTEGER PRIMARY KEY AUTOINCREMENT,
+       [CategoryName] TEXT,
+       [Description] TEXT,
+       [Picture] BLOB
+);
+CREATE TABLE sqlite_sequence(name,seq);
+CREATE TABLE [CustomerCustomerDemo](
+   [CustomerID]TEXT NOT NULL,
+   [CustomerTypeID]TEXT NOT NULL,
+   PRIMARY KEY ("CustomerID","CustomerTypeID"),
+   FOREIGN KEY ([CustomerID]) REFERENCES [Customers] ([CustomerID]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+	FOREIGN KEY ([CustomerTypeID]) REFERENCES [CustomerDemographics] ([CustomerTypeID]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [CustomerDemographics](
+   [CustomerTypeID]TEXT NOT NULL,
+   [CustomerDesc]TEXT,
+    PRIMARY KEY ("CustomerTypeID")
+);
+CREATE TABLE [Customers]
+(      [CustomerID] TEXT,
+       [CompanyName] TEXT,
+       [ContactName] TEXT,
+       [ContactTitle] TEXT,
+       [Address] TEXT,
+       [City] TEXT,
+       [Region] TEXT,
+       [PostalCode] TEXT,
+       [Country] TEXT,
+       [Phone] TEXT,
+       [Fax] TEXT,
+       PRIMARY KEY (`CustomerID`)
+);
+CREATE TABLE [Employees]
+(      [EmployeeID] INTEGER PRIMARY KEY AUTOINCREMENT,
+       [LastName] TEXT,
+       [FirstName] TEXT,
+       [Title] TEXT,
+       [TitleOfCourtesy] TEXT,
+       [BirthDate] DATE,
+       [HireDate] DATE,
+       [Address] TEXT,
+       [City] TEXT,
+       [Region] TEXT,
+       [PostalCode] TEXT,
+       [Country] TEXT,
+       [HomePhone] TEXT,
+       [Extension] TEXT,
+       [Photo] BLOB,
+       [Notes] TEXT,
+       [ReportsTo] INTEGER,
+       [PhotoPath] TEXT,
+	   FOREIGN KEY ([ReportsTo]) REFERENCES [Employees] ([EmployeeID]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [EmployeeTerritories](
+   [EmployeeID]INTEGER NOT NULL,
+   [TerritoryID]TEXT NOT NULL,
+    PRIMARY KEY ("EmployeeID","TerritoryID"),
+	FOREIGN KEY ([EmployeeID]) REFERENCES [Employees] ([EmployeeID]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+	FOREIGN KEY ([TerritoryID]) REFERENCES [Territories] ([TerritoryID]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [Order Details](
+   [OrderID]INTEGER NOT NULL,
+   [ProductID]INTEGER NOT NULL,
+   [UnitPrice]NUMERIC NOT NULL DEFAULT 0,
+   [Quantity]INTEGER NOT NULL DEFAULT 1,
+   [Discount]REAL NOT NULL DEFAULT 0,
+    PRIMARY KEY ("OrderID","ProductID"),
+    CHECK ([Discount]>=(0) AND [Discount]<=(1)),
+    CHECK ([Quantity]>(0)),
+    CHECK ([UnitPrice]>=(0)),
+	FOREIGN KEY ([OrderID]) REFERENCES [Orders] ([OrderID]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+	FOREIGN KEY ([ProductID]) REFERENCES [Products] ([ProductID]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [Orders](
+   [OrderID]INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+   [CustomerID]TEXT,
+   [EmployeeID]INTEGER,
+   [OrderDate]DATETIME,
+   [RequiredDate]DATETIME,
+   [ShippedDate]DATETIME,
+   [ShipVia]INTEGER,
+   [Freight]NUMERIC DEFAULT 0,
+   [ShipName]TEXT,
+   [ShipAddress]TEXT,
+   [ShipCity]TEXT,
+   [ShipRegion]TEXT,
+   [ShipPostalCode]TEXT,
+   [ShipCountry]TEXT,
+   FOREIGN KEY ([EmployeeID]) REFERENCES [Employees] ([EmployeeID]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+	FOREIGN KEY ([CustomerID]) REFERENCES [Customers] ([CustomerID]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+	FOREIGN KEY ([ShipVia]) REFERENCES [Shippers] ([ShipperID]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [Products](
+   [ProductID]INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+   [ProductName]TEXT NOT NULL,
+   [SupplierID]INTEGER,
+   [CategoryID]INTEGER,
+   [QuantityPerUnit]TEXT,
+   [UnitPrice]NUMERIC DEFAULT 0,
+   [UnitsInStock]INTEGER DEFAULT 0,
+   [UnitsOnOrder]INTEGER DEFAULT 0,
+   [ReorderLevel]INTEGER DEFAULT 0,
+   [Discontinued]TEXT NOT NULL DEFAULT '0',
+    CHECK ([UnitPrice]>=(0)),
+    CHECK ([ReorderLevel]>=(0)),
+    CHECK ([UnitsInStock]>=(0)),
+    CHECK ([UnitsOnOrder]>=(0)),
+	FOREIGN KEY ([CategoryID]) REFERENCES [Categories] ([CategoryID]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+	FOREIGN KEY ([SupplierID]) REFERENCES [Suppliers] ([SupplierID]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [Regions](
+   [RegionID]INTEGER NOT NULL PRIMARY KEY,
+   [RegionDescription]TEXT NOT NULL
+);
+CREATE TABLE [Shippers](
+   [ShipperID]INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+   [CompanyName]TEXT NOT NULL,
+   [Phone]TEXT
+);
+CREATE TABLE [Suppliers](
+   [SupplierID]INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+   [CompanyName]TEXT NOT NULL,
+   [ContactName]TEXT,
+   [ContactTitle]TEXT,
+   [Address]TEXT,
+   [City]TEXT,
+   [Region]TEXT,
+   [PostalCode]TEXT,
+   [Country]TEXT,
+   [Phone]TEXT,
+   [Fax]TEXT,
+   [HomePage]TEXT
+);
+CREATE TABLE [Territories](
+   [TerritoryID]TEXT NOT NULL,
+   [TerritoryDescription]TEXT NOT NULL,
+   [RegionID]INTEGER NOT NULL,
+    PRIMARY KEY ("TerritoryID"),
+	FOREIGN KEY ([RegionID]) REFERENCES [Regions] ([RegionID]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+sqlite> re[K,[K[K.read prac_nothwind[K[K[K[K[K[Krthwind.sql
+┌──────────────────────────┐
+│          Title           │
+├──────────────────────────┤
+│ Sales Representative     │
+│ Vice President, Sales    │
+│ Sales Manager            │
+│ Inside Sales Coordinator │
+└──────────────────────────┘
+┌───────────┬───────────┬──────────────────────────┐
+│ FirstName │ LastName  │          Title           │
+├───────────┼───────────┼──────────────────────────┤
+│ Laura     │ Callahan  │ Inside Sales Coordinator │
+│ Nancy     │ Davolio   │ Sales Representative     │
+│ Andrew    │ Fuller    │ Vice President, Sales    │
+│ Janet     │ Leverling │ Sales Representative     │
+│ Margaret  │ Peacock   │ Sales Representative     │
+└───────────┴───────────┴──────────────────────────┘
+┌─────────────┐
+│ ShipCountry │
+├─────────────┤
+│ Argentina   │
+│ Austria     │
+│ Belgium     │
+│ Brazil      │
+│ Canada      │
+│ Denmark     │
+│ Finland     │
+│ France      │
+│ Germany     │
+│ Ireland     │
+│ Italy       │
+│ Mexico      │
+│ Norway      │
+│ Poland      │
+│ Portugal    │
+│ Spain       │
+│ Sweden      │
+│ Switzerland │
+│ UK          │
+│ USA         │
+│ Venezuela   │
+└─────────────┘
+┌─────────┬────────────┬──────────────┬─────────────┐
+│ OrderID │ OrderDate  │ RequiredDate │ ShippedDate │
+├─────────┼────────────┼──────────────┼─────────────┤
+│ 10264   │ 2016-07-24 │ 2016-08-21   │ 2016-08-23  │
+│ 10271   │ 2016-08-01 │ 2016-08-29   │ 2016-08-30  │
+│ 10280   │ 2016-08-14 │ 2016-09-11   │ 2016-09-12  │
+│ 10302   │ 2016-09-10 │ 2016-10-08   │ 2016-10-09  │
+│ 10309   │ 2016-09-19 │ 2016-10-17   │ 2016-10-23  │
+│ 10320   │ 2016-10-03 │ 2016-10-17   │ 2016-10-18  │
+│ 10380   │ 2016-12-12 │ 2017-01-09   │ 2017-01-16  │
+│ 10423   │ 2017-01-23 │ 2017-02-06   │ 2017-02-24  │
+│ 10427   │ 2017-01-27 │ 2017-02-24   │ 2017-03-03  │
+│ 10433   │ 2017-02-03 │ 2017-03-03   │ 2017-03-04  │
+│ 10451   │ 2017-02-19 │ 2017-03-05   │ 2017-03-12  │
+│ 10483   │ 2017-03-24 │ 2017-04-21   │ 2017-04-25  │
+│ 10515   │ 2017-04-23 │ 2017-05-07   │ 2017-05-23  │
+│ 10523   │ 2017-05-01 │ 2017-05-29   │ 2017-05-30  │
+│ 10545   │ 2017-05-22 │ 2017-06-19   │ 2017-06-26  │
+│ 10578   │ 2017-06-24 │ 2017-07-22   │ 2017-07-25  │
+│ 10593   │ 2017-07-09 │ 2017-08-06   │ 2017-08-13  │
+│ 10596   │ 2017-07-11 │ 2017-08-08   │ 2017-08-12  │
+│ 10660   │ 2017-09-08 │ 2017-10-06   │ 2017-10-15  │
+│ 10663   │ 2017-09-10 │ 2017-09-24   │ 2017-10-03  │
+│ 10687   │ 2017-09-30 │ 2017-10-28   │ 2017-10-30  │
+│ 10705   │ 2017-10-15 │ 2017-11-12   │ 2017-11-18  │
+│ 10709   │ 2017-10-17 │ 2017-11-14   │ 2017-11-20  │
+│ 10726   │ 2017-11-03 │ 2017-11-17   │ 2017-12-05  │
+│ 10727   │ 2017-11-03 │ 2017-12-01   │ 2017-12-05  │
+│ 10749   │ 2017-11-20 │ 2017-12-18   │ 2017-12-19  │
+│ 10777   │ 2017-12-15 │ 2017-12-29   │ 2018-01-21  │
+│ 10779   │ 2017-12-16 │ 2018-01-13   │ 2018-01-14  │
+│ 10807   │ 2017-12-31 │ 2018-01-28   │ 2018-01-30  │
+│ 10816   │ 2018-01-06 │ 2018-02-03   │ 2018-02-04  │
+│ 10827   │ 2018-01-12 │ 2018-01-26   │ 2018-02-06  │
+│ 10828   │ 2018-01-13 │ 2018-01-27   │ 2018-02-04  │
+│ 10847   │ 2018-01-22 │ 2018-02-05   │ 2018-02-10  │
+│ 10924   │ 2018-03-04 │ 2018-04-01   │ 2018-04-08  │
+│ 10927   │ 2018-03-05 │ 2018-04-02   │ 2018-04-08  │
+│ 10960   │ 2018-03-19 │ 2018-04-02   │ 2018-04-08  │
+│ 10970   │ 2018-03-24 │ 2018-04-07   │ 2018-04-24  │
+└─────────┴────────────┴──────────────┴─────────────┘
+┌───────────────────────────────┬──────────────┐
+│          ProductName          │ UnitsInStock │
+├───────────────────────────────┼──────────────┤
+│ Chef Anton's Gumbo Mix        │ 0            │
+│ Mishi Kobe Niku               │ 29           │
+│ Alice Mutton                  │ 0            │
+│ Guaraná Fantástica            │ 20           │
+│ Rössle Sauerkraut             │ 26           │
+│ Thüringer Rostbratwurst       │ 0            │
+│ Singaporean Hokkien Fried Mee │ 26           │
+│ Perth Pasties                 │ 0            │
+└───────────────────────────────┴──────────────┘
+┌─────────┬───────────┬───────────┬──────────┬──────────┐
+│ OrderID │ ProductID │ UnitPrice │ Quantity │ Discount │
+├─────────┼───────────┼───────────┼──────────┼──────────┤
+│ 10248   │ 11        │ 14        │ 12       │ 0.0      │
+│ 10248   │ 42        │ 9.8       │ 10       │ 0.0      │
+│ 10248   │ 72        │ 34.8      │ 5        │ 0.0      │
+│ 10249   │ 14        │ 18.6      │ 9        │ 0.0      │
+└─────────┴───────────┴───────────┴──────────┴──────────┘
+┌─────────┬──────────┬───────────┐
+│ OrderID │ Quantity │ UnitPrice │
+├─────────┼──────────┼───────────┤
+│ 10850   │ 4        │ 2.5       │
+│ 10972   │ 7        │ 2.5       │
+│ 10528   │ 8        │ 2.5       │
+│ 10677   │ 8        │ 2.5       │
+│ 11054   │ 10       │ 2.5       │
+│ 10574   │ 14       │ 2.5       │
+│ 10607   │ 14       │ 2.5       │
+│ 10539   │ 15       │ 2.5       │
+│ 10951   │ 15       │ 2.5       │
+│ 11045   │ 15       │ 2.5       │
+│ 10515   │ 16       │ 2.5       │
+│ 10815   │ 16       │ 2.5       │
+│ 10562   │ 20       │ 2.5       │
+│ 10632   │ 20       │ 2.5       │
+│ 10536   │ 30       │ 2.5       │
+│ 10678   │ 30       │ 2.5       │
+│ 10682   │ 30       │ 2.5       │
+│ 10915   │ 30       │ 2.5       │
+│ 11024   │ 30       │ 2.5       │
+│ 10861   │ 35       │ 2.5       │
+│ 10913   │ 40       │ 2.5       │
+│ 10341   │ 8        │ 2         │
+│ 10473   │ 12       │ 2         │
+│ 10273   │ 20       │ 2         │
+│ 10415   │ 20       │ 2         │
+│ 10454   │ 20       │ 2         │
+│ 10271   │ 24       │ 2         │
+│ 10252   │ 25       │ 2         │
+│ 10410   │ 49       │ 2         │
+│ 10414   │ 50       │ 2         │
+│ 10269   │ 60       │ 2         │
+│ 10382   │ 60       │ 2         │
+└─────────┴──────────┴───────────┘
+sqlite> 
+reset;history -d $(history 1)
+]0;~/csc270/Activities/A02-Data-Retrieval[01;34m~/csc270/Activities/A02-Data-Retrieval[00m$ 
+]0;~/csc270/Activities/A02-Data-Retrieval[01;34m~/csc270/Activities/A02-Data-Retrieval[00m$ reset;history -d $(history 1)
+c]104[!p[?3;4l[4l>[?69l]0;~/csc270/Activities/A02-Data-Retrieval[01;34m~/csc270/Activities/A02-Data-Retrieval[00m$ ]0;~/csc270/Activities/A02-Data-Retrieval[01;34m~/csc270/Activities/A02-Data-Retrieval[00m$ 

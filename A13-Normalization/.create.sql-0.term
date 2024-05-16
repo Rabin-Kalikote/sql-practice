@@ -1,0 +1,153 @@
+]0;~/csc270/Activities/A13-Normalization[01;34m~/csc270/Activities/A13-Normalization[00m$ clearsqlite3
+SQLite version 3.37.2 2022-01-06 13:25:41
+Enter ".help" for usage hints.
+Connected to a [1mtransient in-memory database[0m.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite> .opne[K[K[K[K[K.quitschemaselect country from Shows;[C[C[C[C[C[C[C[C.schema[Kselect listed_in from Shows;[C[C[C[C[C[C[C[C.schema[Ktablesopen Netflix.db[C[C[C[C[C[C[C[C[C[9Pschema[2PclearWHERE p.firstname = 'Barack';[C[C[C[C[C[C[C[C[9PFROM Politician AS p[C[C[C[C[C[C[C[CSELECT p.politician_id, 1, '2009-01-20', '2017-01-20'[C[C[C[C[C[C[C[C[33PFROM Politician AS p[C[C[C[C[C[C[C[CWHERE p.firstname = 'Barack';[C[C[C[C[C[C[C[Cclear[K.schema[2PclearWHERE p.firstname = 'Barack';[C[C[C[C[C[C[C[C[9PFROM Politician AS p[C[C[C[C[C[C[C[CSELECT p.politician_id, 1, '2009-01-20', '2017-01-20'[C[C[C[C[C[C[C[CINSERT INTO PoliticianOffice (politician_id, office_id, start_date, end_date)[C[C[C[C[C[C[C[C[27Pdelete from Politician where firstname = 'Barack';[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[2@* [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[27Pselect * from Politician;[C[C[C[C[C[C[C[C[7P.read act10USA.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sqlc.sqlr.sqle.sqla.sqlt.sqle.sql[C[C[C[C
+sqlite> .tables
+AlcoholConsumption  Country             WhoRegion         
+sqlite> .schema
+CREATE TABLE `WhoRegion` (
+  `RegionCode` INTEGER,
+  `RegionName` VARCHAR(50),
+  PRIMARY KEY (`RegionCode`)
+);
+CREATE TABLE `Country` (
+  `CountryCode` INTEGER,
+  `CountryName` VARCHAR(50),
+  `RegionCode` Integer,
+  PRIMARY KEY (`CountryCode`),
+  FOREIGN KEY (`RegionCode`) REFERENCES `WhoRegion`(`RegionCode`)
+);
+CREATE TABLE `AlcoholConsumption` (
+  `Year` INTEGER,
+  `Country` VARCHAR(25),
+  `Sex` VARCHAR(5),
+  `HigherData` FLOAT,
+  `LowerData` FLOAT,
+  `AverageData` FLOAT,
+  PRIMARY KEY (`Year`, `Country`, `Sex`),
+  FOREIGN KEY (`Country`) REFERENCES `Country`(`CountryCode`)
+);
+sqlite> .opme[K[Ken whoA;c[K[Klch[Kohol.db
+sqlite> .tables
+AllData
+sqlite> .tablesopen whoAlcohol.db[C[C[C[C[C[C[C[C[C[12Pschematablesread create.sql
+sqlite> .read create.sql[C[C[C[C[C[C[C[C[C[9Ptables
+AlcoholConsumption  AllData             Country             WhoRegion         
+sqlite> .schema
+CREATE TABLE IF NOT EXISTS "AllData" (
+  "WHO Region Code" TEXT,
+  "WHO Region" TEXT,
+  "Country Code" TEXT,
+  "Country" TEXT,
+  "Year" TEXT,
+  "Sex" TEXT,
+  "Alcohol total per capita (15+) consumption in liters (numeric)" REAL,
+  "Alcohol total per capita (15+) consumption in liters (low estimation)" REAL,
+  "Alcohol total per capita (15+) consumption in liters (high estimation)" REAL,
+  "Alcohol total per capita (15+) consumption in liters (string)" TEXT,
+  PRIMARY KEY ("Country Code", "Year", "Sex")
+);
+CREATE TABLE `WhoRegion` (
+  `RegionCode` INTEGER,
+  `RegionName` VARCHAR(50),
+  PRIMARY KEY (`RegionCode`)
+);
+CREATE TABLE `Country` (
+  `CountryCode` INTEGER,
+  `CountryName` VARCHAR(50),
+  `RegionCode` Integer,
+  PRIMARY KEY (`CountryCode`),
+  FOREIGN KEY (`RegionCode`) REFERENCES `WhoRegion`(`RegionCode`)
+);
+CREATE TABLE `AlcoholConsumption` (
+  `Year` INTEGER,
+  `Country` VARCHAR(25),
+  `Sex` VARCHAR(5),
+  `HigherData` FLOAT,
+  `LowerData` FLOAT,
+  `AverageData` FLOAT,
+  PRIMARY KEY (`Year`, `Country`, `Sex`),
+  FOREIGN KEY (`Country`) REFERENCES `Country`(`CountryCode`)
+);
+sqlite> insert into WhoRegion ''[K[K()R)e)g)i)o)n)C)O)[1P)o)d)e).) )[1P)[1P),) )R)e)g)i)o)n)N)e)a)m)[1P)[1P)[1P)a)m)e)[C values()[K[K[K[K[K[K[K[K[K [K[K) select distn[Kincct "WHO RE[Kegion COde[K[K[Kode" [K, W[K"WHO Region" from Al lData;
+Error: in prepare, no such column: distincct (1)
+sqlite> insert into WhoRegion (RegionCode, RegionName) select distincct "WHO Region Code", "WHO Region" from AllData;[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ct "WHO Region Code", "WHO Region" from AllD[1Pata;[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+Error: stepping, datatype mismatch (20)
+sqlite> insert into WhoRegion (RegionCode, RegionName) select distinct "WHO Region Code", "WHO Region" from AllData;[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CCAST('3.02' as decimal) "WHO Region Code", "WHO Region" from AllData;[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C CAST('3.02' as decimal) "WHO Region Code"[1@,[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C as decimal) "WHO Region Code",[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C as decimal) "WHO Region Code", [1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C as decimal) "WHO Region Code", "[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C as decimal) "WHO Region Code", "W[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C as decimal) "WHO Region Code", "WH[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C as decimal) "WHO Region Code", "WHO[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C"WHO Region Code" as decimal) "WHO R[17@egion Code", "WHO[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+[C[C[C[C[C[C[C[C[C[C[C[C[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C, [1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C, "[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C, "W[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C, "WH[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C, "WHO[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C, "WHO [1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CC"WHO[1@ [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CA"WH[1@O[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CS"W[1@H[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CT"[1@W[1@([C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1@,[C[1@ [1@a[1@s[1P[1P[1P[1P[1@a[1@s[1P[1P[C[1@ [1@a[1@s[C[1@ [1@d[1@e[1@c[1@i[1@m[1@a[1@l[1@)[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+sqlite> select * from WhoRegion
+   ...> ;
+0|0
+sqlite> ;select * from WhoRegion[C[C[C[C[C[C[C[Cinsert into WhoRegion (RegionCode, RegionName) select distinct CAST("WHO Region Code" as decimal), CAST("WHO Region" as decimal) from AllData;[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C"WHO Region Code", "WHO Region" from AllData;[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cct "WHO Region Code", "WHO Region" from AllData;[A[C[C.schema[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ctablesread create.sql[C[C[C[C[C[C[C[C[C[9Ptablesread create.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sql[1P.sqli.sqln.sqls.sqle.sqlr.sqlt.sql[C[C[C[C
+Error: near line 1: stepping, UNIQUE constraint failed: WhoRegion.RegionCode (19)
+sqlite> .read insert.sql[C[C[C[C[C[C[C[C;[Kselect * from WhoRegion;
+0|0
+sqlite> header.[K[K[K[K[K[K[K.mode box;
+Error: mode should be one of: ascii box column csv html insert json line list markdown quote table tabs tcl
+sqlite> .mode box;[K
+sqlite> c[K.mode box;[C[C[C[C[C[C[C[Cselect * from WhoRegion;
+┌────────────┬────────────┐
+│ RegionCode │ RegionName │
+├────────────┼────────────┤
+│ 0          │ 0          │
+└────────────┴────────────┘
+sqlite> insert into Country (CountryCode, CountryName, RegionCode)
+   ...> select distinct CAST("Country Code" as decimal), Country, CAST("WHO Region Code" as decimal) from AllData;
+Error: stepping, UNIQUE constraint failed: Country.CountryCode (19)
+sqlite> [Ksqlite> [Ksqlite> ]0;~/csc270/Activities/A13-Normalization[01;34m~/csc270/Activities/A13-Normalization[00m$ ]0;~/csc270/Activities/A13-Normalization[01;34m~/csc270/Activities/A13-Normalization[00m$ [K]0;~/csc270/Activities/A13-Normalization[01;34m~/csc270/Activities/A13-Normalization[00m$ ]0;~/csc270/Activities/A13-Normalization[01;34m~/csc270/Activities/A13-Normalization[00m$ ]0;~/csc270/Activities/A13-Normalization[01;34m~/csc270/Activities/A13-Normalization[00m$ [K]0;~/csc270/Activities/A13-Normalization[01;34m~/csc270/Activities/A13-Normalization[00m$ clearsqlite3[2Pclear
+[H[2J[3J]0;~/csc270/Activities/A13-Normalization[01;34m~/csc270/Activities/A13-Normalization[00m$ clearsqlite3
+SQLite version 3.37.2 2022-01-06 13:25:41
+Enter ".help" for usage hints.
+Connected to a [1mtransient in-memory database[0m.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite> .quitschemaselect country from Shows;[C[C[C[C[C[C[C[C.schema[Kselect listed_in from Shows;[C[C[C[C[C[C[C[C.schema[Ktablesopen Netflix.db[C[C[C[C[C[C[C[C[C[9Pschema[2PclearWHERE p.firstname = 'Barack';[C[C[C[C[C[C[C[C[9PFROM Politician AS p[C[C[C[C[C[C[C[CSELECT p.politician_id, 1, '2009-01-20', '2017-01-20'[C[C[C[C[C[C[C[CINSERT INTO PoliticianOffice (politician_id, office_id, start_date, end_date)[A[13Pdelete from Politician where firstname = 'Barack';
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[2@* [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[27Pselect * from Politician;[C[C[C[C[C[C[C[C[7P.read act10USA.sql[C[C[C[C[C[C[C[C[C[11Pschemaselect * from Politician;[C[C[C[C[C[C[C[C[C[1P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[3Pelect * from Office;[C[C[C[C[C[C[C[C[Clect * from Politician;[C[C[C[C[C[C[C[C[C[1@e[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C.schema[Kread act10USA.sql[C[C[C[C[C[C[C[Cselect * from Politician;[C[C[C[C[C[C[C[Cdelete * from Politician where firstname = 'Barack';[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[2P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CINSERT INTO PoliticianOffice (politician_id, office_id, start_date, end_date)[A[10PSELECT p.politician_id, 1, '2009-01-20', '2017-01-20'
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[33PFROM Politician AS p[C[C[C[C[C[C[C[CWHERE p.firstname = 'Barack';[C[C[C[C[C[C[C[Cclear[K.schemaopen Netflix.db[C[C[C[C[C[C[C[C[C[9Ptablesschemaselect listed_in from Shows;[C[C[C[C[C[C[C[C.schema[Kselect country from Shows;[C[C[C[C[C[C[C[C.schema[K[2Pquit[K.ip[K[Kmode box
+sqlite> .open All[K[K[KwhoAlcohol.db
+sqlite> .tables
+AlcoholConsumption  AllData             Country             WhoRegion         
+sqlite> c[K.reds[K[Kad creat.[Ke.spl[K[Kql
+sqlite> ce[K[K.read create.sql[C[C[C[C[C[C[C[C[C[9Ptables
+AlcoholConsumption  AllData             Country             WhoRegion         
+sqlite> .schema
+CREATE TABLE IF NOT EXISTS "AllData" (
+  "WHO Region Code" TEXT,
+  "WHO Region" TEXT,
+  "Country Code" TEXT,
+  "Country" TEXT,
+  "Year" TEXT,
+  "Sex" TEXT,
+  "Alcohol total per capita (15+) consumption in liters (numeric)" REAL,
+  "Alcohol total per capita (15+) consumption in liters (low estimation)" REAL,
+  "Alcohol total per capita (15+) consumption in liters (high estimation)" REAL,
+  "Alcohol total per capita (15+) consumption in liters (string)" TEXT,
+  PRIMARY KEY ("Country Code", "Year", "Sex")
+);
+CREATE TABLE `WhoRegion` (
+  `RegionCode` VARCHAR(10),
+  `RegionName` VARCHAR(50),
+  PRIMARY KEY (`RegionCode`)
+);
+CREATE TABLE `Country` (
+  `CountryCode` VARCHAR(10),
+  `CountryName` VARCHAR(50),
+  `RegionCode` VARCHAR(50),
+  PRIMARY KEY (`CountryCode`),
+  FOREIGN KEY (`RegionCode`) REFERENCES `WhoRegion`(`RegionCode`)
+);
+CREATE TABLE `AlcoholConsumption` (
+  `Year` INTEGER,
+  `Country` VARCHAR(25),
+  `Sex` VARCHAR(5),
+  `HigherData` FLOAT,
+  `LowerData` FLOAT,
+  `AverageData` FLOAT,
+  PRIMARY KEY (`Year`, `Country`, `Sex`),
+  FOREIGN KEY (`Country`) REFERENCES `Country`(`CountryName`)
+);
+sqlite> .[Kselect all from[K[K[K[K[K[K[K[K* from A[KCountry;
+sqlite> [Ksqlite> [Ksqlite> [Ksqlite> [Ksqlite> [Ksqlite> [Ksqlite> [Ksqlite> [Ksqlite> ]0;~/csc270/Activities/A13-Normalization[01;34m~/csc270/Activities/A13-Normalization[00m$ ]0;~/csc270/Activities/A13-Normalization[01;34m~/csc270/Activities/A13-Normalization[00m$ 

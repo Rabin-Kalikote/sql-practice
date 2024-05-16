@@ -1,0 +1,36 @@
+
+reset;history -d $(history 1)
+[?2004h]0;~/csc270/Activities/A01-Basics/student[01;34m~/csc270/Activities/A01-Basics/student[00m$ 
+[?2004l[?2004h]0;~/csc270/Activities/A01-Basics/student[01;34m~/csc270/Activities/A01-Basics/student[00m$ reset;history -d $(history 1)
+[?2004lc]104[!p[?3;4l[4l>[?69l[?2004h]0;~/csc270/Activities/A01-Basics/student[01;34m~/csc270/Activities/A01-Basics/student[00m$ 
+reset;history -d $(history 1)
+[?2004h]0;~/csc270/Activities/A01-Basics[01;34m~/csc270/Activities/A01-Basics[00m$ 
+[?2004l[?2004h]0;~/csc270/Activities/A01-Basics[01;34m~/csc270/Activities/A01-Basics[00m$ reset;history -d $(history 1)
+[?2004lc]104[!p[?3;4l[4l>[?69l[?2004h]0;~/csc270/Activities/A01-Basics[01;34m~/csc270/Activities/A01-Basics[00m$ [K]0;~/csc270/Activities/A01-Basics[01;34m~/csc270/Activities/A01-Basics[00m$ sqlite [K3
+[?2004lSQLite version 3.37.2 2022-01-06 13:25:41
+Enter ".help" for usage hints.
+Connected to a [1mtransient in-memory database[0m.
+Use ".open FILENAME" to reopen on a persistent database.
+[?2004hsqlite> select 'Hello, World'[K!';
+[?2004lHello, World!
+[?2004hsqlite> select 5_5[K[K-5
+[?2004l[?2004h   ...> select 5-5;
+[?2004lError: in prepare, near "select": syntax error (1)
+[?2004hsqlite> select 5-5;
+[?2004l0
+[?2004hsqlite> .red[Kad s[Khellp.[K[Ko.sql
+[?2004lHello, World
+[?2004hsqlite> .read hello.sql
+[?2004lHello, World!
+[?2004hsqlite> .quit
+[?2004l[?2004h]0;~/csc270/Activities/A01-Basics[01;34m~/csc270/Activities/A01-Basics[00m$ sqlite3[Kqlite3
+[?2004lSQLite version 3.37.2 2022-01-06 13:25:41
+Enter ".help" for usage hints.
+Connected to a [1mtransient in-memory database[0m.
+Use ".open FILENAME" to reopen on a persistent database.
+[?2004hsqlite> sfhaj
+[?2004l[?2004h   ...> ∂[K[?2004l
+
+Error: in prepare, near "sfhaj": syntax error (1)
+[?2004h]0;~/csc270/Activities/A01-Basics[01;34m~/csc270/Activities/A01-Basics[00m$ clear
+[?2004l[H[2J[3J[?2004h]0;~/csc270/Activities/A01-Basics[01;34m~/csc270/Activities/A01-Basics[00m$ 

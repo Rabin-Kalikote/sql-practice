@@ -1,0 +1,657 @@
+]0;~/csc270/Activities/A08-Subqueries[01;34m~/csc270/Activities/A08-Subqueries[00m$ clearsqlite3
+SQLite version 3.37.2 2022-01-06 13:25:41
+Enter ".help" for usage hints.
+Connected to a [1mtransient in-memory database[0m.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite> .hear[Kder.[K on
+sqlite> .n[Kmoce b[K[K[K[Kde box
+sqlite> select 2 = (1, 2, 3)
+   ...> ;
+Error: in prepare, row value misused (1)
+sqlite> ;select 2 = (1, 2, 3);
+Error: in prepare, row value misused (1)
+sqlite> select 2 = (1, 2, 3);[1P[1P[1P[1P[1P[1P
+Error: in prepare, near "2": syntax error (1)
+sqlite>  2 = (1, 2, 3);[C[C[C[C[C[C[C[C[6@select[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C;[Kselect 2 = (1, 2, 3);[1P);[1P);[1P);[C[1P2);[1P2);[1P2);[C[C[C
+┌─────────┐
+│ 2 = (2) │
+├─────────┤
+│ 1       │
+└─────────┘
+sqlite> select 2 = (2);[C[C[C[C[C[C[C[C 2 = (1, 2, 3);[C[C[C[C[C[C[C[C[6@select[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[6P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P[1@5
+Error: in prepare, near "5": syntax error (1)
+sqlite>  5 = (1, 2, 3);[C[C[C[C[C[C[C[Cselect 2 = (2);[C[1P[1@5
+┌─────────┐
+│ 5 = (2) │
+├─────────┤
+│ 0       │
+└─────────┘
+sqlite> select 5 = (2);[C[C[C[C[C[C[C[C 5 = (1, 2, 3);[C[C[C[C[C[C[C[Cselect 5 = (2);[C[C[C[C[C[C[C[C 5 = (1, 2, 3);[C[C[C[C[C[C[C[Cselect 2 = (2);[C[C[C[C[C[C[C[C 2 = (1, 2, 3);[C[C[C[C[C[C[C[Cselect 2 = (2);[1P);
+Error: in prepare, near ")": syntax error (1)
+sqlite> .open CHi[K[Khon[K[Kinook.db
+sqlite> .tables
+Album          Employee       InvoiceLine    PlaylistTrack
+Artist         Genre          MediaType      Track        
+Customer       Invoice        Playlist     
+sqlite> .schema
+CREATE TABLE [Album]
+(
+    [AlbumId] INTEGER  NOT NULL,
+    [Title] NVARCHAR(160)  NOT NULL,
+    [ArtistId] INTEGER  NOT NULL,
+    CONSTRAINT [PK_Album] PRIMARY KEY  ([AlbumId]),
+    FOREIGN KEY ([ArtistId]) REFERENCES [Artist] ([ArtistId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [Artist]
+(
+    [ArtistId] INTEGER  NOT NULL,
+    [Name] NVARCHAR(120),
+    CONSTRAINT [PK_Artist] PRIMARY KEY  ([ArtistId])
+);
+CREATE TABLE [Customer]
+(
+    [CustomerId] INTEGER  NOT NULL,
+    [FirstName] NVARCHAR(40)  NOT NULL,
+    [LastName] NVARCHAR(20)  NOT NULL,
+    [Company] NVARCHAR(80),
+    [Address] NVARCHAR(70),
+    [City] NVARCHAR(40),
+    [State] NVARCHAR(40),
+    [Country] NVARCHAR(40),
+    [PostalCode] NVARCHAR(10),
+    [Phone] NVARCHAR(24),
+    [Fax] NVARCHAR(24),
+    [Email] NVARCHAR(60)  NOT NULL,
+    [SupportRepId] INTEGER,
+    CONSTRAINT [PK_Customer] PRIMARY KEY  ([CustomerId]),
+    FOREIGN KEY ([SupportRepId]) REFERENCES [Employee] ([EmployeeId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [Employee]
+(
+    [EmployeeId] INTEGER  NOT NULL,
+    [LastName] NVARCHAR(20)  NOT NULL,
+    [FirstName] NVARCHAR(20)  NOT NULL,
+    [Title] NVARCHAR(30),
+    [ReportsTo] INTEGER,
+    [BirthDate] DATETIME,
+    [HireDate] DATETIME,
+    [Address] NVARCHAR(70),
+    [City] NVARCHAR(40),
+    [State] NVARCHAR(40),
+    [Country] NVARCHAR(40),
+    [PostalCode] NVARCHAR(10),
+    [Phone] NVARCHAR(24),
+    [Fax] NVARCHAR(24),
+    [Email] NVARCHAR(60),
+    CONSTRAINT [PK_Employee] PRIMARY KEY  ([EmployeeId]),
+    FOREIGN KEY ([ReportsTo]) REFERENCES [Employee] ([EmployeeId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [Genre]
+(
+    [GenreId] INTEGER  NOT NULL,
+    [Name] NVARCHAR(120),
+    CONSTRAINT [PK_Genre] PRIMARY KEY  ([GenreId])
+);
+CREATE TABLE [Invoice]
+(
+    [InvoiceId] INTEGER  NOT NULL,
+    [CustomerId] INTEGER  NOT NULL,
+    [InvoiceDate] DATETIME  NOT NULL,
+    [BillingAddress] NVARCHAR(70),
+    [BillingCity] NVARCHAR(40),
+    [BillingState] NVARCHAR(40),
+    [BillingCountry] NVARCHAR(40),
+    [BillingPostalCode] NVARCHAR(10),
+    [Total] NUMERIC(10,2)  NOT NULL,
+    CONSTRAINT [PK_Invoice] PRIMARY KEY  ([InvoiceId]),
+    FOREIGN KEY ([CustomerId]) REFERENCES [Customer] ([CustomerId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [InvoiceLine]
+(
+    [InvoiceLineId] INTEGER  NOT NULL,
+    [InvoiceId] INTEGER  NOT NULL,
+    [TrackId] INTEGER  NOT NULL,
+    [UnitPrice] NUMERIC(10,2)  NOT NULL,
+    [Quantity] INTEGER  NOT NULL,
+    CONSTRAINT [PK_InvoiceLine] PRIMARY KEY  ([InvoiceLineId]),
+    FOREIGN KEY ([InvoiceId]) REFERENCES [Invoice] ([InvoiceId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+    FOREIGN KEY ([TrackId]) REFERENCES [Track] ([TrackId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [MediaType]
+(
+    [MediaTypeId] INTEGER  NOT NULL,
+    [Name] NVARCHAR(120),
+    CONSTRAINT [PK_MediaType] PRIMARY KEY  ([MediaTypeId])
+);
+CREATE TABLE [Playlist]
+(
+    [PlaylistId] INTEGER  NOT NULL,
+    [Name] NVARCHAR(120),
+    CONSTRAINT [PK_Playlist] PRIMARY KEY  ([PlaylistId])
+);
+CREATE TABLE [PlaylistTrack]
+(
+    [PlaylistId] INTEGER  NOT NULL,
+    [TrackId] INTEGER  NOT NULL,
+    CONSTRAINT [PK_PlaylistTrack] PRIMARY KEY  ([PlaylistId], [TrackId]),
+    FOREIGN KEY ([PlaylistId]) REFERENCES [Playlist] ([PlaylistId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+    FOREIGN KEY ([TrackId]) REFERENCES [Track] ([TrackId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE TABLE [Track]
+(
+    [TrackId] INTEGER  NOT NULL,
+    [Name] NVARCHAR(200)  NOT NULL,
+    [AlbumId] INTEGER,
+    [MediaTypeId] INTEGER  NOT NULL,
+    [GenreId] INTEGER,
+    [Composer] NVARCHAR(220),
+    [Milliseconds] INTEGER  NOT NULL,
+    [Bytes] INTEGER,
+    [UnitPrice] NUMERIC(10,2)  NOT NULL,
+    CONSTRAINT [PK_Track] PRIMARY KEY  ([TrackId]),
+    FOREIGN KEY ([AlbumId]) REFERENCES [Album] ([AlbumId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+    FOREIGN KEY ([GenreId]) REFERENCES [Genre] ([GenreId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION,
+    FOREIGN KEY ([MediaTypeId]) REFERENCES [MediaType] ([MediaTypeId]) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE INDEX [IFK_AlbumArtistId] ON [Album] ([ArtistId]);
+CREATE INDEX [IFK_CustomerSupportRepId] ON [Customer] ([SupportRepId]);
+CREATE INDEX [IFK_EmployeeReportsTo] ON [Employee] ([ReportsTo]);
+CREATE INDEX [IFK_InvoiceCustomerId] ON [Invoice] ([CustomerId]);
+CREATE INDEX [IFK_InvoiceLineInvoiceId] ON [InvoiceLine] ([InvoiceId]);
+CREATE INDEX [IFK_InvoiceLineTrackId] ON [InvoiceLine] ([TrackId]);
+CREATE INDEX [IFK_PlaylistTrackTrackId] ON [PlaylistTrack] ([TrackId]);
+CREATE INDEX [IFK_TrackAlbumId] ON [Track] ([AlbumId]);
+CREATE INDEX [IFK_TrackGenreId] ON [Track] ([GenreId]);
+CREATE INDEX [IFK_TrackMediaTypeId] ON [Track] ([MediaTypeId]);
+sqlite> .schematablesschema[K.read act8Chinook.q[Ksql
+┌────────────────────────────────────┐
+│               Title                │
+├────────────────────────────────────┤
+│ BBC Sessions [Disc 1] [Live]       │
+│ Physical Graffiti [Disc 1]         │
+│ BBC Sessions [Disc 2] [Live]       │
+│ Coda                               │
+│ Houses Of The Holy                 │
+│ In Through The Out Door            │
+│ IV                                 │
+│ Led Zeppelin I                     │
+│ Led Zeppelin II                    │
+│ Led Zeppelin III                   │
+│ Physical Graffiti [Disc 2]         │
+│ Presence                           │
+│ The Song Remains The Same (Disc 1) │
+│ The Song Remains The Same (Disc 2) │
+└────────────────────────────────────┘
+sqlite> Email[K[K[K[K[K.read act8Chinook.sql[C[C[C[C[C[C[C[C[Cschema[Kread act8Chinook.sql
+┌────────────────────────────────────┐
+│               Title                │
+├────────────────────────────────────┤
+│ BBC Sessions [Disc 1] [Live]       │
+│ Physical Graffiti [Disc 1]         │
+│ BBC Sessions [Disc 2] [Live]       │
+│ Coda                               │
+│ Houses Of The Holy                 │
+│ In Through The Out Door            │
+│ IV                                 │
+│ Led Zeppelin I                     │
+│ Led Zeppelin II                    │
+│ Led Zeppelin III                   │
+│ Physical Graffiti [Disc 2]         │
+│ Presence                           │
+│ The Song Remains The Same (Disc 1) │
+│ The Song Remains The Same (Disc 2) │
+└────────────────────────────────────┘
+┌───────────────────────────────┐
+│             Email             │
+├───────────────────────────────┤
+│ edfrancis@yachoo.ca           │
+│ ellie.sullivan@shaw.ca        │
+│ emma_jones@hotmail.com        │
+│ fralston@gmail.com            │
+│ ftremblay@gmail.com           │
+│ fzimmermann@yahoo.de          │
+│ hughoreilly@apple.ie          │
+│ isabelle_mercier@apple.fr     │
+│ jenniferp@rogers.ca           │
+│ ladislav_kovacs@apple.hu      │
+│ luisg@embraer.com.br          │
+│ manoj.pareek@rediff.com       │
+│ michelleb@aol.com             │
+│ nschroder@surfeu.de           │
+│ phil.hughes@gmail.com         │
+│ puja_srivastava@yahoo.in      │
+│ robbrown@shaw.ca              │
+│ roberto.almeida@riotur.gov.br │
+│ terhi.hamalainen@apple.fi     │
+│ tgoyer@apple.com              │
+│ wyatt.girard@yahoo.fr         │
+└───────────────────────────────┘
+sqlite> .read act8Chinook.sql
+┌────────────────────────────────────┐
+│               Title                │
+├────────────────────────────────────┤
+│ BBC Sessions [Disc 1] [Live]       │
+│ Physical Graffiti [Disc 1]         │
+│ BBC Sessions [Disc 2] [Live]       │
+│ Coda                               │
+│ Houses Of The Holy                 │
+│ In Through The Out Door            │
+│ IV                                 │
+│ Led Zeppelin I                     │
+│ Led Zeppelin II                    │
+│ Led Zeppelin III                   │
+│ Physical Graffiti [Disc 2]         │
+│ Presence                           │
+│ The Song Remains The Same (Disc 1) │
+│ The Song Remains The Same (Disc 2) │
+└────────────────────────────────────┘
+┌───────────────────────────────┐
+│             Email             │
+├───────────────────────────────┤
+│ edfrancis@yachoo.ca           │
+│ ellie.sullivan@shaw.ca        │
+│ emma_jones@hotmail.com        │
+│ fralston@gmail.com            │
+│ ftremblay@gmail.com           │
+│ fzimmermann@yahoo.de          │
+│ hughoreilly@apple.ie          │
+│ isabelle_mercier@apple.fr     │
+│ jenniferp@rogers.ca           │
+│ ladislav_kovacs@apple.hu      │
+│ luisg@embraer.com.br          │
+│ manoj.pareek@rediff.com       │
+│ michelleb@aol.com             │
+│ nschroder@surfeu.de           │
+│ phil.hughes@gmail.com         │
+│ puja_srivastava@yahoo.in      │
+│ robbrown@shaw.ca              │
+│ roberto.almeida@riotur.gov.br │
+│ terhi.hamalainen@apple.fi     │
+│ tgoyer@apple.com              │
+│ wyatt.girard@yahoo.fr         │
+└───────────────────────────────┘
+┌───────────┬──────────┐
+│ FirstName │ LastName │
+├───────────┼──────────┤
+│ Nancy     │ Edwards  │
+│ Michael   │ Mitchell │
+└───────────┴──────────┘
+sqlite> .read act8Chinook.sql
+┌────────────────────────────────────┐
+│               Title                │
+├────────────────────────────────────┤
+│ BBC Sessions [Disc 1] [Live]       │
+│ Physical Graffiti [Disc 1]         │
+│ BBC Sessions [Disc 2] [Live]       │
+│ Coda                               │
+│ Houses Of The Holy                 │
+│ In Through The Out Door            │
+│ IV                                 │
+│ Led Zeppelin I                     │
+│ Led Zeppelin II                    │
+│ Led Zeppelin III                   │
+│ Physical Graffiti [Disc 2]         │
+│ Presence                           │
+│ The Song Remains The Same (Disc 1) │
+│ The Song Remains The Same (Disc 2) │
+└────────────────────────────────────┘
+┌───────────────────────────────┐
+│             Email             │
+├───────────────────────────────┤
+│ edfrancis@yachoo.ca           │
+│ ellie.sullivan@shaw.ca        │
+│ emma_jones@hotmail.com        │
+│ fralston@gmail.com            │
+│ ftremblay@gmail.com           │
+│ fzimmermann@yahoo.de          │
+│ hughoreilly@apple.ie          │
+│ isabelle_mercier@apple.fr     │
+│ jenniferp@rogers.ca           │
+│ ladislav_kovacs@apple.hu      │
+│ luisg@embraer.com.br          │
+│ manoj.pareek@rediff.com       │
+│ michelleb@aol.com             │
+│ nschroder@surfeu.de           │
+│ phil.hughes@gmail.com         │
+│ puja_srivastava@yahoo.in      │
+│ robbrown@shaw.ca              │
+│ roberto.almeida@riotur.gov.br │
+│ terhi.hamalainen@apple.fi     │
+│ tgoyer@apple.com              │
+│ wyatt.girard@yahoo.fr         │
+└───────────────────────────────┘
+sqlite> .read act8Chinook.sql
+┌────────────────────────────────────┐
+│               Title                │
+├────────────────────────────────────┤
+│ BBC Sessions [Disc 1] [Live]       │
+│ Physical Graffiti [Disc 1]         │
+│ BBC Sessions [Disc 2] [Live]       │
+│ Coda                               │
+│ Houses Of The Holy                 │
+│ In Through The Out Door            │
+│ IV                                 │
+│ Led Zeppelin I                     │
+│ Led Zeppelin II                    │
+│ Led Zeppelin III                   │
+│ Physical Graffiti [Disc 2]         │
+│ Presence                           │
+│ The Song Remains The Same (Disc 1) │
+│ The Song Remains The Same (Disc 2) │
+└────────────────────────────────────┘
+┌───────────────────────────────┐
+│             Email             │
+├───────────────────────────────┤
+│ edfrancis@yachoo.ca           │
+│ ellie.sullivan@shaw.ca        │
+│ emma_jones@hotmail.com        │
+│ fralston@gmail.com            │
+│ ftremblay@gmail.com           │
+│ fzimmermann@yahoo.de          │
+│ hughoreilly@apple.ie          │
+│ isabelle_mercier@apple.fr     │
+│ jenniferp@rogers.ca           │
+│ ladislav_kovacs@apple.hu      │
+│ luisg@embraer.com.br          │
+│ manoj.pareek@rediff.com       │
+│ michelleb@aol.com             │
+│ nschroder@surfeu.de           │
+│ phil.hughes@gmail.com         │
+│ puja_srivastava@yahoo.in      │
+│ robbrown@shaw.ca              │
+│ roberto.almeida@riotur.gov.br │
+│ terhi.hamalainen@apple.fi     │
+│ tgoyer@apple.com              │
+│ wyatt.girard@yahoo.fr         │
+└───────────────────────────────┘
+sqlite> .read act8Chinook.sql
+┌────────────────────────────────────┐
+│               Title                │
+├────────────────────────────────────┤
+│ BBC Sessions [Disc 1] [Live]       │
+│ Physical Graffiti [Disc 1]         │
+│ BBC Sessions [Disc 2] [Live]       │
+│ Coda                               │
+│ Houses Of The Holy                 │
+│ In Through The Out Door            │
+│ IV                                 │
+│ Led Zeppelin I                     │
+│ Led Zeppelin II                    │
+│ Led Zeppelin III                   │
+│ Physical Graffiti [Disc 2]         │
+│ Presence                           │
+│ The Song Remains The Same (Disc 1) │
+│ The Song Remains The Same (Disc 2) │
+└────────────────────────────────────┘
+┌───────────────────────────────┐
+│             Email             │
+├───────────────────────────────┤
+│ edfrancis@yachoo.ca           │
+│ ellie.sullivan@shaw.ca        │
+│ emma_jones@hotmail.com        │
+│ fralston@gmail.com            │
+│ ftremblay@gmail.com           │
+│ fzimmermann@yahoo.de          │
+│ hughoreilly@apple.ie          │
+│ isabelle_mercier@apple.fr     │
+│ jenniferp@rogers.ca           │
+│ ladislav_kovacs@apple.hu      │
+│ luisg@embraer.com.br          │
+│ manoj.pareek@rediff.com       │
+│ michelleb@aol.com             │
+│ nschroder@surfeu.de           │
+│ phil.hughes@gmail.com         │
+│ puja_srivastava@yahoo.in      │
+│ robbrown@shaw.ca              │
+│ roberto.almeida@riotur.gov.br │
+│ terhi.hamalainen@apple.fi     │
+│ tgoyer@apple.com              │
+│ wyatt.girard@yahoo.fr         │
+└───────────────────────────────┘
+┌───────────┬──────────┐
+│ FirstName │ LastName │
+├───────────┼──────────┤
+│ Andrew    │ Adams    │
+│ Nancy     │ Edwards  │
+│ Michael   │ Mitchell │
+└───────────┴──────────┘
+sqlite> .read act8Chinook.sql
+┌────────────────────────────────────┐
+│               Title                │
+├────────────────────────────────────┤
+│ BBC Sessions [Disc 1] [Live]       │
+│ Physical Graffiti [Disc 1]         │
+│ BBC Sessions [Disc 2] [Live]       │
+│ Coda                               │
+│ Houses Of The Holy                 │
+│ In Through The Out Door            │
+│ IV                                 │
+│ Led Zeppelin I                     │
+│ Led Zeppelin II                    │
+│ Led Zeppelin III                   │
+│ Physical Graffiti [Disc 2]         │
+│ Presence                           │
+│ The Song Remains The Same (Disc 1) │
+│ The Song Remains The Same (Disc 2) │
+└────────────────────────────────────┘
+┌───────────────────────────────┐
+│             Email             │
+├───────────────────────────────┤
+│ edfrancis@yachoo.ca           │
+│ ellie.sullivan@shaw.ca        │
+│ emma_jones@hotmail.com        │
+│ fralston@gmail.com            │
+│ ftremblay@gmail.com           │
+│ fzimmermann@yahoo.de          │
+│ hughoreilly@apple.ie          │
+│ isabelle_mercier@apple.fr     │
+│ jenniferp@rogers.ca           │
+│ ladislav_kovacs@apple.hu      │
+│ luisg@embraer.com.br          │
+│ manoj.pareek@rediff.com       │
+│ michelleb@aol.com             │
+│ nschroder@surfeu.de           │
+│ phil.hughes@gmail.com         │
+│ puja_srivastava@yahoo.in      │
+│ robbrown@shaw.ca              │
+│ roberto.almeida@riotur.gov.br │
+│ terhi.hamalainen@apple.fi     │
+│ tgoyer@apple.com              │
+│ wyatt.girard@yahoo.fr         │
+└───────────────────────────────┘
+┌───────────┬──────────┐
+│ FirstName │ LastName │
+├───────────┼──────────┤
+│ Andrew    │ Adams    │
+│ Nancy     │ Edwards  │
+│ Michael   │ Mitchell │
+└───────────┴──────────┘
+┌───────────┬──────────┐
+│ FirstName │ LastName │
+├───────────┼──────────┤
+│ Jane      │ Peacock  │
+│ Margaret  │ Park     │
+│ Steve     │ Johnson  │
+│ Robert    │ King     │
+│ Laura     │ Callahan │
+└───────────┴──────────┘
+sqlite> insert into Employee ()F)i)r)s)t)N)e)[1P)a)m)e),) )C)[1P)L)a)s)t)N)a)m)e)[C va[K[K[K[K [K) values ()[C;');D);a);v);e);');,); );');F);[1P);R);o);s);o);f);f);');[C[1@,[1@ [1@h[1@i[1@r[1@e[1@d[1P[1P[1P[1P[1P[1@H[1@i[1@r[1@e[1@D[1@a[1@t[1@e[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C,); );');');2');0');2');4');-');0');2');-');2');9');[C,); );');f);[1P);d);a);c);e);[1P);[1P);v);e);@);c);h); [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ci);[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cn);o);o);k);c);o);r);p);.);c);o);m);');[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C,) values ('Dave', 'Rosoff', '2024-02-29', 'dave@chin[Cokcorp.com');[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C ) values ('Dave', 'Rosoff', '2024-02-29', 'dave@chinookcorp.com');[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CE) values ('Dave', 'Rosoff', '2024-02-29', 'dave@chinookcorp.com');[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ca) values ('Dave', 'Rosoff', '2024-02-29', 'dave@chinookcorp.com');[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ci) values ('Dave', 'Rosoff', '2024-02-29', 'dave@chinookcorp.com');[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C) values ('Dave', 'Rosoff', '2024-02-29', 'dave@c[1Phinookcorp.com');[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C) values ('Dave', 'Rosoff', '2024-02-29', 'dave@ch[1Pinookcorp.com');[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cm) values ('Dave', 'Rosoff', '2024-02-29', 'dave@chinookcorp.com');[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ca) values ('Dave', 'Rosoff', '2024-02-29', 'dave@chinookcorp.com');[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ci) values ('Dave', 'Rosoff', '2024-02-29', 'dave@chinookcorp.com');[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cl) values ('Dave', 'Rosoff', '2024-02-29', 'dave@chinookcorp.com');[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+sqlite> slec[K[K[Kelce[K[Kect &[K* from Employee;
+┌────────────┬──────────┬───────────┬─────────────────────┬───────────┬─────────────────────┬─────────────────────┬─────────────────────────────┬────────────┬───────┬─────────┬────────────┬───────────────────┬───────────────────┬──────────────────────────┐
+│ EmployeeId │ LastName │ FirstName │        Title        │ ReportsTo │      BirthDate      │      HireDate       │           Address           │    City    │ State │ Country │ PostalCode │       Phone       │        Fax        │          Email           │
+├────────────┼──────────┼───────────┼─────────────────────┼───────────┼─────────────────────┼─────────────────────┼─────────────────────────────┼────────────┼───────┼─────────┼────────────┼───────────────────┼───────────────────┼──────────────────────────┤
+│ 1          │ Adams    │ Andrew    │ General Manager     │           │ 1962-02-18 00:00:00 │ 2002-08-14 00:00:00 │ 11120 Jasper Ave NW         │ Edmonton   │ AB    │ Canada  │ T5K 2N1    │ +1 (780) 428-9482 │ +1 (780) 428-3457 │ andrew@chinookcorp.com   │
+│ 2          │ Edwards  │ Nancy     │ Sales Manager       │ 1         │ 1958-12-08 00:00:00 │ 2002-05-01 00:00:00 │ 825 8 Ave SW                │ Calgary    │ AB    │ Canada  │ T2P 2T3    │ +1 (403) 262-3443 │ +1 (403) 262-3322 │ nancy@chinookcorp.com    │
+│ 3          │ Peacock  │ Jane      │ Sales Support Agent │ 2         │ 1973-08-29 00:00:00 │ 2002-04-01 00:00:00 │ 1111 6 Ave SW               │ Calgary    │ AB    │ Canada  │ T2P 5M5    │ +1 (403) 262-3443 │ +1 (403) 262-6712 │ jane@chinookcorp.com     │
+│ 4          │ Park     │ Margaret  │ Sales Support Agent │ 2         │ 1947-09-19 00:00:00 │ 2003-05-03 00:00:00 │ 683 10 Street SW            │ Calgary    │ AB    │ Canada  │ T2P 5G3    │ +1 (403) 263-4423 │ +1 (403) 263-4289 │ margaret@chinookcorp.com │
+│ 5          │ Johnson  │ Steve     │ Sales Support Agent │ 2         │ 1965-03-03 00:00:00 │ 2003-10-17 00:00:00 │ 7727B 41 Ave                │ Calgary    │ AB    │ Canada  │ T3B 1Y7    │ 1 (780) 836-9987  │ 1 (780) 836-9543  │ steve@chinookcorp.com    │
+│ 6          │ Mitchell │ Michael   │ IT Manager          │ 1         │ 1973-07-01 00:00:00 │ 2003-10-17 00:00:00 │ 5827 Bowness Road NW        │ Calgary    │ AB    │ Canada  │ T3B 0C5    │ +1 (403) 246-9887 │ +1 (403) 246-9899 │ michael@chinookcorp.com  │
+│ 7          │ King     │ Robert    │ IT Staff            │ 6         │ 1970-05-29 00:00:00 │ 2004-01-02 00:00:00 │ 590 Columbia Boulevard West │ Lethbridge │ AB    │ Canada  │ T1K 5N8    │ +1 (403) 456-9986 │ +1 (403) 456-8485 │ robert@chinookcorp.com   │
+│ 8          │ Callahan │ Laura     │ IT Staff            │ 6         │ 1968-01-09 00:00:00 │ 2004-03-04 00:00:00 │ 923 7 ST NW                 │ Lethbridge │ AB    │ Canada  │ T1H 1Y8    │ +1 (403) 467-3351 │ +1 (403) 467-8772 │ laura@chinookcorp.com    │
+│ 9          │ Rosoff   │ Dave      │                     │           │                     │ 2024-02-29          │                             │            │       │         │            │                   │                   │ dave@chinookcorp.com     │
+└────────────┴──────────┴───────────┴─────────────────────┴───────────┴─────────────────────┴─────────────────────┴─────────────────────────────┴────────────┴───────┴─────────┴────────────┴───────────────────┴───────────────────┴──────────────────────────┘
+sqlite> select * from Employee;[C[C[C[C[C[C[C[Cinsert into Employee (FirstName, LastName, HireDate, Email) values ('Dave', 'Rosoff', '2024-02-29', 'dave@chinookcorp.com');[A[C[C[C[C[C[C[C[C.read act8Chinook.sql[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+┌────────────────────────────────────┐
+│               Title                │
+├────────────────────────────────────┤
+│ BBC Sessions [Disc 1] [Live]       │
+│ Physical Graffiti [Disc 1]         │
+│ BBC Sessions [Disc 2] [Live]       │
+│ Coda                               │
+│ Houses Of The Holy                 │
+│ In Through The Out Door            │
+│ IV                                 │
+│ Led Zeppelin I                     │
+│ Led Zeppelin II                    │
+│ Led Zeppelin III                   │
+│ Physical Graffiti [Disc 2]         │
+│ Presence                           │
+│ The Song Remains The Same (Disc 1) │
+│ The Song Remains The Same (Disc 2) │
+└────────────────────────────────────┘
+┌───────────────────────────────┐
+│             Email             │
+├───────────────────────────────┤
+│ edfrancis@yachoo.ca           │
+│ ellie.sullivan@shaw.ca        │
+│ emma_jones@hotmail.com        │
+│ fralston@gmail.com            │
+│ ftremblay@gmail.com           │
+│ fzimmermann@yahoo.de          │
+│ hughoreilly@apple.ie          │
+│ isabelle_mercier@apple.fr     │
+│ jenniferp@rogers.ca           │
+│ ladislav_kovacs@apple.hu      │
+│ luisg@embraer.com.br          │
+│ manoj.pareek@rediff.com       │
+│ michelleb@aol.com             │
+│ nschroder@surfeu.de           │
+│ phil.hughes@gmail.com         │
+│ puja_srivastava@yahoo.in      │
+│ robbrown@shaw.ca              │
+│ roberto.almeida@riotur.gov.br │
+│ terhi.hamalainen@apple.fi     │
+│ tgoyer@apple.com              │
+│ wyatt.girard@yahoo.fr         │
+└───────────────────────────────┘
+┌───────────┬──────────┐
+│ FirstName │ LastName │
+├───────────┼──────────┤
+│ Andrew    │ Adams    │
+│ Nancy     │ Edwards  │
+│ Michael   │ Mitchell │
+└───────────┴──────────┘
+┌───────────┬──────────┐
+│ FirstName │ LastName │
+├───────────┼──────────┤
+│ Jane      │ Peacock  │
+│ Margaret  │ Park     │
+│ Steve     │ Johnson  │
+│ Robert    │ King     │
+│ Laura     │ Callahan │
+│ Dave      │ Rosoff   │
+└───────────┴──────────┘
+sqlite> .read act8Chinook.sql[C[C[C[C[C[C[C[Cselect * from Employee;[C[C[C[C[C[C[C[Cinsert into Employee (FirstName, LastName, HireDate, Email) values ('Dave', 'Rosoff', '2024-02-29', 'dave@chinookcorp.com');[A[C[C[C[C[C[C[C[Cselect * from Employee;[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+┌────────────┬──────────┬───────────┬─────────────────────┬───────────┬─────────────────────┬─────────────────────┬─────────────────────────────┬────────────┬───────┬─────────┬────────────┬───────────────────┬───────────────────┬──────────────────────────┐
+│ EmployeeId │ LastName │ FirstName │        Title        │ ReportsTo │      BirthDate      │      HireDate       │           Address           │    City    │ State │ Country │ PostalCode │       Phone       │        Fax        │          Email           │
+├────────────┼──────────┼───────────┼─────────────────────┼───────────┼─────────────────────┼─────────────────────┼─────────────────────────────┼────────────┼───────┼─────────┼────────────┼───────────────────┼───────────────────┼──────────────────────────┤
+│ 1          │ Adams    │ Andrew    │ General Manager     │           │ 1962-02-18 00:00:00 │ 2002-08-14 00:00:00 │ 11120 Jasper Ave NW         │ Edmonton   │ AB    │ Canada  │ T5K 2N1    │ +1 (780) 428-9482 │ +1 (780) 428-3457 │ andrew@chinookcorp.com   │
+│ 2          │ Edwards  │ Nancy     │ Sales Manager       │ 1         │ 1958-12-08 00:00:00 │ 2002-05-01 00:00:00 │ 825 8 Ave SW                │ Calgary    │ AB    │ Canada  │ T2P 2T3    │ +1 (403) 262-3443 │ +1 (403) 262-3322 │ nancy@chinookcorp.com    │
+│ 3          │ Peacock  │ Jane      │ Sales Support Agent │ 2         │ 1973-08-29 00:00:00 │ 2002-04-01 00:00:00 │ 1111 6 Ave SW               │ Calgary    │ AB    │ Canada  │ T2P 5M5    │ +1 (403) 262-3443 │ +1 (403) 262-6712 │ jane@chinookcorp.com     │
+│ 4          │ Park     │ Margaret  │ Sales Support Agent │ 2         │ 1947-09-19 00:00:00 │ 2003-05-03 00:00:00 │ 683 10 Street SW            │ Calgary    │ AB    │ Canada  │ T2P 5G3    │ +1 (403) 263-4423 │ +1 (403) 263-4289 │ margaret@chinookcorp.com │
+│ 5          │ Johnson  │ Steve     │ Sales Support Agent │ 2         │ 1965-03-03 00:00:00 │ 2003-10-17 00:00:00 │ 7727B 41 Ave                │ Calgary    │ AB    │ Canada  │ T3B 1Y7    │ 1 (780) 836-9987  │ 1 (780) 836-9543  │ steve@chinookcorp.com    │
+│ 6          │ Mitchell │ Michael   │ IT Manager          │ 1         │ 1973-07-01 00:00:00 │ 2003-10-17 00:00:00 │ 5827 Bowness Road NW        │ Calgary    │ AB    │ Canada  │ T3B 0C5    │ +1 (403) 246-9887 │ +1 (403) 246-9899 │ michael@chinookcorp.com  │
+│ 7          │ King     │ Robert    │ IT Staff            │ 6         │ 1970-05-29 00:00:00 │ 2004-01-02 00:00:00 │ 590 Columbia Boulevard West │ Lethbridge │ AB    │ Canada  │ T1K 5N8    │ +1 (403) 456-9986 │ +1 (403) 456-8485 │ robert@chinookcorp.com   │
+│ 8          │ Callahan │ Laura     │ IT Staff            │ 6         │ 1968-01-09 00:00:00 │ 2004-03-04 00:00:00 │ 923 7 ST NW                 │ Lethbridge │ AB    │ Canada  │ T1H 1Y8    │ +1 (403) 467-3351 │ +1 (403) 467-8772 │ laura@chinookcorp.com    │
+│ 9          │ Rosoff   │ Dave      │ Sales Manager       │ 1         │                     │ 2024-02-29          │                             │            │       │         │            │                   │                   │ dave@chinookcorp.com     │
+└────────────┴──────────┴───────────┴─────────────────────┴───────────┴─────────────────────┴─────────────────────┴─────────────────────────────┴────────────┴───────┴─────────┴────────────┴───────────────────┴───────────────────┴──────────────────────────┘
+sqlite> [Ksqlite> [Ksqlite> select * from Employee;[C[C[C[C[C[C[C[C[2P.read act8Chinook.sql
+┌────────────────────────────────────┐
+│               Title                │
+├────────────────────────────────────┤
+│ BBC Sessions [Disc 1] [Live]       │
+│ Physical Graffiti [Disc 1]         │
+│ BBC Sessions [Disc 2] [Live]       │
+│ Coda                               │
+│ Houses Of The Holy                 │
+│ In Through The Out Door            │
+│ IV                                 │
+│ Led Zeppelin I                     │
+│ Led Zeppelin II                    │
+│ Led Zeppelin III                   │
+│ Physical Graffiti [Disc 2]         │
+│ Presence                           │
+│ The Song Remains The Same (Disc 1) │
+│ The Song Remains The Same (Disc 2) │
+└────────────────────────────────────┘
+┌───────────────────────────────┐
+│             Email             │
+├───────────────────────────────┤
+│ edfrancis@yachoo.ca           │
+│ ellie.sullivan@shaw.ca        │
+│ emma_jones@hotmail.com        │
+│ fralston@gmail.com            │
+│ ftremblay@gmail.com           │
+│ fzimmermann@yahoo.de          │
+│ hughoreilly@apple.ie          │
+│ isabelle_mercier@apple.fr     │
+│ jenniferp@rogers.ca           │
+│ ladislav_kovacs@apple.hu      │
+│ luisg@embraer.com.br          │
+│ manoj.pareek@rediff.com       │
+│ michelleb@aol.com             │
+│ nschroder@surfeu.de           │
+│ phil.hughes@gmail.com         │
+│ puja_srivastava@yahoo.in      │
+│ robbrown@shaw.ca              │
+│ roberto.almeida@riotur.gov.br │
+│ terhi.hamalainen@apple.fi     │
+│ tgoyer@apple.com              │
+│ wyatt.girard@yahoo.fr         │
+└───────────────────────────────┘
+┌───────────┬──────────┐
+│ FirstName │ LastName │
+├───────────┼──────────┤
+│ Andrew    │ Adams    │
+│ Nancy     │ Edwards  │
+│ Michael   │ Mitchell │
+└───────────┴──────────┘
+┌───────────┬──────────┐
+│ FirstName │ LastName │
+├───────────┼──────────┤
+│ Jane      │ Peacock  │
+│ Margaret  │ Park     │
+│ Steve     │ Johnson  │
+│ Robert    │ King     │
+│ Laura     │ Callahan │
+│ Dave      │ Rosoff   │
+└───────────┴──────────┘
+sqlite> .read act8Chinook.sql[C[C[C[C[C[C[C[Cselect * from Employee;[C[C[C[C[C[C[C[C[2P.read act8Chinook.sql[C[C[C[C[C[C[C[Cselect * from Employee;
+┌────────────┬──────────┬───────────┬─────────────────────┬───────────┬─────────────────────┬─────────────────────┬─────────────────────────────┬────────────┬───────┬─────────┬────────────┬───────────────────┬───────────────────┬──────────────────────────┐
+│ EmployeeId │ LastName │ FirstName │        Title        │ ReportsTo │      BirthDate      │      HireDate       │           Address           │    City    │ State │ Country │ PostalCode │       Phone       │        Fax        │          Email           │
+├────────────┼──────────┼───────────┼─────────────────────┼───────────┼─────────────────────┼─────────────────────┼─────────────────────────────┼────────────┼───────┼─────────┼────────────┼───────────────────┼───────────────────┼──────────────────────────┤
+│ 1          │ Adams    │ Andrew    │ General Manager     │           │ 1962-02-18 00:00:00 │ 2002-08-14 00:00:00 │ 11120 Jasper Ave NW         │ Edmonton   │ AB    │ Canada  │ T5K 2N1    │ +1 (780) 428-9482 │ +1 (780) 428-3457 │ andrew@chinookcorp.com   │
+│ 2          │ Edwards  │ Nancy     │ Sales Manager       │ 1         │ 1958-12-08 00:00:00 │ 2002-05-01 00:00:00 │ 825 8 Ave SW                │ Calgary    │ AB    │ Canada  │ T2P 2T3    │ +1 (403) 262-3443 │ +1 (403) 262-3322 │ nancy@chinookcorp.com    │
+│ 3          │ Peacock  │ Jane      │ Sales Support Agent │ 9         │ 1973-08-29 00:00:00 │ 2002-04-01 00:00:00 │ 1111 6 Ave SW               │ Calgary    │ AB    │ Canada  │ T2P 5M5    │ +1 (403) 262-3443 │ +1 (403) 262-6712 │ jane@chinookcorp.com     │
+│ 4          │ Park     │ Margaret  │ Sales Support Agent │ 9         │ 1947-09-19 00:00:00 │ 2003-05-03 00:00:00 │ 683 10 Street SW            │ Calgary    │ AB    │ Canada  │ T2P 5G3    │ +1 (403) 263-4423 │ +1 (403) 263-4289 │ margaret@chinookcorp.com │
+│ 5          │ Johnson  │ Steve     │ Sales Support Agent │ 9         │ 1965-03-03 00:00:00 │ 2003-10-17 00:00:00 │ 7727B 41 Ave                │ Calgary    │ AB    │ Canada  │ T3B 1Y7    │ 1 (780) 836-9987  │ 1 (780) 836-9543  │ steve@chinookcorp.com    │
+│ 6          │ Mitchell │ Michael   │ IT Manager          │ 1         │ 1973-07-01 00:00:00 │ 2003-10-17 00:00:00 │ 5827 Bowness Road NW        │ Calgary    │ AB    │ Canada  │ T3B 0C5    │ +1 (403) 246-9887 │ +1 (403) 246-9899 │ michael@chinookcorp.com  │
+│ 7          │ King     │ Robert    │ IT Staff            │ 6         │ 1970-05-29 00:00:00 │ 2004-01-02 00:00:00 │ 590 Columbia Boulevard West │ Lethbridge │ AB    │ Canada  │ T1K 5N8    │ +1 (403) 456-9986 │ +1 (403) 456-8485 │ robert@chinookcorp.com   │
+│ 8          │ Callahan │ Laura     │ IT Staff            │ 6         │ 1968-01-09 00:00:00 │ 2004-03-04 00:00:00 │ 923 7 ST NW                 │ Lethbridge │ AB    │ Canada  │ T1H 1Y8    │ +1 (403) 467-3351 │ +1 (403) 467-8772 │ laura@chinookcorp.com    │
+│ 9          │ Rosoff   │ Dave      │ Sales Manager       │ 1         │                     │ 2024-02-29          │                             │            │       │         │            │                   │                   │ dave@chinookcorp.com     │
+└────────────┴──────────┴───────────┴─────────────────────┴───────────┴─────────────────────┴─────────────────────┴─────────────────────────────┴────────────┴───────┴─────────┴────────────┴───────────────────┴───────────────────┴──────────────────────────┘
+sqlite> [Ksqlite> [Ksqlite> [Ksqlite> ]0;~/csc270/Activities/A08-Subqueries[01;34m~/csc270/Activities/A08-Subqueries[00m$ 
